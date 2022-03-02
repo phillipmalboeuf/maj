@@ -73,7 +73,7 @@
   style="color: var(--{page.couleur?.toLowerCase()});"
   class="padded">
   <aside class="sticky">
-    <h2 class="p3">{page.titre}</h2>
+    <a href="/{page.id}" sveltekit:prefetch><h2 class="p3">{page.titre}</h2></a>
     <p>{page.description}</p>
   </aside>
 </section>
