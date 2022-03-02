@@ -1,4 +1,4 @@
-export async function query<T>(fetch, query: string, variables?: {[key:string]: any}) {
+export async function query<T = any>(fetch, query: string, variables?: {[key:string]: any}): Promise<{ data: T }> {
   const res = await fetch(
     'https://graphql.contentful.com/content/v1/spaces/hlfxtjh4lx5k/environments/master', {
     method: 'POST',

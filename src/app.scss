@@ -72,7 +72,7 @@ main {
 }
 
 h1, h2, h3, h4, h5, h6, p, figure {
-  margin: 0 auto 1em;
+  margin: 0 0 1em;
   white-space: pre-line;
 }
 
@@ -168,6 +168,30 @@ svg {
 
   &.grid--thirds {
     grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--small);
+  row-gap: calc(var(--small) / 2);
+
+  &.flex--nogap {
+    flex-wrap: nowrap;
+    gap: 0;
+  }
+
+  &.flex--middle {
+    align-items: center;
+  }
+
+  &.flex--spaced {
+    justify-content: space-between;
+  }
+
+  .flex__seventh {
+    width: (100% / 7);
   }
 }
 

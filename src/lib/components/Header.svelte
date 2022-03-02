@@ -6,9 +6,11 @@
 </script>
 
 <header>
-  <a class="padded" href="/#top" aria-label="Accueil">
-    <Logo />
-  </a>
+  <span class="padded">
+    <a href="/#top" aria-label="Accueil">
+      <Logo />
+    </a>
+  </span>
 
   {#if visible}
   <nav class="padded" transition:fly={{ y: -100 }}>
@@ -33,8 +35,12 @@
 <style lang="scss">
   header {
     color: var(--color);
+    pointer-events: none;
 
-    > a,
+    a, button {
+      pointer-events: auto;
+    }
+
     nav,
     > span {
       position: fixed;
@@ -43,11 +49,8 @@
       left: 0;
     }
 
-    > a {
-      z-index: 11;
-    }
-
     nav {
+      z-index: 9;
       width: 100vw;
       background: linear-gradient(180deg, rgba(251, 251, 251, 0.81) 97.4%, rgba(251, 251, 251, 0) 100%);
       -webkit-backdrop-filter: blur(20px);
@@ -62,7 +65,7 @@
       }
     }
 
-    > span {
+    > span:last-child {
       left: auto;
       right: 0;
     }

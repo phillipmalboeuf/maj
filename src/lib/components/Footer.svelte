@@ -2,7 +2,7 @@
 
 </script>
 
-<footer class="grid grid--thirds small padded">
+<footer class="flex flex--spaced small padded">
   <nav class="grid">
     <a href="/">Expositions</a>
     <a href="/">Explorer</a>
