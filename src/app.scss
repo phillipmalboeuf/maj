@@ -71,6 +71,11 @@ main {
   @include text(60px, 72px);
 }
 
+h1, h2, h3, h4, h5, h6, p, figure {
+  margin: 0 auto 1em;
+  white-space: pre-line;
+}
+
 h1, .h1 {
   @include text(48px, 56px);
 }

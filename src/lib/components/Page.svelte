@@ -1,6 +1,14 @@
+<script context="module" lang="ts">
+  export interface PageDocument {
+    titre: string
+    id: string
+    couleur: string
+    description?: string
+  }
+</script>
+
 <script lang="ts">
   import { onMount } from 'svelte'
-  import type { PageDocument } from '$routes/[page].svelte'
 
 	export let page: PageDocument
   export let noTitre = false

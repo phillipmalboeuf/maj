@@ -43,8 +43,7 @@
 </script>
 
 <script lang="ts">
-  import type { PageDocument } from '../[page].svelte'
-  import Page from '$lib/components/Page.svelte'
+  import Page, { type PageDocument } from '$lib/components/Page.svelte'
 
 	export let page: PageDocument
   export let expositions: ExpositionDocument[]
@@ -53,7 +52,7 @@
 <Page {page} />
 
 <section>
-  <ol>
+  <ol class="padded">
     {#each expositions as expo, i}
     <li>
       <a class="grid" href="/expositions/{expo.id}">
@@ -75,7 +74,6 @@
   
   ol {
     list-style: none;
-    padding: var(--gutter);
     max-width: 910px;
     margin: 0 auto;
   }

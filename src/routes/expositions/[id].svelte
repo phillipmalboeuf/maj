@@ -6,9 +6,15 @@
     titre: string
     titreCourt?: string
     id: string
-    debut: Date
-    fin: Date
+    debut: string
+    fin: string
     description?: string
+  }
+
+  export interface CuratorDocument {
+    nom: string
+    id: string
+    position?: string
   }
 
   /** @type {import('@sveltejs/kit').Load} */
@@ -30,18 +36,45 @@
             description {
               json
             }
+            curatorsCollection {
+              items {
+                nom
+                id
+                position
+              }
+            }
+            oeuvresCollection {
+              items {
+                titre
+                id
+                media {
+                  fileName
+                  url
+                  contentType
+                  title
+                  description
+                  width
+                  height
+                }
+                description {
+                  json
+                }
+              }
+            }
           }
         }
       }
     `, {
       pageId: "2kSFcw8y6f6cAVCN10AeY1",
-      id: "la-nature-morte"
+      id: params.id
     })
     if (data && data.expositionCollection.items.length > 0) {
       return {
         props: { 
           page: data.page,
-          exposition: data.expositionCollection.items[0]
+          exposition: data.expositionCollection.items[0],
+          oeuvres: data.expositionCollection.items[0].oeuvresCollection.items,
+          curators: data.expositionCollection.items[0].curatorsCollection.items
         }
       }
     }
@@ -49,17 +82,43 @@
 </script>
 
 <script lang="ts">
-  import type { PageDocument } from '../[page].svelte'
-  import Page from '$lib/components/Page.svelte'
+  import { DateTime } from "luxon"
+
+  import Page, { type PageDocument } from '$lib/components/Page.svelte'
+  import Oeuvres, { type OeuvreDocument } from '$lib/components/Oeuvres.svelte'
+  import Document from '$lib/components/document/Document.svelte'
+  import { onMount } from 'svelte'
 
 	export let page: PageDocument
   export let exposition: ExpositionDocument
+  export let curators: CuratorDocument[]
+  export let oeuvres: OeuvreDocument[]
+  
+  const d = exposition.debut && DateTime.fromISO(exposition.debut)
+  const f = exposition.fin && DateTime.fromISO(exposition.fin)
+
+  let readingTime: number
+  let element: HTMLElement
+  const wpm = 200
+
+  onMount(() => {
+    readingTime = Math.ceil(element.innerText.trim().split(/\s+/).length / wpm)
+  })
 </script>
 
 <Page {page} noTitre />
 
-<article>
+<article bind:this={element} class="padded">
   <h1 class="center">{exposition.titreCourt}</h1>
+
+  <div class="grid">
+    <span>{d?.toFormat('yyyy.ll.dd')} {f ? f.toFormat('yyyy.ll.dd') : ''}</span>
+    <span>{curators.map(curator => [curator.nom, curator.position].join(', ')).join(', ')}</span>
+    <span>{readingTime} min</span>
+  </div>
+
+  <Document body={exposition.description} />
+  <Oeuvres {oeuvres} />
 </article>
 
 
