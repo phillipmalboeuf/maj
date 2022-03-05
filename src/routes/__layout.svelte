@@ -3,6 +3,7 @@
 
   import Header from '$lib/components/Header.svelte'
   import Footer from '$lib/components/Footer.svelte'
+  import Questions from '$lib/components/Questions.svelte'
 </script>
 
 <Header />
@@ -11,4 +12,5 @@
   <slot />
 </main>
 
+<Questions />
 <Footer />
