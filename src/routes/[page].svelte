@@ -1,6 +1,33 @@
 <script context="module" lang="ts">
   import { query } from '$lib/clients/contentful'
 
+  export const contenuCollection = `contenuCollection(limit: 12) {
+      items {
+        __typename
+        ... on Text {
+          titre
+          titreInvisible
+          corps {
+            json
+          }
+        }
+        ... on Gallerie {
+          titre
+          titreInvisible
+          mediasCollection(limit: 8) {
+            items {
+              fileName
+              url
+              contentType
+              title
+              description
+              width
+              height
+            }
+          }
+        }
+      }
+    }`
 
    /** @type {import('@sveltejs/kit').Load} */
   export async function load({ fetch, params }) {
@@ -12,6 +39,7 @@
             id
             description
             couleur
+            ${contenuCollection}
           }
         }
       }

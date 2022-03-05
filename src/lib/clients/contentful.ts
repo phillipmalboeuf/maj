@@ -13,5 +13,6 @@ export async function query<T = any>(fetch, query: string, variables?: {[key:str
   })
 
   const json = await res.json()
+  console.log(json)
   return json
 }

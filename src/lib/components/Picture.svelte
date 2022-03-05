@@ -14,6 +14,7 @@
   }
 </style>
 
+{#if media.title !== '[SPACER]'}
 {#if media.contentType.startsWith('video/')}
 <video src="{media.url}" autoplay muted loop playsinline />
 {:else}
@@ -37,4 +38,5 @@
 
 {#if !noDescription && (media.title || media.description)}
 <p class="small">{media.title} {media.description}</p>
+{/if}
 {/if}

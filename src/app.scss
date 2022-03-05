@@ -65,14 +65,18 @@ main {
 
 .d1 {
   @include text(72px, 80px);
+  font-weight: 300;
+  text-transform: uppercase;
 }
 
 .d2 {
   @include text(60px, 72px);
+  font-weight: 300;
+  text-transform: uppercase;
 }
 
 h1, h2, h3, h4, h5, h6, p, figure {
-  margin: 0 0 1em;
+  margin: 0 0 1rem;
   white-space: pre-line;
 }
 
@@ -169,16 +173,19 @@ svg {
   &.grid--thirds {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  &.grid--halves {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .flex {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   column-gap: var(--small);
   row-gap: calc(var(--small) / 2);
 
   &.flex--nogap {
-    flex-wrap: nowrap;
     gap: 0;
   }
 
@@ -188,6 +195,10 @@ svg {
 
   &.flex--spaced {
     justify-content: space-between;
+  }
+
+  &.flex--center {
+    justify-content: center;
   }
 
   .flex__seventh {

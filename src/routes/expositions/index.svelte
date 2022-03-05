@@ -6,8 +6,8 @@
     titre: string
     titreCourt?: string
     id: string
-    debut: Date
-    fin: Date
+    debut: string
+    fin: string
     description?: string
     sys: {
       id: string
@@ -31,9 +31,6 @@
         }
         expositionCollection {
           items {
-            sys {
-              id
-            }
             titre
             titreCourt
             id
