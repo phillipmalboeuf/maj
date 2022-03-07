@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
   import { query } from '$lib/clients/contentful'
-  import { media } from '$routes/[page].svelte'
+  import { media } from '../../[page].svelte'
 
 
   /** @type {import('@sveltejs/kit').Load} */
