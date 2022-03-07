@@ -5,7 +5,7 @@
   let visible = false
 </script>
 
-<header>
+<header id="header">
   <span class="padded">
     <a href="/#top" aria-label="Accueil">
       <Logo />

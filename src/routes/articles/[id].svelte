@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
   import { query } from '$lib/clients/contentful'
-  import { contenuCollection } from '../[page].svelte'
+  import { contenuCollection, media } from '../[page].svelte'
 
 
   /** @type {import('@sveltejs/kit').Load} */
@@ -22,15 +22,7 @@
             intro {
               json
             }
-            media {
-              fileName
-              url
-              contentType
-              title
-              description
-              width
-              height
-            }
+            media ${media}
             personnesCollection {
               items {
                 nom

@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
   import { query } from '$lib/clients/contentful'
-  import { contenuCollection } from '../[page].svelte'
+  import { contenuCollection, media } from '../[page].svelte'
 
   export interface ArticleDocument {
     titre: string
@@ -48,15 +48,7 @@
             titreCourt
             id
             date
-            media {
-              fileName
-              url
-              contentType
-              title
-              description
-              width
-              height
-            }
+            media ${media}
             personnesCollection(limit: 6) {
               items {
                 nom
@@ -84,7 +76,7 @@
   import { fade, fly } from 'svelte/transition'
   import Page, { type PageDocument } from '$lib/components/Page.svelte'
   import Picture from '$lib/components/Picture.svelte'
-  import { DateTime } from 'luxon'
+  import Articles from '$lib/components/Articles.svelte'
 
 	export let page: PageDocument
   export let articles: ArticleDocument[]
@@ -93,32 +85,12 @@
 <Page {page} />
 
 <section class="padded">
-  <ol class="grid grid--halves">
-    {#each articles as article}
-    <li>
-      <a href="/articles/{article.id}">
-        <figure>
-          <Picture media={article.media} noDescription />
-          <figcaption class="flex flex--spaced">
-            <span>{article.personnesCollection.items.map(personne => [personne.nom].join(', ')).join(', ')}</span>
-            <span>{article.date && DateTime.fromISO(article.date).toFormat('yyyy.ll.dd')}</span>
-          </figcaption>
-        </figure>
-        <h3>{article.titreCourt || article.titre}</h3>
-      </a>
-    </li>
-    {/each}
-  </ol>
+  <Articles {articles} />
 </section>
 
 
 <style lang="scss">
   section {
     color: var(--color);
-  }
-
-  ol {
-    list-style: none;
-    padding: 0;
   }
 </style>

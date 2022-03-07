@@ -1,5 +1,6 @@
 <script context="module" lang="ts">
   import { query } from '$lib/clients/contentful'
+  import { media } from '$routes/[page].svelte'
 
 
   /** @type {import('@sveltejs/kit').Load} */
@@ -20,15 +21,7 @@
               items {
                 titre
                 id
-                media {
-                  fileName
-                  url
-                  contentType
-                  title
-                  description
-                  width
-                  height
-                }
+                media ${media}
                 description {
                   json
                 }
@@ -59,6 +52,7 @@
   import Document from '$lib/components/document/Document.svelte'
   import { onMount } from 'svelte'
   import type { ExpositionDocument } from '../[id].svelte'
+  
 
 	export let page: PageDocument
   export let exposition: ExpositionDocument

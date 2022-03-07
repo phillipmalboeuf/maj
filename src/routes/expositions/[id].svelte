@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
   import { query } from '$lib/clients/contentful'
-
+  import { media } from '$routes/[page].svelte'
 
   export interface ExpositionDocument {
     titre: string
@@ -9,6 +9,10 @@
     debut: string
     fin: string
     description?: string
+    media?: object
+    curatorsCollection?: {
+      items: CuratorDocument[]
+    }
   }
 
   export interface CuratorDocument {
@@ -47,15 +51,7 @@
               items {
                 titre
                 id
-                media {
-                  fileName
-                  url
-                  contentType
-                  title
-                  description
-                  width
-                  height
-                }
+                media ${media}
                 description {
                   json
                 }

@@ -1,6 +1,16 @@
 <script context="module" lang="ts">
   import { query } from '$lib/clients/contentful'
 
+  export const media = `{
+    fileName
+    url
+    contentType
+    title
+    description
+    width
+    height
+  }`
+
   export const contenuCollection = `contenuCollection(limit: 12) {
       items {
         __typename
@@ -15,15 +25,7 @@
           titre
           titreInvisible
           mediasCollection(limit: 8) {
-            items {
-              fileName
-              url
-              contentType
-              title
-              description
-              width
-              height
-            }
+            items ${media}
           }
         }
       }

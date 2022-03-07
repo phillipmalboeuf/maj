@@ -3,7 +3,11 @@
     titre: string
     id: string
     couleur: string
+    fonce: boolean
     description?: string
+    intro?: {
+      json: object
+    }
     contenuCollection?: {
       items: any[]
     }
