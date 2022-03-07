@@ -1,4 +1,6 @@
 <script context="module" lang="ts">
+  import type { Lien } from './Link.svelte'
+  
   export interface PageDocument {
     titre: string
     id: string
@@ -7,6 +9,9 @@
     description?: string
     intro?: {
       json: object
+    }
+    liensCollection?: {
+      items: Lien[]
     }
     contenuCollection?: {
       items: any[]
@@ -24,7 +29,7 @@
 
 {@html `<style>body { --color: var(--${page.couleur?.toLowerCase()}) !important; }</style>`}
 {#if !noTitre}
-<h1 class="center">{page.titre}</h1>
+<h1 class="center padded">{page.titre}</h1>
 <Contenu contenu={page.contenuCollection?.items} />
 {/if}
 

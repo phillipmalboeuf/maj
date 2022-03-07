@@ -21,6 +21,13 @@
                 intro {
                   json
                 }
+                liensCollection(limit: 5) {
+                  items {
+                    titre
+                    lien
+                    externe
+                  }
+                }
               }
             }
           }
@@ -82,6 +89,7 @@
   import Document from '$lib/components/document/Document.svelte'
   import Articles from '$lib/components/Articles.svelte'
   import Expositions from '$lib/components/Expositions.svelte'
+  import Link from '$lib/components/Link.svelte'
 
 	export let index: {
     titre: string
@@ -107,7 +115,7 @@
           }
         })
       },
-      { threshold: 0, rootMargin: '0 0 -90%' }
+      { threshold: 0, rootMargin: '-9% 0 -90%' }
     )
 
     Object.values(elements).forEach(element => observer.observe(element))
@@ -126,6 +134,13 @@
   <aside class="sticky">
     <a href="/{page.id}" sveltekit:prefetch><h2 class="p3">{page.titre}</h2></a>
     {#if page.description}<p>{page.description}</p>{/if}
+    {#if page.liensCollection}
+    <nav>
+      {#each page.liensCollection.items as lien}
+      <Link {lien} button /><br />
+      {/each}
+    </nav>
+    {/if}
   </aside>
 
   <div>
@@ -173,6 +188,12 @@
         > :global(strong) {
           font-size: 6rem;
         }
+      }
+    }
+
+    nav {
+      :global(a) {
+        margin-bottom: 0.5rem;
       }
     }
   }

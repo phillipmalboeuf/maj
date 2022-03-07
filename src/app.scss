@@ -133,7 +133,9 @@ a {
   }
 }
 
-button {
+button,
+a.button {
+  display: inline-block;
   cursor: pointer;
   color: currentColor;
   font-size: inherit;

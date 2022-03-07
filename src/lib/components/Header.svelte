@@ -5,6 +5,8 @@
   let visible = false
 </script>
 
+<svelte:body on:click={() => visible = false} />
+
 <header id="header">
   <span class="padded">
     <a href="/#top" aria-label="Accueil">
@@ -14,19 +16,21 @@
 
   {#if visible}
   <nav class="padded" transition:fly={{ y: -100 }}>
-    <a class="h4" href="/">Expositions</a>
-    <a class="h4" href="/">Explorer</a>
-    <a class="h4" href="/">À propos</a>
-    <a class="h4" href="/">Participer</a>
-    <a class="h4" href="/">Soutenir ce projet</a>
+    <a class="h4" href="/expositions">Expositions</a>
+    <a class="h4" href="/articles">Explorer</a>
+    <a class="h4" href="/a-propos">À propos</a>
+    <a class="h4" href="/participer">Participer</a>
+    <a class="h4" href="/soutenir">Soutenir ce projet</a>
+
     <a class="h4" href="/">Se connecter</a>
     <a class="h4" href="/">Profil</a>
+
     <a class="h4" href="/">En</a>
   </nav>
   {/if}
 
   <span class="padded">
-    <button on:click={() => visible = !visible}>
+    <button on:click|stopPropagation={() => visible = !visible}>
       {#if visible}Close{:else}Menu{/if}
     </button>
   </span>

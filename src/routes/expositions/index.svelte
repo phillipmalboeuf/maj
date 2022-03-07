@@ -31,6 +31,9 @@
         }
         expositionCollection {
           items {
+            sys {
+              id
+            }
             titre
             titreCourt
             id
