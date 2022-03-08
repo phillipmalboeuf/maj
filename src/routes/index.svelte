@@ -163,7 +163,7 @@
   }
 
   section {
-    min-height: 88vh;
+    min-height: 50vh;
 
     &.dark {
       color: var(--light);

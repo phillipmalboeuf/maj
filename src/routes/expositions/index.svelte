@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
   import { query } from '$lib/clients/contentful'
-
+  import { media } from '../[page].svelte'
 
   export interface ExpositionDocument {
     titre: string
@@ -12,6 +12,7 @@
     sys: {
       id: string
     }
+    media: object
   }
 
   /** @type {import('@sveltejs/kit').Load} */
@@ -34,6 +35,7 @@
             sys {
               id
             }
+            media ${media}
             titre
             titreCourt
             id
@@ -57,6 +59,7 @@
   import { fade, fly } from 'svelte/transition'
   import Page, { type PageDocument } from '$lib/components/Page.svelte'
   import Picture from '$lib/components/Picture.svelte'
+  import { DateTime } from 'luxon'
 
 	export let page: PageDocument
   export let expositions: ExpositionDocument[]
@@ -67,16 +70,20 @@
 <Page {page} />
 
 <section>
-  <ol class="padded" on:pointerleave={() => current = undefined}>
+  <ol class="padded flex flex--nogap" on:pointerleave={() => current = undefined}>
     {#each [...expositions, ...expositions, ...expositions, ...expositions] as expo, i}
     <li class:current={current === i}>
-      <a class="flex" href="/expositions/{expo.id}" on:pointerenter={() => current = i}>
-        <span>{new Date(expo.debut).getFullYear()}</span>
-        <span>{expo.titreCourt}</span>
-        <span>{expo.titre}</span>
-        <span>Expositions</span>
+      <a href="/expositions/{expo.id}" on:pointerenter={() => current = i}>
+        {#if expo.media}<figure>
+          <Picture media={expo.media} noDescription />
+        </figure>{/if}
+        <aside class="flex flex--spaced">
+          <span>{expo.titreCourt}</span>
+          <span>{DateTime.fromISO(expo.debut).toFormat('yyyy.ll.dd')}</span>
+        </aside>
+        <h4>{expo.titre}</h4>
       </a>
-      {#if current === i}
+      <!-- {#if current === i}
       <aside class="flex flex--nogap">
       {#await query(fetch, `
         query($id: String!) {
@@ -110,7 +117,7 @@
         {/each}
       {/await}
       </aside>
-      {/if}
+      {/if} -->
     </li>
     {/each}
   </ol>
@@ -127,22 +134,37 @@
 
     li {
       position: relative;
-      
-      > a,
-      > aside {
-        max-width: 56.875rem;
-        margin: 0 auto;
+      flex: 1;
+
+      transition: flex 420ms;
+
+      &:hover {
+        flex: 1.1;
       }
       
-      &.current {
-        color: white;
-        background: linear-gradient(180deg, #188507 23.44%, rgba(24, 133, 7, 0) 100%);
-      }
+      // > a,
+      // > aside {
+      //   max-width: 56.875rem;
+      //   margin: 0 auto;
+      // }
+      
+      // &.current {
+      //   color: white;
+      //   background: linear-gradient(180deg, #188507 23.44%, rgba(24, 133, 7, 0) 100%);
+      // }
     }
   }
 
   figure {
-    width: 3rem;
-    min-height: 6rem;
+    // width: 3rem;
+    // min-height: 6rem;
+    margin-bottom: 0;
+  }
+
+  a {
+    > aside,
+    > h4 {
+      padding: 0 0.5rem;
+    }
   }
 </style>
