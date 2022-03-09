@@ -48,6 +48,7 @@
     border-color: transparent;
     border-bottom-right-radius: 0;
     z-index: 16;
+    margin-top: var(--gutter);
   }
 
   aside {

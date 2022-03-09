@@ -21,6 +21,11 @@
         position: string
       }[]
     }
+    theme: {
+      titre: string
+      titreCourt?: string
+      id: string
+    }
     contenuCollection: {
       items: any[]
     }

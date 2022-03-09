@@ -30,6 +30,11 @@
                 position
               }
             }
+            theme {
+              titre
+              titreCourt
+              id
+            }
             ${contenuCollection}
           }
         }
@@ -96,6 +101,40 @@
   <Contenu contenu={article.contenuCollection.items}  />
 </article>
 
+{#if article.theme}
+<nav class="padded center" style="background-color: var(--{page.couleur?.toLowerCase()});">
+  <button>Explorer davantage dans notre archive</button>
+  {#await query(fetch, `
+      query($themeId: String!) {
+        articleCollection(limit: 9, where: {theme: { id: $themeId }}) {
+          items {
+            titre
+            titreCourt
+            id
+            date
+            media ${media}
+          }
+        }
+      }
+    `, {
+      themeId: article.theme.id
+    })}
+    ...
+  {:then { data }}
+  <div class="flex flex--center flex--nogap">
+    {#each data.articleCollection.items as a}
+    <a href="/articles/{a.id}">
+      <figure>
+        <Picture media={a.media} noDescription />
+        <figcaption>{a.titreCourt || a.titre}</figcaption>
+      </figure>
+    </a>
+    {/each}
+  </div>
+  {/await}
+</nav>
+{/if}
+
 
 <style lang="scss">
   article {
@@ -105,5 +144,32 @@
   h1 {
     color: var(--dark);
     margin-bottom: 0;
+  }
+
+  nav {
+    color: var(--light);
+
+    > div {
+      margin-top: 2rem;
+    }
+
+    a {
+      text-align: left;
+      max-width: 25%;
+
+      figcaption {
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 333ms, transform 333ms;
+      }
+
+      &:hover,
+      &:focus {
+        figcaption {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    }
   }
 </style>

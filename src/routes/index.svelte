@@ -173,11 +173,11 @@
     .sticky {
       top: 10rem;
       width: 24rem;
-      height: 50vh;
+      height: 30vh;
     }
 
     > div {
-      margin-top: -50vh;
+      margin-top: -30vh;
       margin-left: 24rem;
       padding-left: var(--gutter);
 
