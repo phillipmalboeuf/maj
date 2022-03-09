@@ -4,15 +4,14 @@
   import { onMount } from 'svelte'
   import { fade, fly } from 'svelte/transition'
   import Document from './document/Document.svelte'
+  import Overlay from './Overlay.svelte'
 
   let open = false
 </script>
 
 <button class="fixed" on:click={() => open = !open}>Q/R</button>
 
-{#if open}
-<aside>
-  <button transition:fade on:click={() => open = false} area-label="Close" />
+<Overlay bind:open={open}>
   <ol>
     <li transition:fly={{ y: 10 }}>Quelle est votre question aujourd’hui?</li>
   {#await query(fetch, `query {
@@ -35,8 +34,7 @@
     {/each}
   {/await}
   </ol>
-</aside>
-{/if}
+</Overlay>
 
 <style lang="scss">
   button.fixed {
@@ -47,56 +45,33 @@
     background-color: var(--bleu);
     border-color: transparent;
     border-bottom-right-radius: 0;
-    z-index: 16;
+    z-index: 14;
     margin-top: var(--gutter);
   }
 
-  aside {
-    position: fixed;
-    inset: 0;
-    z-index: 15;
+  ol {
+    list-style: none;
+    padding: var(--gutter);
     padding-top: 10rem;
-    overflow-y: auto;
-    
-    > button {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      // background: transparent;
-      // border: none;
-      background-color: rgba(251, 251, 251, 0.66);
-      // -webkit-backdrop-filter: blur(4px);
-      // backdrop-filter: blur(4px);
+    max-width: calc(24rem + var(--gutter));
+    margin: 0 auto;
 
-      border: none;
-      border-radius: 0;
+    li {
+      color: var(--light);
+      background: var(--bleu);
+      margin-bottom: 1em;
+      padding: calc(var(--gutter) / 2);
+      border-radius: 2em;
+      -webkit-backdrop-filter: blur(4px);
+      backdrop-filter: blur(4px);
 
-      // cursor: url(/close.png) 0 0, pointer;
-    }
+      &:first-child {
+        color: var(--dark);
+        background: rgba(182, 206, 242, 0.9);
+      }
 
-    ol {
-      list-style: none;
-      padding: var(--gutter);
-      max-width: calc(24rem + var(--gutter));
-      margin: 0 auto;
-
-      li {
-        color: var(--light);
-        background: var(--bleu);
-        margin-bottom: 1em;
-        padding: calc(var(--gutter) / 2);
-        border-radius: 2em;
-        -webkit-backdrop-filter: blur(4px);
-        backdrop-filter: blur(4px);
-
-        &:first-child {
-          color: var(--dark);
-          background: rgba(182, 206, 242, 0.9);
-        }
-
-        :global(p:last-child) {
-          margin-bottom: 0;
-        }
+      :global(p:last-child) {
+        margin-bottom: 0;
       }
     }
   }

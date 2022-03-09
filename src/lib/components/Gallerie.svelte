@@ -15,7 +15,7 @@
 <div class="flex">
   {#if entry.mediasCollection}
   {#each entry.mediasCollection.items as media}
-  <figure><Picture {media} /></figure>
+  <figure><Picture {media} zoom /></figure>
   {/each}
   {/if}
 </div>
