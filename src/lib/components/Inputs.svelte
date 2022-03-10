@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { fade, fly } from 'svelte/transition'
   import type { FormDocument } from '../../routes/forms/[id].svelte'
 
   export let form: FormDocument
@@ -6,7 +7,8 @@
 </script>
 
 <fieldset>
-{#each form.inputsCollection.items.filter(item => emphasis ? item.emphasis : !item.emphasis) as input}
+{#each form.inputsCollection.items.filter(item => emphasis ? item.emphasis : !item.emphasis) as input, i}
+  <div in:fly={{ y: 10, delay: 100*i }}>
   {#if input.type === 'Textarea'}
   <label for={input.id}>{input.label}</label>
   <textarea id={input.id} name={input.id} />
@@ -23,6 +25,7 @@
   <label for={input.id}>{input.label}</label>
   <input id={input.id} name={input.id} />
   {/if}
+  </div>
 {/each}
 </fieldset>
 
@@ -57,11 +60,11 @@
       &:focus {
         outline: none;
       }
+    }
 
-      &[type="file"] {
-        cursor: pointer;
-        padding-top: 12em;
-      }
+    input[type="file"] {
+      cursor: pointer;
+      padding-top: 12em;
     }
 
     textarea {
