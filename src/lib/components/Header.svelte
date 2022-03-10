@@ -31,7 +31,19 @@
 
   <span class="padded">
     <button on:click|stopPropagation={() => visible = !visible}>
-      {#if visible}Close{:else}Menu{/if}
+      {#if !visible}
+      <svg width="45" height="24" viewBox="0 0 45 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="45" height="24" rx="12" fill="var(--color)"/>
+      <line x1="10.3848" y1="8" x2="35.3078" y2="8" stroke="white" stroke-width="2"/>
+      <line x1="10.3848" y1="14.8462" x2="35.3078" y2="14.8462" stroke="white" stroke-width="2"/>
+      </svg>
+      {:else}
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="15" fill="var(--color)"/>
+      <path d="M24.0005 7.72412L7.72461 24" stroke="white" stroke-width="2" stroke-linecap="square"/>
+      <path d="M7.72414 7.72412L24 24" stroke="white" stroke-width="2" stroke-linecap="square"/>
+      </svg>
+      {/if}
     </button>
   </span>
 </header>
@@ -72,6 +84,13 @@
     > span:last-child {
       left: auto;
       right: 0;
+    }
+
+    button {
+      border: none;
+      padding: 0;
+      background: none;
+      border-radius: 0;
     }
   }
 </style>
