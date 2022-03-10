@@ -19,7 +19,7 @@
 </script>
 
 {#if lien.lien}
-<a class:active class:button href={((!lien.externe && $page.params.locale === 'fr') ? "/fr" : "") + lien.lien} target={lien.externe && '_blank'} rel={(lien.externe || external) && "external"} on:click>{lien.titre}{lien.externe && arrow ? ' ↗' : ''}</a>
+<a class:active class:button href={((!lien.externe && $page.params.locale === 'fr') ? "/fr" : "") + lien.lien} target={lien.externe ? '_blank' : undefined} rel={(lien.externe || external) ? "external" : undefined} on:click>{lien.titre}{lien.externe && arrow ? ' ↗' : ''}</a>
 {:else}
 <small>{lien.titre}</small>
 {/if}
