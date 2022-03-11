@@ -79,11 +79,12 @@
 
 <script lang="ts">
   import { DateTime } from "luxon"
+  import { onMount } from 'svelte'
 
   import Page, { type PageDocument } from '$lib/components/Page.svelte'
   import Oeuvres, { type OeuvreDocument } from '$lib/components/Oeuvres.svelte'
   import Document from '$lib/components/document/Document.svelte'
-  import { onMount } from 'svelte'
+  import Comments from '$lib/components/Comments.svelte'
 
 	export let page: PageDocument
   export let exposition: ExpositionDocument
@@ -117,6 +118,8 @@
   <Document body={exposition.description} />
   <Oeuvres {oeuvres} />
 </article>
+
+<Comments />
 
 
 <style lang="scss">

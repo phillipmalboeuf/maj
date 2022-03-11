@@ -64,6 +64,7 @@
   import type { ArticleDocument } from './index.svelte'
   import Picture from '$lib/components/Picture.svelte'
   import Contenu from '$lib/components/Contenu.svelte'
+  import Comments from '$lib/components/Comments.svelte'
 
 	export let page: PageDocument
   export let article: ArticleDocument
@@ -100,6 +101,8 @@
   <aside><Document body={article.intro} /></aside>
   <Contenu contenu={article.contenuCollection.items}  />
 </article>
+
+<Comments />
 
 {#if article.theme}
 <nav class="padded center" style="background-color: var(--{page.couleur?.toLowerCase()});">
