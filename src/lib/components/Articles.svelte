@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { ArticleDocument } from '$routes/articles/index.svelte'
   import { DateTime } from 'luxon'
+  import type { ArticleDocument } from 'src/routes/articles/index.svelte'
   import Picture from './Picture.svelte'
 
   export let articles: ArticleDocument[]

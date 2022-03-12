@@ -11,19 +11,19 @@
   <div in:fly={{ y: 10, delay: 100*i }}>
   {#if input.type === 'Textarea'}
   <label for={input.id}>{input.label}</label>
-  <textarea id={input.id} name={input.id} />
+  <textarea id={input.id} name={input.id} value="Text" />
   {:else if input.type === 'Email'}
   <label for={input.id}>{input.label}</label>
-  <input type="email" id={input.id} name={input.id} />
+  <input type="email" id={input.id} name={input.id} value="phil@phils.computer" />
   {:else if input.type === 'Date'}
   <label for={input.id}>{input.label}</label>
-  <input type="text" id={input.id} name={input.id} />
+  <input type="text" id={input.id} name={input.id} value="2022-12-12" />
   {:else if input.type === 'File'}
   <label class="file" for={input.id}>{input.label}</label>
   <input type="file" id={input.id} name={input.id} />
   {:else}
   <label for={input.id}>{input.label}</label>
-  <input id={input.id} name={input.id} />
+  <input id={input.id} name={input.id} value="Moi" />
   {/if}
   </div>
 {/each}

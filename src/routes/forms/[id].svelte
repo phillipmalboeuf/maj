@@ -15,7 +15,6 @@
     }
   }
 
-
   /** @type {import('@sveltejs/kit').Load} */
   export async function load({ fetch, params }) {
     const { data } = await query(fetch, `
@@ -75,7 +74,8 @@
 
   <!-- <h1 class="d1 center">{page.titre}</h1> -->
 
-  <form class="flex flex--center padded">
+  <form action="/forms/{form.id}/soumissions" method="post" enctype="multipart/form-data" class="flex flex--center padded">
+    <input type="hidden" name="form" value={form.id}>
     <Inputs {form} emphasis />
     <Inputs {form} />
 

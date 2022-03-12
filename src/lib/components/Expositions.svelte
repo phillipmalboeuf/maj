@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { ExpositionDocument } from '$routes/expositions/[id].svelte'
   import { DateTime } from 'luxon'
+  import type { ExpositionDocument } from 'src/routes/expositions/[id].svelte'
   import Picture from './Picture.svelte'
 
   export let expositions: ExpositionDocument[]
