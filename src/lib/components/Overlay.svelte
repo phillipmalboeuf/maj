@@ -2,7 +2,7 @@
   import { onMount } from 'svelte'
   import { fade, fly } from 'svelte/transition'
 
-  export let open = false
+  export let open: boolean | string = false
 </script>
 
 {#if open}
@@ -25,9 +25,9 @@
       z-index: -1;
       // background: transparent;
       // border: none;
-      background-color: rgba(251, 251, 251, 0.66);
-      // -webkit-backdrop-filter: blur(4px);
-      // backdrop-filter: blur(4px);
+      background-color: rgba(0, 0, 0, 0.15);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
 
       border: none;
       border-radius: 0;

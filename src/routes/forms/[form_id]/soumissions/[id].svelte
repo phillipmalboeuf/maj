@@ -11,6 +11,9 @@
     nom: string
     ville: string
     details: object
+    description: {
+      json: object
+    }
   }
 
   /** @type {import('@sveltejs/kit').Load} */

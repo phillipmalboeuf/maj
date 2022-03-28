@@ -19,11 +19,15 @@
             titreCourt
             oeuvresCollection {
               items {
-                titre
-                id
-                media ${media}
-                description {
-                  json
+                ... on Oeuvre {
+                  titre
+                  id
+                  media ${media}
+                }
+                ... on Soumission {
+                  titre
+                  id
+                  media ${media}
                 }
               }
             }
