@@ -37,6 +37,7 @@
   }
 </style>
 
+{#if media}
 {#if media.title !== '[SPACER]'}
 {#if media.contentType.startsWith('video/')}
 <video class:zoom src="{media.url}" autoplay muted loop playsinline />
@@ -69,5 +70,6 @@
     <svelte:self {media} />
   </figure>
 </Overlay>
+{/if}
 {/if}
 {/if}

@@ -17,7 +17,7 @@
   {#if visible}
   <nav class="padded" transition:fly={{ y: -100 }}>
     <a class="h4" href="/expositions">Expositions</a>
-    <a class="h4" href="/articles">Explorer</a>
+    <a class="h4" href="/explorer">Explorer</a>
     <a class="h4" href="/a-propos">À propos</a>
     <a class="h4" href="/participer">Participer</a>
     <a class="h4" href="/soutenir">Soutenir ce projet</a>
