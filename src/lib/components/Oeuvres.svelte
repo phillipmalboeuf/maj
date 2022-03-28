@@ -4,6 +4,7 @@
     id: string
     description?: object
     media?: object
+    date: string
   }
 </script>
 

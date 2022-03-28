@@ -1,6 +1,7 @@
 <script context="module" lang="ts">
   import { query } from '$lib/clients/contentful'
   import { media } from '../[page].svelte'
+  import type { OeuvreDocument } from '$lib/components/Oeuvres.svelte'
 
   export interface ExpositionDocument {
     titre: string
@@ -13,6 +14,9 @@
       id: string
     }
     media: object
+    oeuvresCollection: {
+      items: OeuvreDocument[]
+    }
   }
 
   /** @type {import('@sveltejs/kit').Load} */
@@ -40,6 +44,13 @@
             titreCourt
             id
             debut
+            oeuvresCollection(limit: 7) {
+              items {
+                titre
+                id
+                media ${media}
+              }
+            }
           }
         }
       }
@@ -60,67 +71,39 @@
   import Page, { type PageDocument } from '$lib/components/Page.svelte'
   import Picture from '$lib/components/Picture.svelte'
   import { DateTime } from 'luxon'
+  import Oeuvres from '$lib/components/Oeuvres.svelte'
 
 	export let page: PageDocument
   export let expositions: ExpositionDocument[]
 
-  let current: string | number
+  let current: string
 </script>
 
 <Page {page} />
 
 <section>
+  {#each [...expositions, ...expositions, ...expositions, ...expositions] as expo, i}
+  <div class="flex flex--spaced padded">
+    <h3>{expo.titreCourt || expo.titre}</h3>
+    <span><a href="/expositions/{expo.id}" class="button">Voir toute l’exposition</a></span>
+  </div>
   <ol class="padded flex flex--nogap" on:pointerleave={() => current = undefined}>
-    {#each [...expositions, ...expositions, ...expositions, ...expositions] as expo, i}
-    <li class:current={current === i}>
-      <a href="/expositions/{expo.id}" on:pointerenter={() => current = i}>
-        {#if expo.media}<figure>
-          <Picture media={expo.media} noDescription />
-        </figure>{/if}
+    {#each [...expo.oeuvresCollection.items,...expo.oeuvresCollection.items,...expo.oeuvresCollection.items] as oeuvre, j}
+    <li class:current={current === `${i}.${j}`}>
+      <a href="/expositions/{expo.id}/oeuvre/{oeuvre.id}" on:pointerenter={() => current = `${i}.${j}`}>
+        <h5>{oeuvre.titre}</h5>
         <aside class="flex flex--spaced">
-          <span>{expo.titreCourt}</span>
-          <span>{DateTime.fromISO(expo.debut).toFormat('yyyy.ll.dd')}</span>
+          <span>X</span>
+          <span>{DateTime.fromISO(oeuvre.date).toFormat('yyyy.ll.dd')}</span>
         </aside>
-        <h4>{expo.titre}</h4>
+        {#if oeuvre.media}<figure>
+          <Picture media={oeuvre.media} noDescription />
+        </figure>{/if}
       </a>
-      <!-- {#if current === i}
-      <aside class="flex flex--nogap">
-      {#await query(fetch, `
-        query($id: String!) {
-          exposition(id: $id) {
-            oeuvresCollection(limit: 7) {
-              items {
-                titre
-                id
-                media {
-                  fileName
-                  url
-                  contentType
-                  title
-                  description
-                  width
-                  height
-                }
-              }
-            }
-          }
-        }
-      `, { id: expo.sys.id })}
-      <figure />
-      {:then { data }}
-        {#each data.exposition.oeuvresCollection.items as oeuvre, i}
-        <a href="/oeuvres/{oeuvre.id}">
-          <figure>
-            <Picture media={oeuvre.media} noDescription small />
-          </figure>
-        </a>
-        {/each}
-      {/await}
-      </aside>
-      {/if} -->
     </li>
     {/each}
   </ol>
+  {/each}
 </section>
 
 

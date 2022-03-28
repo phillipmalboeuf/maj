@@ -127,9 +127,9 @@
 <p class="center padded" style="color: var(--{index.pagesCollection.items[0].couleur?.toLowerCase()});">{index.description}</p>
 
 {#each index.pagesCollection.items as page}
-<section bind:this={elements[page.id]} id={page.id} data-color={page.couleur ? page.couleur.toLowerCase() : page.fonce ? 'light' : undefined}
+<section bind:this={elements[page.id]} id={page.id} data-color={page.fonce ? 'light' : page.couleur ? page.couleur.toLowerCase() : undefined}
   class:dark={page.fonce}
-  style={page.couleur && `color: var(--${page.couleur.toLowerCase()})`}
+  style={page.couleur && (page.fonce ? `background-color: var(--${page.couleur.toLowerCase()})` : `color: var(--${page.couleur.toLowerCase()})`)}
   class="padded">
   <aside class="sticky">
     <a href="/{page.id}" sveltekit:prefetch><h2 class="p3">{page.titre}</h2></a>
@@ -167,7 +167,6 @@
 
     &.dark {
       color: var(--light);
-      background-color: var(--dark);
     }
 
     .sticky {
