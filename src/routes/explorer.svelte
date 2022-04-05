@@ -15,8 +15,9 @@
             ${contenuCollection}
           }
         }
-        articleCollection(limit: 6, order: date_DESC) {
+        articleCollection(limit: 3, order: date_DESC) {
           items {
+            __typename
             titre
             id
             titreCourt
@@ -32,6 +33,7 @@
         }
         baladoCollection(limit: 6, order: date_DESC) {
           items {
+            __typename
             titre
             id
             titreCourt
@@ -40,6 +42,22 @@
             liens
             introduction {
               json
+            }
+          }
+        }
+        activityCollection(limit: 3, order: date_DESC) {
+          items {
+            __typename
+            titre
+            id
+            titreCourt
+            date
+            media ${media}
+            personnesCollection {
+              items {
+                id
+                nom
+              }
             }
           }
         }
@@ -52,7 +70,8 @@
         props: { 
           page: data.pageCollection.items[0],
           articles: data.articleCollection.items,
-          balados: data.baladoCollection.items
+          balados: data.baladoCollection.items,
+          activites: data.activityCollection.items
         }
       }
     }
@@ -66,10 +85,12 @@
 
   import type { ArticleDocument } from './articles/index.svelte'
   import type { BaladoDocument } from './balados/index.svelte'
+  import type { ActivityDocument } from './activites/index.svelte'
 
   export let page: PageDocument
   export let articles: ArticleDocument[]
   export let balados: BaladoDocument[]
+  export let activites: ActivityDocument[]
 </script>
 
 <Page {page} />
@@ -78,6 +99,9 @@
 </section>
 <section class="padded dark">
   <Balados {balados} />
+</section>
+<section class="padded">
+  <Articles articles={activites} />
 </section>
 
 <style lang="scss">

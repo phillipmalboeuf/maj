@@ -32,14 +32,49 @@
             }
           }
         }
-        articleCollection(order: [date_DESC], limit: 3) {
+        articleCollection(order: [date_DESC], limit: 1) {
           items {
+            __typename
             titre
             titreCourt
             id
             date
             media ${media}
-            personnesCollection(limit: 6) {
+            personnesCollection(limit: 2) {
+              items {
+                nom
+                id
+                position
+              }
+            }
+          }
+        }
+        activityCollection(order: [date_DESC], limit: 1) {
+          items {
+            __typename
+            titre
+            titreCourt
+            id
+            date
+            media ${media}
+            personnesCollection(limit: 2) {
+              items {
+                nom
+                id
+                position
+              }
+            }
+          }
+        }
+        baladoCollection(order: [date_DESC], limit: 1) {
+          items {
+            __typename
+            titre
+            titreCourt
+            id
+            date
+            media ${media}
+            personnesCollection(limit: 2) {
               items {
                 nom
                 id
@@ -50,6 +85,7 @@
         }
         expositionCollection {
           items {
+            __typename
             titre
             titreCourt
             id
@@ -71,6 +107,8 @@
         props: { 
           index: data.index,
           articles: data.articleCollection.items,
+          balados: data.baladoCollection.items,
+          activites: data.activityCollection.items,
           expositions: data.expositionCollection.items
         }
       }
@@ -90,6 +128,8 @@
   import Articles from '$lib/components/Articles.svelte'
   import Expositions from '$lib/components/Expositions.svelte'
   import Link from '$lib/components/Link.svelte'
+  import type { ActivityDocument } from './activites/index.svelte'
+  import type { BaladoDocument } from './balados/index.svelte'
 
 	export let index: {
     titre: string
@@ -100,6 +140,8 @@
     }
   }
   export let articles: ArticleDocument[]
+  export let balados: BaladoDocument[]
+  export let activites: ActivityDocument[]
   export let expositions: ExpositionDocument[]
 
   let elements: {[key: string]: HTMLElement} = {}
@@ -146,8 +188,8 @@
   <div>
     <Document body={page.intro} />
 
-    {#if page.id === 'articles'}
-    <Articles {articles} />
+    {#if page.id === 'explorer'}
+    <Articles articles={[...articles,...activites,...balados]} />
     {:else if page.id === 'expositions'}
     <Expositions {expositions} />
     {/if}

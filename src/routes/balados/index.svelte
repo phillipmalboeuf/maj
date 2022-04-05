@@ -3,12 +3,20 @@
   import { contenuCollection, media } from '../[page].svelte'
 
   export interface BaladoDocument {
+    __typename: string
     titre: string
     titreCourt?: string
     id: string
     date: string
     audio: object
-    image: object
+    media: object
+    personnesCollection: {
+      items: {
+        nom: string
+        id: string
+        position: string
+      }[]
+    }
     sys: {
       id: string
     }

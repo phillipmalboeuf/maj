@@ -9,7 +9,11 @@
 <ol class="grid grid--halves">
   {#each articles as article}
   <li>
-    <a href="/articles/{article.id}">
+    <a href="/{{
+      'Article': 'articles',
+      'Activity': 'activites',
+      'Balado': 'balados'
+    }[article.__typename] || 'articles'}/{article.id}">
       <figure>
         <Picture media={article.media} noDescription />
         <figcaption class="flex flex--spaced">
