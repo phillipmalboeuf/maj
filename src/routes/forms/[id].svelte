@@ -9,6 +9,7 @@
       items: {
         label: string
         id: string
+        placeholder: string
         type: string
         emphasis: boolean
       }[]
@@ -29,9 +30,11 @@
           items {
             titre
             id
+            cta
             inputsCollection {
               items {
                 label
+                placeholder
                 id
                 type
                 emphasis
@@ -93,7 +96,7 @@
     bottom: var(--gutter);
     right: var(--gutter);
     color: var(--light);
-    background-color: var(--vert);
+    background-color: var(--rouge);
     border-color: transparent;
     z-index: 14;
     margin-top: var(--gutter);

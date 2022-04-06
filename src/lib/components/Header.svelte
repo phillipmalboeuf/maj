@@ -15,7 +15,7 @@
   </span>
 
   {#if visible}
-  <nav class="padded" transition:fly={{ y: -100 }}>
+  <nav class="padded" transition:fly={{ y: 0 }}>
     <a class="h4" href="/expositions">Expositions</a>
     <a class="h4" href="/explorer">Explorer</a>
     <a class="h4" href="/a-propos">À propos</a>
@@ -68,7 +68,8 @@
     nav {
       z-index: 9;
       width: 100vw;
-      background: linear-gradient(180deg, rgba(251, 251, 251, 0.81) 97.4%, rgba(251, 251, 251, 0) 100%);
+      height: 100vh;
+      background:  linear-gradient(180deg, rgba(251, 251, 251, 0.81) 71.35%, rgba(251, 251, 251, 0) 100%);
       -webkit-backdrop-filter: blur(20px);
       backdrop-filter: blur(20px);
       padding-top: calc(var(--gutter) / 2);

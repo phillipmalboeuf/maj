@@ -21,7 +21,7 @@
 
   <nav class="grid">
     <a href="/">Privacy policy</a>
-    <a href="/">© 2022 MAJx</a>
+    <a href="/">© 2022 JAM</a>
     <a href="/">Designed by Paprika</a>
   </nav>
 </footer>

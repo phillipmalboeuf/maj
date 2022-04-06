@@ -9,21 +9,17 @@
 <fieldset>
 {#each form.inputsCollection.items.filter(item => emphasis ? item.emphasis : !item.emphasis) as input, i}
   <div in:fly={{ y: 10, delay: 100*i }}>
+  {#if input.label}<label class={input.type} for={input.id}>{input.label}</label>{/if}
   {#if input.type === 'Textarea'}
-  <label for={input.id}>{input.label}</label>
-  <textarea id={input.id} name={input.id} value="Text" />
+  <textarea id={input.id} placeholder={input.placeholder} name={input.id} />
   {:else if input.type === 'Email'}
-  <label for={input.id}>{input.label}</label>
-  <input type="email" id={input.id} name={input.id} value="phil@phils.computer" />
+  <input type="email" id={input.id} placeholder={input.placeholder} name={input.id} />
   {:else if input.type === 'Date'}
-  <label for={input.id}>{input.label}</label>
-  <input type="text" id={input.id} name={input.id} value="2022-12-12" />
+  <input type="text" id={input.id} placeholder={input.placeholder} name={input.id} />
   {:else if input.type === 'File'}
-  <label class="file" for={input.id}>{input.label}</label>
-  <input type="file" id={input.id} name={input.id} />
+  <input type="file" id={input.id} placeholder={input.placeholder} name={input.id} />
   {:else}
-  <label for={input.id}>{input.label}</label>
-  <input id={input.id} name={input.id} value="Moi" />
+  <input id={input.id} placeholder={input.placeholder} name={input.id} />
   {/if}
   </div>
 {/each}
@@ -38,7 +34,7 @@
     label {
       display: block;
       // color: var(--light);
-      margin: 0 0 0 1em;
+      margin: 0;
       width: 75%;
     }
 
@@ -50,7 +46,7 @@
       font-size: 1rem;
       line-height: 1;
       color: var(--light);
-      background: var(--color);
+      background: var(--grey);
       border-radius: 1.5em;
       padding: 0.66em 1em;
       margin-bottom: 1em;
@@ -59,6 +55,10 @@
       
       &:focus {
         outline: none;
+      }
+
+      &::placeholder {
+        color: var(--light);
       }
     }
 

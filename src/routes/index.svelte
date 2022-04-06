@@ -209,6 +209,7 @@
 
     &.dark {
       color: var(--light);
+      background-color: var(--dark);
     }
 
     .sticky {

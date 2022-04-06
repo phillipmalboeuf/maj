@@ -4,6 +4,7 @@
   import { onMount } from 'svelte'
   import { fade, fly } from 'svelte/transition'
   import Document from './document/Document.svelte'
+  import Inputs from './Inputs.svelte'
   import Overlay from './Overlay.svelte'
 
   let open = false
@@ -13,8 +14,24 @@
 
 <Overlay bind:open={open}>
   <ol>
-    <li transition:fly={{ y: 10 }}>Quelle est votre question aujourd’hui?</li>
-  {#await query(fetch, `query {
+    
+  {#await query(fetch, `query($id: String!) {
+    formCollection(limit: 1, where: {id: $id}) {
+      items {
+        titre
+        id
+        cta
+        inputsCollection {
+          items {
+            label
+            placeholder
+            id
+            type
+            emphasis
+          }
+        }
+      }
+    }
     questionCollection(order: [date_DESC]) {
       items {
         question
@@ -24,7 +41,15 @@
         }
       }
     }
-  }`) then { data }}
+  }`, { id: 'question' }) then { data }}
+    <li transition:fly={{ y: 10 }}>
+      <p>{data.formCollection.items[0].titre}</p>
+      <hr>
+      <form class="flex flex--middle" action="/question" method="post">
+        <Inputs form={data.formCollection.items[0]} />
+        <button>{data.formCollection.items[0].cta}</button>
+      </form>
+    </li>
     {#each data.questionCollection.items as question, i}
     <li transition:fly={{ y: 10, delay: 100*i }}>
       <p>Q.<br>{question.question}</p>
@@ -66,8 +91,15 @@
       backdrop-filter: blur(4px);
 
       &:first-child {
-        color: var(--dark);
-        background: rgba(182, 206, 242, 0.9);
+        // color: var(--dark);
+        background: rgba(141, 178, 234, 0.9);
+      }
+
+      hr {
+        border: none;
+        height: 1px;
+        background-color: currentColor;
+        margin: calc(var(--gutter) / 2) calc(var(--gutter) * -0.5);
       }
 
       :global(p:last-child) {
