@@ -8,8 +8,26 @@
   export let ar = undefined
   export let eager = false
   export let zoom = false
+  export let label: string = undefined
 
   let open: boolean
+  let x: number
+  let y: number
+  let labelVisible: boolean
+  // let timeout
+
+  function move(e: PointerEvent & { currentTarget: HTMLElement }) {
+    if (label) {
+      labelVisible = true
+      x = e.x + window.scrollX + 20
+      y = e.y + window.scrollY
+
+      // clearTimeout(timeout)
+      // timeout = setTimeout(() => {
+      //   labelVisible = false
+      // }, 333)
+    }
+  }
 </script>
 
 <style lang="scss">
@@ -35,6 +53,12 @@
       object-fit: contain;
     }
   }
+
+  span {
+    position: absolute;
+    background-color: var(--light);
+    padding: 0.5em;
+  }
 </style>
 
 {#if media}
@@ -55,13 +79,17 @@
 <source srcSet="{media.url}?w=900{ar ? `&h=${Math.round(ar * 900)}&fit=fill` : ''}" media="(max-width: 900px)" />
 <source srcSet="{media.url}?w=1200{ar ? `&h=${Math.round(ar * 1200)}&fit=fill` : ''}&fm=avif" type="image/avif" media="(max-width: 1200px)" />
 <source srcSet="{media.url}?w=1800{ar ? `&h=${Math.round(ar * 1800)}&fit=fill` : ''}&fm=avif" type="image/avif" />
-<img class:zoom on:click={() => open = true} style={ar ? `aspect-ratio: 1800 / ${Math.round(ar * 1800)}` : `aspect-ratio: ${media.width} / ${media.height}`} src="{media.url}?w=1800{ar ? `&h=${Math.round(ar * 1800)}&fit=fill` : ''}" alt="{media.title} {media.description}" loading={eager ? "eager" : "lazy"} />
+<img class:zoom on:pointermove={move} on:pointerleave={() => labelVisible = false} on:click={() => open = true} style={ar ? `aspect-ratio: 1800 / ${Math.round(ar * 1800)}` : `aspect-ratio: ${media.width} / ${media.height}`} src="{media.url}?w=1800{ar ? `&h=${Math.round(ar * 1800)}&fit=fill` : ''}" alt="{media.title} {media.description}" loading={eager ? "eager" : "lazy"} />
   {/if}
 </picture>
 {/if}
 
 {#if !noDescription && (media.title || media.description)}
 <p class="small">{media.title} {media.description}</p>
+{/if}
+
+{#if label && labelVisible}
+<span transition:fade style="top: {y}px; left: {x}px;">{label}</span>
 {/if}
 
 {#if zoom}

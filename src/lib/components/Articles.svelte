@@ -15,7 +15,11 @@
       'Balado': 'balados'
     }[article.__typename] || 'articles'}/{article.id}">
       <figure>
-        <Picture media={article.media} noDescription />
+        <Picture media={article.media} noDescription label={{
+          'Article': 'Lire l\'article',
+          'Activity': 'Lire l\'activité',
+          'Balado': 'Écouter le balado'
+        }[article.__typename] || 'Lire l\'article'} />
         <figcaption class="flex flex--spaced">
           <span>{article.personnesCollection.items.map(personne => [personne.nom].join(', ')).join(', ')}</span>
           <span>{article.date && DateTime.fromISO(article.date).toFormat('yyyy.ll.dd')}</span>

@@ -137,7 +137,10 @@ a {
 
 button,
 a.button {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  column-gap: var(--small);
+  
   cursor: pointer;
   color: currentColor;
   font-size: inherit;

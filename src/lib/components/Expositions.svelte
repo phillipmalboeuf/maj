@@ -11,7 +11,7 @@
   <li>
     <a href="/expositions/{exposition.id}">
       <figure>
-        <Picture media={exposition.media} noDescription />
+        <Picture media={exposition.media} noDescription label="Voir l'exposition" />
         <figcaption class="flex flex--spaced">
           <span>{exposition.curatorsCollection.items.map(personne => [personne.nom].join(', ')).join(', ')}</span>
           <span>{exposition.debut && DateTime.fromISO(exposition.debut).toFormat('yyyy.ll.dd')}</span>
