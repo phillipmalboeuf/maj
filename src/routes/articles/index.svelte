@@ -8,6 +8,7 @@
     titreCourt?: string
     id: string
     date: string
+    vedette?: boolean
     media?: object
     sys: {
       id: string
@@ -54,6 +55,7 @@
             titreCourt
             id
             date
+            vedette
             media ${media}
             personnesCollection(limit: 6) {
               items {

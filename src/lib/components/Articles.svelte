@@ -4,11 +4,12 @@
   import Picture from './Picture.svelte'
 
   export let articles: ArticleDocument[]
+  export let thirds = false
 </script>
 
-<ol class="grid grid--halves">
+<ol class="grid {thirds ? 'grid--thirds' : 'grid--halves'}">
   {#each articles as article}
-  <li>
+  <li class={article.vedette && 'span__2'}>
     <a href="/{{
       'Article': 'articles',
       'Activity': 'activites',

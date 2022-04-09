@@ -5,6 +5,8 @@
   export let entry: {
     titre: string
     titreInvisible: boolean
+    colonnes: number
+    alignement: string
     mediasCollection: {
       items: object[]
     }
@@ -12,17 +14,17 @@
 </script>
 
 {#if !entry.titreInvisible}<h2 class="d2 center">{entry.titre}</h2>{/if}
-<div class="flex">
+<div class="flex flex--wrap{entry.alignement === "Droite" ? ' flex--end' : ''}">
   {#if entry.mediasCollection}
   {#each entry.mediasCollection.items as media}
-  <figure><Picture {media} zoom /></figure>
+  <figure class={entry.colonnes && { 2: 'flex__half', 3: 'flex__third' }[entry.colonnes]}><Picture {media} zoom /></figure>
   {/each}
   {/if}
 </div>
 
 <style lang="scss">
   figure {
-    flex: 1;
+    // flex: 1;
   }
 
   h2 {

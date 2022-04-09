@@ -24,6 +24,8 @@
         ... on Gallerie {
           titre
           titreInvisible
+          colonnes
+          alignement
           mediasCollection(limit: 8) {
             items ${media}
           }

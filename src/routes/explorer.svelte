@@ -21,6 +21,7 @@
             titre
             id
             titreCourt
+            vedette
             date
             media ${media}
             personnesCollection {
@@ -94,17 +95,29 @@
 </script>
 
 <Page {page} />
+
+<nav class="padded flex flex--tight flex--center flex--middle">
+  <a href="/articles" class="button">Articles</a>
+  <a href="/balados" class="button">Balados</a>
+  <a href="/activites" class="button">Activités</a>
+  <a href="/archives">Archives</a>
+</nav>
+
 <section class="padded">
-  <Articles {articles} />
+  <Articles thirds {articles} />
 </section>
 <section class="padded dark">
   <Balados {balados} />
 </section>
 <section class="padded">
-  <Articles articles={activites} />
+  <Articles thirds articles={activites} />
 </section>
 
 <style lang="scss">
+  nav {
+    color: var(--color);
+  }
+  
   section {
     color: var(--color);
 

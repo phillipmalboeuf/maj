@@ -18,6 +18,7 @@
             titre
             titreCourt
             id
+            vedette
             date
             intro {
               json

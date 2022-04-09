@@ -140,7 +140,7 @@ a.button {
   display: inline-flex;
   align-items: center;
   column-gap: var(--small);
-  
+
   cursor: pointer;
   color: currentColor;
   font-size: inherit;
@@ -149,6 +149,11 @@ a.button {
   border: 1px solid;
   border-radius: 2em;
   padding: 0.5em 0.75em;
+
+  &:hover,
+  &:focus {
+    border-radius: 0;
+  }
 }
 
 svg {
@@ -184,6 +189,10 @@ svg {
   &.grid--halves {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .span__2 {
+    grid-column: span 2;
+  }
 }
 
 .flex {
@@ -194,6 +203,14 @@ svg {
 
   &.flex--nogap {
     gap: 0;
+  }
+
+  &.flex--tight {
+    column-gap: calc(var(--small) / 2);
+  }
+
+  &.flex--wrap {
+    flex-wrap: wrap;
   }
 
   &.flex--middle {
@@ -208,6 +225,18 @@ svg {
     justify-content: center;
   }
 
+  &.flex--end {
+    justify-content: flex-end;
+  }
+
+  .flex__half {
+    width: calc(100% / 2);
+  }
+
+  .flex__third {
+    width: calc(100% / 3);
+  }
+
   .flex__seventh {
     width: calc(100% / 7);
   }
@@ -215,4 +244,6 @@ svg {
 
 .padded {
   padding: var(--gutter);
+
+  &.padded--vertical { padding-left: 0; padding-right: 0; }
 }

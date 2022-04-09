@@ -37,6 +37,7 @@
             __typename
             titre
             titreCourt
+            vedette
             id
             date
             media ${media}
