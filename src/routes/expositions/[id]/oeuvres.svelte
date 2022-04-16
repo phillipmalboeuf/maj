@@ -16,6 +16,7 @@
         expositionCollection(limit: 1, where: {id: $id}) {
           items {
             titre
+            id
             titreCourt
             oeuvresCollection {
               items {
@@ -51,31 +52,35 @@
 </script>
 
 <script lang="ts">
+  import { onMount } from 'svelte'
+  import { page as p } from '$app/stores'
+
   import Page, { type PageDocument } from '$lib/components/Page.svelte'
   import Oeuvres, { type OeuvreDocument } from '$lib/components/Oeuvres.svelte'
   import Document from '$lib/components/document/Document.svelte'
-  import { onMount } from 'svelte'
-  import type { ExpositionDocument } from '../[id].svelte'
   
+  import type { ExpositionDocument } from '../[id].svelte'
+  import ExpoLinks from '$lib/components/ExpoLinks.svelte'
 
 	export let page: PageDocument
   export let exposition: ExpositionDocument
   export let oeuvres: OeuvreDocument[]
-
-  let type = 'grid'
 </script>
 
 <Page {page} noTitre />
 
 <article class="padded">
   <h1 class="center">{exposition.titreCourt}</h1>
-  <button on:click={() => type = type === 'grid' ? 'slider' : 'grid'}>Disposition</button>
-  <Oeuvres {oeuvres} {type} />
+  <center class="flex flex--center"><ExpoLinks type={$p.url.searchParams.get('type') || 'slider'} expo={exposition} /></center>
+  {#key $p.url}
+  <Oeuvres {oeuvres} type={$p.url.searchParams.get('type') || 'slider'} />
+  {/key}
 </article>
 
 
 <style lang="scss">
   article {
     color: var(--color);
+    overflow-x: hidden;
   }
 </style>

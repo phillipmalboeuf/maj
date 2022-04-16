@@ -95,6 +95,7 @@
   import Oeuvres, { type OeuvreDocument } from '$lib/components/Oeuvres.svelte'
   import Document from '$lib/components/document/Document.svelte'
   import Comments from '$lib/components/Comments.svelte'
+  import ExpoLinks from '$lib/components/ExpoLinks.svelte'
 
 	export let page: PageDocument
   export let exposition: ExpositionDocument
@@ -116,16 +117,21 @@
 <Page {page} noTitre />
 
 <article bind:this={element} class="padded">
-  <h1 class="center">{exposition.titreCourt}</h1>
+  <h2 class="center">{exposition.titreCourt}</h2>
+  <br><br>
 
-  <div class="grid">
+  <h1 class="d1 center">{exposition.titre}</h1>
+
+  <div class="flex flex--middle flex--spaced padded">
     <span>{d?.toFormat('yyyy.ll.dd')} {f ? f.toFormat('yyyy.ll.dd') : ''}</span>
     <span>{curators.map(curator => [curator.nom, curator.position].join(', ')).join(', ')}</span>
     <span>{readingTime} min</span>
-    <span><a href="/expositions/{exposition.id}/oeuvres">Oeuvres</a></span>
+    <div><ExpoLinks expo={exposition} noDescription /></div>
   </div>
 
-  <Document body={exposition.description} />
+  <div class="description">
+    <Document body={exposition.description} />
+  </div>
   <Oeuvres {oeuvres} />
 </article>
 
@@ -135,5 +141,16 @@
 <style lang="scss">
   article {
     color: var(--color);
+
+    .description {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+  }
+
+  span {
+    border: 1px solid;
+    padding: 0.15em 0.5em;
+    line-height: 1;
   }
 </style>

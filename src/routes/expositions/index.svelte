@@ -83,7 +83,7 @@
   import Oeuvres from '$lib/components/Oeuvres.svelte'
   import Overlay from '$lib/components/Overlay.svelte'
   import Document from '$lib/components/document/Document.svelte'
-
+  import ExpoLinks from '$lib/components/ExpoLinks.svelte'
 
 	export let page: PageDocument
   export let expositions: ExpositionDocument[]
@@ -96,9 +96,9 @@
 
 <section>
   {#each [...expositions, ...expositions, ...expositions, ...expositions] as expo, i}
-  <div class="flex flex--spaced padded">
+  <div class="flex flex--spaced padded" id={expo.id}>
     <h3>{expo.titreCourt || expo.titre}</h3>
-    <span><a href="/expositions/{expo.id}" class="button">Voir toute l’exposition</a></span>
+    <ExpoLinks {expo} type="folder" />
   </div>
   <ol class="padded flex flex--nogap"  on:pointerleave={() => current = undefined}>
     {#each [...expo.oeuvresCollection.items,...expo.oeuvresCollection.items,...expo.oeuvresCollection.items] as oeuvre, j}

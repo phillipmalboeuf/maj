@@ -184,6 +184,10 @@ svg {
   row-gap: calc(var(--small) / 2);
   grid-template-columns: repeat(4, 1fr);
 
+  &.grid--tight {
+    column-gap: calc(var(--small) / 3);
+  }
+
   &.grid--sixths {
     grid-template-columns: repeat(6, 1fr);
   }
@@ -212,7 +216,7 @@ svg {
   }
 
   &.flex--tight {
-    column-gap: calc(var(--small) / 2);
+    column-gap: calc(var(--small) / 3);
   }
 
   &.flex--wrap {
