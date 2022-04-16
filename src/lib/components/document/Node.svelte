@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { query } from '$lib/clients/contentful'
+  import { media } from '../../../routes/[page].svelte'
+
   import Picture from '../Picture.svelte'
   import Mark from './Mark.svelte'
 
@@ -36,5 +39,9 @@
   <blockquote>{#each node.content as code}<svelte:self node={code} />{/each}</blockquote>
 
 {:else if node.nodeType === 'embedded-asset-block'}
-<Picture media={node.data.target} />
+{#await query(fetch, `query($id: String!) {
+  asset(id: $id) ${media}
+}`, { id: node.data.target.sys.id }) then { data }}
+  <Picture media={data.asset} noDescription />  
+{/await}
 {/if}

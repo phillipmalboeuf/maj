@@ -9,7 +9,6 @@
   let element: HTMLAudioElement
 
   function loaded() {
-    console.log('loaded', element.duration)
     duration =  Duration.fromMillis(element.duration*1000).toFormat('mm:ss')
   }
 

@@ -77,9 +77,10 @@
 
   <!-- <h1 class="d1 center">{page.titre}</h1> -->
 
-  <form action="/forms/{form.id}/soumissions" method="post" enctype="multipart/form-data" class="flex flex--center padded">
+  <form action="/forms/{form.id}/soumissions" method="post" enctype="multipart/form-data" class="padded">
     <input type="hidden" name="form" value={form.id}>
     <Inputs {form} emphasis />
+    <br>
     <Inputs {form} />
 
     <button type="submit">{form.cta || 'Envoyer'}</button>
@@ -89,6 +90,11 @@
 <style lang="scss">
   article {
     color: var(--color);
+  }
+
+  form {
+    max-width: 554px;
+    margin: 0 auto;
   }
 
   button {

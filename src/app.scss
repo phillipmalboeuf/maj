@@ -42,6 +42,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: var(--muted);
+  -webkit-scroll-behavior: smooth;
   scroll-behavior: smooth;
 }
 
@@ -148,6 +149,7 @@ a.button {
   background: none;
   border: 1px solid;
   border-radius: 2em;
+  transition: border-radius 666ms;
   padding: 0.5em 0.75em;
 
   &:hover,
@@ -181,6 +183,10 @@ svg {
   column-gap: var(--small);
   row-gap: calc(var(--small) / 2);
   grid-template-columns: repeat(4, 1fr);
+
+  &.grid--sixths {
+    grid-template-columns: repeat(6, 1fr);
+  }
 
   &.grid--thirds {
     grid-template-columns: repeat(3, 1fr);

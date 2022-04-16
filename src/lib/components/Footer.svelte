@@ -1,30 +1,50 @@
 <script lang="ts">
-
+  import Locale from './Locale.svelte'
+  import NewsletterForm from './NewsletterForm.svelte'
 </script>
 
-<footer class="flex flex--spaced small padded">
-  <nav class="grid">
+<footer class="grid grid--halves small padded">
+  <nav>
+    <div class="grid grid--sixths">
+    <a href="/">Accueil</a>
     <a href="/">Expositions</a>
     <a href="/">Explorer</a>
     <a href="/">À propos</a>
     <a href="/">Participer</a>
-    <a href="/">Soutenir ce projet</a>
-    <a href="/">Se connecter</a>
-    <a href="/">Profil</a>
+    <a href="/">Soutenir</a>
+    </div>
+
+    <br>
+
+    <div class="grid grid--sixths">
+    <a href="/">Facebook</a>
+    <a href="/">Twitter</a>
+    <a href="/">YouTube</a>
+    <a href="/">Instagram</a>
+    <a href="/">Contact</a>
+    </div>
   </nav>
 
-  <nav class="grid">
-    <a href="/">Newsletter</a>
-    <span>Twitter Facebook</span>
-    <a href="/">Fr/En</a>
+  <div class="flex flex--end">
+    <Locale />
+  </div>
+
+  <hr>
+  <hr>
+
+  <nav class="flex">
+    <NewsletterForm />
   </nav>
 
-  <nav class="grid">
+  <nav class="flex flex--end">
     <a href="/">Privacy policy</a>
-    <a href="/">© 2022 JAM</a>
+    <a href="/">© 2022 par Musée d'art de Joliette</a>
     <a href="/">Designed by Paprika</a>
   </nav>
 </footer>
 
 <style lang="scss">
+  hr {
+    margin-bottom: 2rem;
+  }
 </style>

@@ -7,8 +7,8 @@
 </script>
 
 <ol class="grid grid--halves">
-  {#each expositions as exposition}
-  <li>
+  {#each expositions as exposition, i}
+  <li class={i === 0 && 'span__2'}>
     <a href="/expositions/{exposition.id}">
       <figure>
         <Picture media={exposition.media} noDescription label="Voir l'exposition" />

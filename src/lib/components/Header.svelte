@@ -1,45 +1,69 @@
 <script lang="ts">
+  import { query } from '$lib/clients/contentful'
+
   import { fade, fly } from 'svelte/transition'
   import Logo from './Logo.svelte'
+  import NewsletterForm from './NewsletterForm.svelte'
 
   let visible = false
 </script>
 
 <svelte:body on:click={() => visible = false} />
 
-<header id="header">
+<header class:visible id="header">
   <span class="padded">
     <a href="/#top" aria-label="Accueil">
       <Logo />
     </a>
   </span>
 
+  {#await query(fetch, `
+    query {
+      index(id: "1AWDRdqrE2Jks9micYfzwG") {
+          titre
+          id
+          pagesCollection {
+            items {
+              ... on Page {
+                titre
+                id
+              }
+            }
+          }
+        }
+    }
+  `) then { data } }
   {#if visible}
   <nav class="padded" transition:fly={{ y: 0 }}>
-    <a class="h4" href="/expositions">Expositions</a>
-    <a class="h4" href="/explorer">Explorer</a>
-    <a class="h4" href="/a-propos">À propos</a>
-    <a class="h4" href="/participer">Participer</a>
-    <a class="h4" href="/soutenir">Soutenir ce projet</a>
-
-    <a class="h4" href="/">Se connecter</a>
-    <a class="h4" href="/">Profil</a>
-
+    {#each data.index.pagesCollection.items as page, i}
+    {#if i === data.index.pagesCollection.items.length - 1}<br>{/if}
+    <a class="h4" href="/{page.id}">{page.titre}</a>
+    {/each}
+    <br>
     <a class="h4" href="/">En</a>
+
+    <div class="flex">
+      <span on:click|stopPropagation><NewsletterForm /></span>
+      <a href="/">Facebook</a>
+      <a href="/">Twitter</a>
+      <a href="/">YouTube</a>
+      <a href="/">Instagram</a>
+      <a href="/">Contact</a>
+    </div>
   </nav>
   {/if}
+  {/await}
+  
 
-  <span class="padded">
+  <span class:visible class="padded">
     <button on:click|stopPropagation={() => visible = !visible}>
       {#if !visible}
       <svg width="45" height="24" viewBox="0 0 45 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="45" height="24" rx="12" fill="var(--color)"/>
       <line x1="10.3848" y1="8" x2="35.3078" y2="8" stroke="white" stroke-width="2"/>
       <line x1="10.3848" y1="14.8462" x2="35.3078" y2="14.8462" stroke="white" stroke-width="2"/>
       </svg>
       {:else}
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="16" cy="16" r="15" fill="var(--color)"/>
       <path d="M24.0005 7.72412L7.72461 24" stroke="white" stroke-width="2" stroke-linecap="square"/>
       <path d="M7.72414 7.72412L24 24" stroke="white" stroke-width="2" stroke-linecap="square"/>
       </svg>
@@ -79,19 +103,56 @@
         display: block;
         margin-bottom: 0.33em;
         text-decoration: none;
+        transition: padding-left 333ms;
+
+        &:hover,
+        &:focus {
+          padding-left: 1em;
+        }
+      }
+
+      > .flex {
+        position: fixed;
+        bottom: 30%;
+        left: var(--gutter);
       }
     }
 
     > span:last-child {
       left: auto;
       right: 0;
+
+      &.visible {
+        top: -0.25rem;
+        right: 0.25rem;
+        
+        button {
+          padding: 0.15rem 0.13rem 0.15rem 0.15rem;
+        }
+      }
     }
 
     button {
       border: none;
       padding: 0;
-      background: none;
-      border-radius: 0;
+      background: var(--color);
+    }
+  }
+
+  :global(body.dark) header {
+    color: var(--color);
+
+    &:not(.visible) > span > a {
+      color: var(--light);
+    }
+
+    button {
+      background: var(--light);
+
+      line,
+      path {
+        stroke: var(--color);
+      }
     }
   }
 </style>

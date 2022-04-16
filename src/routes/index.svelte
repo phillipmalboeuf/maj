@@ -155,6 +155,11 @@
         entries.forEach(node => {
           if (node.isIntersecting) {
             document.body.setAttribute('style', `--color: var(--${node.target.getAttribute('data-color')})`)
+            if (node.target.classList.contains('dark')) {
+              document.body.classList.add('dark')
+            } else {
+              document.body.classList.remove('dark')
+            }
           }
         })
       },
@@ -169,25 +174,31 @@
 
 <p class="center padded" style="color: var(--{index.pagesCollection.items[0].couleur?.toLowerCase()});">{index.description}</p>
 
-{#each index.pagesCollection.items as page}
-<section bind:this={elements[page.id]} id={page.id} data-color={page.fonce ? 'light' : page.couleur ? page.couleur.toLowerCase() : undefined}
+{#each index.pagesCollection.items as page, i}
+<section bind:this={elements[page.id]} id={page.id} data-color={page.couleur ? page.couleur.toLowerCase() : 'dark'}
   class:dark={page.fonce}
   style={page.couleur && (page.fonce ? `background-color: var(--${page.couleur.toLowerCase()})` : `color: var(--${page.couleur.toLowerCase()})`)}
   class="padded">
   <aside class="sticky">
-    <h2 class="p3"><a href="/{page.id}" class="button" sveltekit:prefetch>{page.titre} <svg width="53" height="32" viewBox="0 0 53 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-<line x1="15.623" y1="15.8079" x2="-0.000949809" y2="15.8079" stroke="white" stroke-width="1.15"/>
-<path d="M38.023 31.616L52.9991 15.808L38.023 0H36.423L50.823 15.232H15.623V16.384H50.823L36.423 31.616H38.023Z" fill="white"/>
-</svg>
-</a></h2>
-    {#if page.description}<p>{page.description}</p>{/if}
-    {#if page.liensCollection}
-    <nav>
-      {#each page.liensCollection.items as lien}
-      <Link {lien} /><br />
+    <div>
+      <h2 class="p3"><a href="/{page.id}" class="button" sveltekit:prefetch>{page.titre} <svg width="53" height="32" viewBox="0 0 53 32" fill="none" xmlns="http://www.w3.org/2000/svg"> <line x1="15.623" y1="15.8079" x2="-0.000949809" y2="15.8079" stroke="white" stroke-width="1.15"/> <path d="M38.023 31.616L52.9991 15.808L38.023 0H36.423L50.823 15.232H15.623V16.384H50.823L36.423 31.616H38.023Z" fill="white"/> </svg> </a></h2>
+      {#if page.description}<p>{page.description}</p>{/if}
+      {#if page.liensCollection}
+      <nav>
+        {#each page.liensCollection.items as lien}
+        <Link button {lien} /><br />
+        {/each}
+      </nav>
+      {/if}
+    </div>
+
+    <nav class="jumps">
+      {#each index.pagesCollection.items as _page, _i}
+      {#if page.id !== _page.id}
+      <a href="#{_page.id}">{_page.titre} {#if _i > i}↓{:else}↑{/if}</a>
+      {/if}
       {/each}
     </nav>
-    {/if}
   </aside>
 
   <div>
@@ -199,10 +210,14 @@
     <Expositions {expositions} />
     {/if}
   </div>
+
+  
 </section>
 {/each}
 
 <style lang="scss">
+  $height: calc(100vh - 18rem);
+
   p {
     max-width: 42rem;
     margin-left: auto;
@@ -210,7 +225,7 @@
   }
 
   section {
-    min-height: 50vh;
+    min-height: 100vh;
 
     &.dark {
       color: var(--light);
@@ -220,11 +235,20 @@
     .sticky {
       top: 10rem;
       width: 24rem;
-      height: 30vh;
+      height: $height;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      
+      .jumps {
+        display: flex;
+        justify-content: space-between;
+      }
     }
 
     > div {
-      margin-top: -30vh;
+      margin-top: calc($height * -1);
       margin-left: 24rem;
       padding-left: var(--gutter);
 

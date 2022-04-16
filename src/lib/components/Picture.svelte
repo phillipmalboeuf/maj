@@ -57,13 +57,26 @@
   span {
     position: absolute;
     background-color: var(--light);
+    background:rgba(251, 251, 251, 0.81);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid;
     padding: 0.5em;
+  }
+
+  .beat {
+    animation: beat .420s infinite alternate;
+    transform-origin: center;
+  }
+
+  @keyframes beat{
+    to { transform: scale(0.88); }
   }
 </style>
 
 {#if media}
 {#if media.title !== '[SPACER]'}
-{#if media.contentType.startsWith('video/')}
+{#if media.contentType?.startsWith('video/')}
 <video class:zoom src="{media.url}" autoplay muted loop playsinline />
 {:else}
 <picture>
@@ -79,12 +92,12 @@
 <source srcSet="{media.url}?w=900{ar ? `&h=${Math.round(ar * 900)}&fit=fill` : ''}" media="(max-width: 900px)" />
 <source srcSet="{media.url}?w=1200{ar ? `&h=${Math.round(ar * 1200)}&fit=fill` : ''}&fm=avif" type="image/avif" media="(max-width: 1200px)" />
 <source srcSet="{media.url}?w=1800{ar ? `&h=${Math.round(ar * 1800)}&fit=fill` : ''}&fm=avif" type="image/avif" />
-<img class:zoom on:pointermove={move} on:pointerleave={() => labelVisible = false} on:click={() => open = true} style={ar ? `aspect-ratio: 1800 / ${Math.round(ar * 1800)}` : `aspect-ratio: ${media.width} / ${media.height}`} src="{media.url}?w=1800{ar ? `&h=${Math.round(ar * 1800)}&fit=fill` : ''}" alt="{media.title} {media.description}" loading={eager ? "eager" : "lazy"} />
+<img class:zoom class:beat={media.title === 'Heartbeat'} on:pointermove={move} on:pointerleave={() => labelVisible = false} on:click={() => open = true} style={ar ? `aspect-ratio: 1800 / ${Math.round(ar * 1800)}` : `aspect-ratio: ${media.width} / ${media.height}`} src="{media.url}?w=1800{ar ? `&h=${Math.round(ar * 1800)}&fit=fill` : ''}" alt="{media.title} {media.description}" loading={eager ? "eager" : "lazy"} />
   {/if}
 </picture>
 {/if}
 
-{#if !noDescription && (media.title || media.description)}
+{#if !noDescription && media.title !== 'Heartbeat' && (media.title || media.description)}
 <p class="small">{media.title} {media.description}</p>
 {/if}
 
