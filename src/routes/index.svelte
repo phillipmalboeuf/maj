@@ -219,9 +219,16 @@
   $height: calc(100vh - 18rem);
 
   p {
+    width: 100%;
     max-width: 42rem;
     margin-left: auto;
     margin-right: auto;
+
+    &.center {
+    @media (max-width: 888px) {
+      display: none;
+    }
+    }
   }
 
   section {
@@ -245,6 +252,12 @@
         display: flex;
         justify-content: space-between;
       }
+
+      @media (max-width: 888px) {
+        position: relative;
+        top: 0;
+        height: auto;
+      }
     }
 
     > div {
@@ -252,12 +265,21 @@
       margin-left: 24rem;
       padding-left: var(--gutter);
 
+      @media (max-width: 888px) {
+        margin: 0;
+        padding-left: 0;
+      }
+
       > :global(p) {
         font-size: 2rem;
         font-weight: bold;
 
         > :global(strong) {
           font-size: 6rem;
+
+          @media (max-width: 888px) {
+            font-size: 4rem;
+          }
         }
       }
     }
