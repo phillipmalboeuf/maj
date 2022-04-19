@@ -1,5 +1,6 @@
 <script lang="ts">
   import Gallerie from './Gallerie.svelte'
+  import Slider from './Slider.svelte'
   import Text from './Text.svelte'
 
   export let contenu: any[]
@@ -11,6 +12,8 @@
 <Text {entry} />
 {:else if entry.__typename === 'Gallerie'}
 <Gallerie {entry} />
+{:else if entry.__typename === 'Slider'}
+<Slider {entry} />
 {/if}
 {/each}
 {/if}

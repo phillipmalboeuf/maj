@@ -17,6 +17,8 @@
         ... on Text {
           titre
           titreInvisible
+          pleinePage
+          media ${media}
           corps {
             json
           }
@@ -28,6 +30,21 @@
           alignement
           mediasCollection(limit: 8) {
             items ${media}
+          }
+        }
+        ... on Slider {
+          titre
+          titreInvisible
+          slidesCollection(limit: 12) {
+            items {
+              ... on Text {
+                titre
+                titreInvisible
+                corps {
+                  json
+                }
+              }
+            }
           }
         }
       }
@@ -43,6 +60,7 @@
             id
             description
             couleur
+            media ${media}
             ${contenuCollection}
           }
         }
@@ -62,7 +80,20 @@
 
 <script lang="ts">
   import Page, { type PageDocument } from '$lib/components/Page.svelte'
+  import Picture from '$lib/components/Picture.svelte'
   export let page: PageDocument
 </script>
 
 <Page {page} />
+{#if page.id === 'a-propos' && page.media}
+<figure>
+  <Picture media={page.media} />
+</figure>
+{/if}
+
+<style lang="scss">
+  figure {
+    max-width: 42rem;
+    margin: 0 auto;
+  }
+</style>

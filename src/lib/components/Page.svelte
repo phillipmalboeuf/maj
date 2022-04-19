@@ -7,6 +7,7 @@
     couleur: string
     fonce: boolean
     description?: string
+    media?: object
     intro?: {
       json: object
     }

@@ -1,26 +1,62 @@
 <script lang="ts">
   import Document from './document/Document.svelte'
+  import Picture from './Picture.svelte'
 
   export let entry: {
     titre: string
     titreInvisible: boolean
+    pleinePage: boolean
+    media: object
     corps: {
       json: object
     }
   }
 </script>
-
-<h2 class="d2 center">{entry.titre}</h2>
-<div><Document body={entry.corps} /></div>
+<article class="padded{entry.media ? " grid grid--thirds" : ""}" class:media={entry.media} class:h1={entry.pleinePage} class:full={entry.pleinePage}>
+  {#if entry.media}<figure class="span__2"><Picture media={entry.media} /></figure>{/if}
+  <aside>
+    {#if !entry.titreInvisible}<h2 class="d2 center">{entry.titre}</h2>{/if}
+    <div><Document body={entry.corps} /></div>
+  </aside>
+</article>
 
 <style lang="scss">
-  div {
-    max-width: 42rem;
-    margin: 0 auto var(--gutter);
+  article {
+
+    &:not(.full):not(.media) {
+      max-width: 42rem;
+      margin: 0 auto;
+    }
+
+    &.media {
+
+    }
+  }
+
+  div,
+  figure {
     color: var(--dark);
+
+    .full & {
+      max-width: none;
+    }
+
+    .full &,
+    .media & {
+      color: var(--color);
+    }
   }
 
   h2 {
-    margin-top: calc(var(--gutter) * 2);
+    // margin-top: 0;
+
+    .full &,
+    .media & {
+      color: var(--color);
+    }
+
+    .media & {
+      text-align: left;
+    }
   }
 </style>

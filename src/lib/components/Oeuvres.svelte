@@ -62,7 +62,7 @@
 </ul>
 {:else if type === 'slider'}
 <ul class="flex flex--tight slider"
-  use:swipe={{ timeframe: 300, minSwipeDistance: 25, touchAction: 'pan-y' }} on:swipe={(e) => {
+  use:swipe={{ timeframe: 500, minSwipeDistance: 25, touchAction: 'pan-y' }} on:swipe={(e) => {
     if (e.detail.direction === 'right') {
       if (current > 0) {
         current = current - 1
