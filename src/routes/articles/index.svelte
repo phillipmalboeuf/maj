@@ -85,12 +85,15 @@
   import Page, { type PageDocument } from '$lib/components/Page.svelte'
   import Picture from '$lib/components/Picture.svelte'
   import Articles from '$lib/components/Articles.svelte'
+  import ExplorerLinks from '$lib/components/ExplorerLinks.svelte'
 
 	export let page: PageDocument
   export let articles: ArticleDocument[]
 </script>
 
 <Page {page} />
+
+<ExplorerLinks current="articles" />
 
 <section class="padded">
   <Articles {articles} />

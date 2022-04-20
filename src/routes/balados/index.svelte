@@ -73,12 +73,15 @@
   import Page, { type PageDocument } from '$lib/components/Page.svelte'
   import Picture from '$lib/components/Picture.svelte'
   import Balados from '$lib/components/Balados.svelte'
+  import ExplorerLinks from '$lib/components/ExplorerLinks.svelte'
 
 	export let page: PageDocument
   export let balados: BaladoDocument[]
 </script>
 
 <Page {page} />
+
+<ExplorerLinks current="balados" />
 
 <section class="padded">
   <Balados {balados} />

@@ -40,6 +40,7 @@
             titreCourt
             date
             audio ${media}
+            media ${media}
             liens
             introduction {
               json
@@ -83,6 +84,7 @@
   import Page, { type PageDocument } from '$lib/components/Page.svelte'
   import Articles from '$lib/components/Articles.svelte'
   import Balados from '$lib/components/Balados.svelte'
+  import ExplorerLinks from '$lib/components/ExplorerLinks.svelte'
 
   import type { ArticleDocument } from './articles/index.svelte'
   import type { BaladoDocument } from './balados/index.svelte'
@@ -96,12 +98,7 @@
 
 <Page {page} />
 
-<nav class="padded flex flex--tight flex--center flex--middle">
-  <a href="/articles" class="button">Articles</a>
-  <a href="/balados" class="button">Balados</a>
-  <a href="/activites" class="button">Activités</a>
-  <a href="/archives">Archives</a>
-</nav>
+<ExplorerLinks />
 
 <section class="padded">
   <Articles thirds {articles} />
@@ -114,10 +111,6 @@
 </section>
 
 <style lang="scss">
-  nav {
-    color: var(--color);
-  }
-  
   section {
     color: var(--color);
 

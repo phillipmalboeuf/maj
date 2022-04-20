@@ -13,9 +13,11 @@
   }
 
   onMount(() => {
-    element.addEventListener('loadedmetadata', loaded)
+    if (element) {
+      element.addEventListener('loadedmetadata', loaded)
 
-    return () => element.removeEventListener('loadedmetadata', loaded)
+      return () => element.removeEventListener('loadedmetadata', loaded)
+    }
   })
 </script>
 

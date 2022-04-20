@@ -28,7 +28,7 @@
         {/if}
       </figcaption>
       {/if}
-      <Picture media={balado.image} />
+      <Picture media={balado.media} />
       <Audio controls={selected === balado.id} media={balado.audio} bind:duration={durations[balado.id]} />
     </figure>
 
