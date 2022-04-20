@@ -76,13 +76,11 @@ main {
 
 .d1 {
   @include text(72px, 80px);
-  font-weight: 300;
   text-transform: uppercase;
 }
 
 .d2 {
-  @include text(60px, 72px);
-  font-weight: 300;
+  @include text(60px, 68px);
   text-transform: uppercase;
 }
 
@@ -96,7 +94,7 @@ h1, .h1 {
 }
 
 h2, .h2 {
-  @include text(39px, 47px, -0.02em);
+  @include text(39px, 44px, -0.02em);
 }
 
 h3, .h3 {

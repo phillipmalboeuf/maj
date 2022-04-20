@@ -30,7 +30,7 @@
 
 {@html `<style>body { --color: var(--${page.couleur?.toLowerCase()}) !important; }</style>`}
 {#if !noTitre}
-<h1 class="center padded">{page.titre}</h1>
+<h1 class="center h2 padded">{page.titre}</h1>
 <Contenu contenu={page.contenuCollection?.items} />
 {/if}
 
