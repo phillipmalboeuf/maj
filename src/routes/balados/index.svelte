@@ -20,7 +20,7 @@
     sys: {
       id: string
     }
-    introduction: {
+    intro: {
       json: object
     }
     liens: object
@@ -48,9 +48,10 @@
             titreCourt
             id
             date
+            audio ${media}
             media ${media}
             liens
-            introduction {
+            intro {
               json
             }
           }

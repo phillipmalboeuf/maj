@@ -13,17 +13,14 @@
           description
           couleur
         }
-        articleCollection(limit: 1, where: {id: $id}) {
+        baladoCollection(limit: 1, where: {id: $id}) {
           items {
             __typename
             titre
             titreCourt
             id
-            vedette
             date
-            intro {
-              json
-            }
+            audio ${media}
             media ${media}
             personnesCollection {
               items {
@@ -32,10 +29,9 @@
                 position
               }
             }
-            theme {
-              titre
-              titreCourt
-              id
+            liens
+            intro {
+              json
             }
             ${contenuCollection}
           }
@@ -45,11 +41,11 @@
       pageId: "2iqQrSM1C0u4j1Tzhmoamx",
       id: params.id
     })
-    if (data && data.articleCollection.items.length > 0) {
+    if (data && data.baladoCollection.items.length > 0) {
       return {
         props: { 
           page: data.page,
-          article: data.articleCollection.items[0]
+          balado: data.baladoCollection.items[0]
         }
       }
     }
@@ -63,19 +59,19 @@
   import Page, { type PageDocument } from '$lib/components/Page.svelte'
   import Document from '$lib/components/document/Document.svelte'
   
-  import type { ArticleDocument } from './index.svelte'
+  import type { BaladoDocument } from './index.svelte'
   import Picture from '$lib/components/Picture.svelte'
   import Contenu from '$lib/components/Contenu.svelte'
   import Comments from '$lib/components/Comments.svelte'
   import Article from '$lib/components/Article.svelte'
 
 	export let page: PageDocument
-  export let article: ArticleDocument
+  export let balado: BaladoDocument
 </script>
 
 <Page {page} noTitre />
 
-<Article {page} {article} />
+<Article {page} article={balado} />
 
 
 <style lang="scss">

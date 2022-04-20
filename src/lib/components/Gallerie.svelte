@@ -23,9 +23,6 @@
 </div>
 
 <style lang="scss">
-  figure {
-    // flex: 1;
-  }
 
   h2 {
     margin-top: calc(var(--gutter) * 2);

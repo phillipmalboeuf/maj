@@ -15,7 +15,7 @@
 <article class="padded{entry.media ? " grid grid--thirds" : ""}" class:media={entry.media} class:h1={entry.pleinePage} class:full={entry.pleinePage}>
   {#if entry.media}<figure class="span__2"><Picture media={entry.media} /></figure>{/if}
   <aside>
-    {#if !entry.titreInvisible}<h2 class="d2 center">{entry.titre}</h2>{/if}
+    {#if !entry.titreInvisible}<h2 class="d2">{entry.titre}</h2>{/if}
     <div><Document body={entry.corps} /></div>
   </aside>
 </article>

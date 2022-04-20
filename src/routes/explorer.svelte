@@ -42,7 +42,7 @@
             audio ${media}
             media ${media}
             liens
-            introduction {
+            intro {
               json
             }
           }
@@ -104,7 +104,7 @@
   <Articles thirds {articles} />
 </section>
 <section class="padded dark">
-  <Balados {balados} />
+  <Balados {balados} selected={balados[0].id} />
 </section>
 <section class="padded">
   <Articles thirds articles={activites} />
