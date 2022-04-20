@@ -10,9 +10,14 @@ import { onMount } from 'svelte';
   })
 </script>
 
-<div class="padded" id="disqus_thread"></div>
+<section class="padded">
+  <div id="disqus_thread"></div>
+</section>
 
 <style lang="scss">
+  section {
+    background-color: var(--color);
+  }
   div {
     max-width: 66rem;
     margin: 0 auto;
