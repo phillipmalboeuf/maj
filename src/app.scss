@@ -214,15 +214,17 @@ svg {
 .flex {
   display: flex;
   flex-wrap: nowrap;
-  column-gap: var(--small);
-  row-gap: calc(var(--small) / 2);
+
+  --gap: var(--small);
+  column-gap: var(--gap);
+  row-gap: calc(var(--gap) / 2);
 
   &.flex--nogap {
-    gap: 0;
+    --gap: 0%;
   }
 
   &.flex--tight {
-    column-gap: calc(var(--small) / 3);
+    --gap: calc(var(--small) / 3);
   }
 
   &.flex--wrap {
@@ -246,15 +248,19 @@ svg {
   }
 
   .flex__half {
-    width: calc(100% / 2);
+    width: calc((100% / 2) - var(--gap));
   }
 
   .flex__third {
-    width: calc(100% / 3);
+    width: calc((100% / 3) - var(--gap));
+  }
+
+  .flex__fourth {
+    width: calc((100% / 4) - var(--gap));
   }
 
   .flex__seventh {
-    width: calc(100% / 7);
+    width: calc((100% / 7) - var(--gap));
   }
 }
 

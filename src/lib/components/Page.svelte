@@ -17,6 +17,7 @@
     contenuCollection?: {
       items: any[]
     }
+    gallerie?: any
   }
 </script>
 

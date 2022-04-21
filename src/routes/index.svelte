@@ -21,6 +21,15 @@
                 intro {
                   json
                 }
+                gallerie {
+                  titre
+                  titreInvisible
+                  colonnes
+                  alignement
+                  mediasCollection(limit: 8) {
+                    items ${media}
+                  }
+                }
                 liensCollection(limit: 5) {
                   items {
                     titre
@@ -131,6 +140,7 @@
   import Link from '$lib/components/Link.svelte'
   import type { ActivityDocument } from './activites/index.svelte'
   import type { BaladoDocument } from './balados/index.svelte'
+import Gallerie from '$lib/components/Gallerie.svelte'
 
 	export let index: {
     titre: string
@@ -207,6 +217,9 @@
 
   <div>
     <Document body={page.intro} />
+    {#if page.gallerie}
+    <Gallerie entry={page.gallerie} />
+    {/if}
 
     {#if page.id === 'explorer'}
     <Articles articles={[...articles,...activites,...balados]} />
