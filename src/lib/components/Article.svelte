@@ -1,6 +1,8 @@
 <script lang="ts">
   import { DateTime } from "luxon"
   import { onMount } from 'svelte'
+  
+  import { query } from '$lib/clients/contentful'
 
   import type { PageDocument } from '$lib/components/Page.svelte'
   import type { ArticleDocument } from '../../routes/articles/index.svelte'
@@ -9,6 +11,8 @@
   import Picture from '$lib/components/Picture.svelte'
   import Contenu from '$lib/components/Contenu.svelte'
   import Comments from '$lib/components/Comments.svelte'
+  import { media } from '../../routes/[page].svelte'
+  import Articles from './Articles.svelte'
 
 
 	export let page: PageDocument
@@ -63,20 +67,42 @@
   <slot />
 </article>
 
-<Comments />
-
-<!-- {#if article.theme}
-<nav class="padded center" style="background-color: var(--{page.couleur?.toLowerCase()});">
-  <button>Explorer davantage dans notre archive</button>
+{#if article.theme}
+<nav class="padded">
+  <center><button>Contenus connexes</button></center>
   {#await query(fetch, `
       query($themeId: String!) {
-        articleCollection(limit: 9, where: {theme: { id: $themeId }}) {
+        themeCollection(limit: 1, where: { id: $themeId }) {
           items {
             titre
-            titreCourt
-            id
-            date
-            media ${media}
+            linkedFrom {
+              entryCollection(limit: 3) {
+                items {
+                  __typename
+                  ... on Article {
+                    titre
+                    titreCourt
+                    date
+                    id
+                    media ${media}
+                  }
+                  ... on Balado {
+                    titre
+                    titreCourt
+                    date
+                    id
+                    media ${media}
+                  }
+                  ... on Activity {
+                    titre
+                    titreCourt
+                    date
+                    id
+                    media ${media}
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -85,19 +111,12 @@
     })}
     ...
   {:then { data }}
-  <div class="flex flex--center flex--nogap">
-    {#each data.articleCollection.items as a}
-    <a href="/articles/{a.id}">
-      <figure>
-        <Picture media={a.media} noDescription />
-        <figcaption>{a.titreCourt || a.titre}</figcaption>
-      </figure>
-    </a>
-    {/each}
-  </div>
+  <Articles thirds archives articles={data.themeCollection.items[0].linkedFrom.entryCollection.items} />
   {/await}
 </nav>
-{/if} -->
+{/if}
+
+<Comments />
 
 
 <style lang="scss">
@@ -121,30 +140,12 @@
     }
   }
 
-  // nav {
-  //   color: var(--light);
+  nav {
+    color: var(--light);
+    background-color: var(--color);
 
-  //   > div {
-  //     margin-top: 2rem;
-  //   }
-
-  //   a {
-  //     text-align: left;
-  //     max-width: 25%;
-
-  //     figcaption {
-  //       opacity: 0;
-  //       transform: translateY(10px);
-  //       transition: opacity 333ms, transform 333ms;
-  //     }
-
-  //     &:hover,
-  //     &:focus {
-  //       figcaption {
-  //         opacity: 1;
-  //         transform: translateY(0);
-  //       }
-  //     }
-  //   }
-  // }
+    > center {
+      margin-bottom: 2rem;
+    }
+  }
 </style>

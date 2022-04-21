@@ -85,6 +85,7 @@
   import Picture from '$lib/components/Picture.svelte'
   import Articles from '$lib/components/Articles.svelte'
   import ExplorerLinks from '$lib/components/ExplorerLinks.svelte'
+  import ExplorerMore from '$lib/components/ExplorerMore.svelte'
 
 	export let page: PageDocument
   export let activites: ActivityDocument[]
@@ -97,6 +98,8 @@
 <section class="padded">
   <Articles articles={activites} />
 </section>
+
+<ExplorerMore />
 
 
 <style lang="scss">

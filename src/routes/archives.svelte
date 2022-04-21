@@ -15,21 +15,14 @@
             ${contenuCollection}
           }
         }
-        articleCollection(limit: 3, order: date_DESC) {
+        articleCollection(limit: 6, order: date_DESC) {
           items {
             __typename
             titre
             id
             titreCourt
-            vedette
             date
             media ${media}
-            personnesCollection {
-              items {
-                id
-                nom
-              }
-            }
           }
         }
         baladoCollection(limit: 6, order: date_DESC) {
@@ -39,15 +32,10 @@
             id
             titreCourt
             date
-            audio ${media}
             media ${media}
-            liens
-            intro {
-              json
-            }
           }
         }
-        activityCollection(limit: 3, order: date_DESC) {
+        activityCollection(limit: 6, order: date_DESC) {
           items {
             __typename
             titre
@@ -55,12 +43,6 @@
             titreCourt
             date
             media ${media}
-            personnesCollection {
-              items {
-                id
-                nom
-              }
-            }
           }
         }
       }
@@ -83,9 +65,7 @@
 <script lang="ts">
   import Page, { type PageDocument } from '$lib/components/Page.svelte'
   import Articles from '$lib/components/Articles.svelte'
-  import Balados from '$lib/components/Balados.svelte'
   import ExplorerLinks from '$lib/components/ExplorerLinks.svelte'
-  import ExplorerMore from '$lib/components/ExplorerMore.svelte'
 
   import type { ArticleDocument } from './articles/index.svelte'
   import type { BaladoDocument } from './balados/index.svelte'
@@ -99,27 +79,14 @@
 
 <Page {page} />
 
-<ExplorerLinks />
+<ExplorerLinks current="archives" />
 
 <section class="padded">
-  <Articles thirds {articles} />
+  <Articles thirds archives articles={[...articles, ...balados, ...activites]} />
 </section>
-<section class="padded dark">
-  <Balados {balados} selected={balados[0].id} />
-</section>
-<section class="padded">
-  <Articles thirds articles={activites} />
-</section>
-
-<ExplorerMore />
 
 <style lang="scss">
   section {
     color: var(--color);
-
-    &.dark {
-      color: var(--light);
-      background-color: var(--dark);
-    }
   }
 </style>

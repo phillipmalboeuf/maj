@@ -75,6 +75,7 @@
   import Picture from '$lib/components/Picture.svelte'
   import Balados from '$lib/components/Balados.svelte'
   import ExplorerLinks from '$lib/components/ExplorerLinks.svelte'
+  import ExplorerMore from '$lib/components/ExplorerMore.svelte'
 
 	export let page: PageDocument
   export let balados: BaladoDocument[]
@@ -87,6 +88,8 @@
 <section class="padded">
   <Balados {balados} />
 </section>
+
+<ExplorerMore />
 
 
 <style lang="scss">
