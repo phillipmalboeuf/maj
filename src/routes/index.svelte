@@ -148,22 +148,26 @@
   let elements: {[key: string]: HTMLElement} = {}
 
   onMount(() => {
-    document.body.setAttribute('style', `--color: var(--${elements[index.pagesCollection.items[0].id].getAttribute('data-color')})`)
+    document.body.setAttribute('style', `--color: var(--${elements[index.pagesCollection.items[0].id].getAttribute('data-color')}); color: var(--color);`)
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(node => {
           if (node.isIntersecting) {
-            document.body.setAttribute('style', `--color: var(--${node.target.getAttribute('data-color')})`)
-            if (node.target.classList.contains('dark')) {
+            const color = node.target.getAttribute('data-color')
+            const background = node.target.getAttribute('data-background-color')
+
+            if (background) {
               document.body.classList.add('dark')
+              document.body.setAttribute('style', `--color: var(--${color}); background-color: var(--${background}); color: var(--light);`)
             } else {
               document.body.classList.remove('dark')
+              document.body.setAttribute('style', `--color: var(--${color}); color: var(--color);`)
             }
           }
         })
       },
-      { threshold: 0, rootMargin: '-9% 0 -90%' }
+      { threshold: 0, rootMargin: '-40% 0 -40%' }
     )
 
     Object.values(elements).forEach(element => observer.observe(element))
@@ -172,12 +176,12 @@
   })
 </script>
 
-<p class="center padded" style="color: var(--{index.pagesCollection.items[0].couleur?.toLowerCase()});">{index.description}</p>
+<p class="center padded">{index.description}</p>
 
 {#each index.pagesCollection.items as page, i}
-<section bind:this={elements[page.id]} id={page.id} data-color={page.couleur ? page.couleur.toLowerCase() : 'dark'}
-  class:dark={page.fonce}
-  style={page.couleur && (page.fonce ? `background-color: var(--${page.couleur.toLowerCase()})` : `color: var(--${page.couleur.toLowerCase()})`)}
+<section bind:this={elements[page.id]} id={page.id}
+  data-color={page.couleur ? page.couleur.toLowerCase() : 'dark'}
+  data-background-color={page.fonce ? page.couleur ? page.couleur.toLowerCase() : 'dark' : undefined}
   class="padded">
   <aside class="sticky">
     <div>
@@ -233,11 +237,6 @@
 
   section {
     min-height: 100vh;
-
-    &.dark {
-      color: var(--light);
-      background-color: var(--dark);
-    }
 
     .sticky {
       top: 10rem;

@@ -75,6 +75,7 @@
 <style lang="scss">
   header {
     color: var(--color);
+    transition: color 333ms;
     pointer-events: none;
 
     a, button {
@@ -136,6 +137,7 @@
       border: none;
       padding: 0;
       background: var(--color);
+      transition: color 333ms, background-color 333ms, border-radius 666ms;
     }
   }
 

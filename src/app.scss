@@ -57,6 +57,8 @@ html.noscroll {
 body {
   margin: 0;
   padding: 0;
+
+  transition: color 333ms, background-color 333ms;
 }
 
 main {
