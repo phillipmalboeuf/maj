@@ -250,6 +250,7 @@ import Gallerie from '$lib/components/Gallerie.svelte'
 
   section {
     min-height: 100vh;
+    padding-bottom: 25vh;
 
     .sticky {
       top: 10rem;
