@@ -177,7 +177,7 @@ import Gallerie from '$lib/components/Gallerie.svelte'
           }
         })
       },
-      { threshold: 0, rootMargin: '-40% 0 -40%' }
+      { threshold: 0, rootMargin: '-40% 0% -40%' }
     )
 
     Object.values(elements).forEach(element => observer.observe(element))
