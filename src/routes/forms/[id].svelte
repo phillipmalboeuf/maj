@@ -77,14 +77,14 @@
 
   <!-- <h1 class="d1 center">{page.titre}</h1> -->
 
-  <form action="/forms/{form.id}/soumissions" method="post" enctype="multipart/form-data" class="padded">
+  <!-- <form action="/forms/{form.id}/soumissions" method="post" enctype="multipart/form-data" class="padded">
     <input type="hidden" name="form" value={form.id}>
     <Inputs {form} emphasis />
     <br>
     <Inputs {form} />
 
     <button type="submit">{form.cta || 'Envoyer'}</button>
-  </form>
+  </form> -->
 </article>
 
 <style lang="scss">
