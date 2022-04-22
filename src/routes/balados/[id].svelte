@@ -72,10 +72,8 @@
 
 <Article {page} article={balado}>
   <div class="padded" slot="extra">
-    <figure class="grid">
-      <span><Picture media={balado.media} /></span>
-      <Audio controls media={balado.audio} />
-    </figure>
+      <!-- <span><Picture media={balado.media} /></span> -->
+    <Audio media={balado.audio} />
 
     <nav class="flex flex--center flex--tight">
       {#each Object.entries(balado.liens) as [label, href]}

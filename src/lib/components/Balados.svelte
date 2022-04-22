@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { DateTime } from 'luxon'
+  import { DateTime, Duration } from 'luxon'
   import type { BaladoDocument } from 'src/routes/balados/index.svelte'
   import Audio from './Audio.svelte'
   import Document from './document/Document.svelte'
@@ -8,7 +8,7 @@
   export let balados: BaladoDocument[]
   export let selected: string = undefined
 
-  let durations: {[id: string]: string} = {}
+  let durations: {[id: string]: number} = {}
 </script>
 
 <section class:selected>
@@ -22,9 +22,9 @@
   <ol>
     {#each balados as balado}
     <li class="flex flex--spaced" class:selected={selected === balado.id} on:click={() => selected = balado.id}>
-      <figure class="grid">
+      <figure class="flex">
         {#if selected === balado.id}
-        <figcaption>
+        <figcaption class="flex__third">
           <a href="/balados/{balado.id}" class="button">Contenu du balado <svg width="53" height="32" viewBox="0 0 53 32" fill="none" xmlns="http://www.w3.org/2000/svg"> <line x1="15.623" y1="15.8079" x2="-0.000949809" y2="15.8079" stroke="white" stroke-width="1.15"/> <path d="M38.023 31.616L52.9991 15.808L38.023 0H36.423L50.823 15.232H15.623V16.384H50.823L36.423 31.616H38.023Z" fill="white"/> </svg></a><br><br>
           <Document body={balado.intro} />
           {#if balado.liens}
@@ -34,24 +34,14 @@
           {/if}
         </figcaption>
         {/if}
-        <span><Picture media={balado.media} /></span>
-        <Audio controls={selected === balado.id} media={balado.audio} bind:duration={durations[balado.id]} />
+        <!-- <span><Picture media={balado.media} /></span> -->
+        <Audio visible={selected === balado.id} media={balado.audio} bind:duration={durations[balado.id]} />
       </figure>
 
       <span>{balado.titre}</span>
       <span>{balado.titreCourt}</span>
       <span>{balado.date && DateTime.fromISO(balado.date).toFormat('yyyy.ll.dd')}</span>
-      <span>{durations[balado.id]}</span>
-      <!--  -->
-      
-      <!-- <figure>
-        <Audio media={balado.audio} bind:duration={durations[balado.id]} />
-
-        <figcaption class="flex flex--spaced">
-          <span>{balado.date && DateTime.fromISO(balado.date).toFormat('yyyy.ll.dd')}</span>
-          <span>{durations[balado.id]}</span>
-        </figcaption>
-      </figure> -->
+      <span>{durations[balado.id] && Duration.fromMillis(durations[balado.id]*1000).toFormat('mm:ss')}</span>
     </li>
     {/each}
   </ol>
@@ -77,6 +67,7 @@
       margin: 0 auto;
 
       figure {
+        cursor: auto;
         position: absolute;
         top: var(--gutter);
         left: 0;
