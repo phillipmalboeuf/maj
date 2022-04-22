@@ -110,5 +110,9 @@
 <style lang="scss">
   article {
     color: var(--color);
+
+    aside > p {
+      color: var(--dark);
+    }
   }
 </style>
