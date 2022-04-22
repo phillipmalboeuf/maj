@@ -182,7 +182,11 @@ import Gallerie from '$lib/components/Gallerie.svelte'
 
     Object.values(elements).forEach(element => observer.observe(element))
 
-    return () => observer.disconnect()
+    return () => {
+      document.body.classList.remove('dark')
+      document.body.removeAttribute('style')
+      observer.disconnect()
+    }
   })
 </script>
 
