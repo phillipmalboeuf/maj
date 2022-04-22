@@ -68,6 +68,7 @@
   import type { FormDocument } from '../../[id].svelte'
   import Document from '$lib/components/document/Document.svelte'
   import Picture from '$lib/components/Picture.svelte'
+  import ParticiperSteps from '$lib/components/ParticiperSteps.svelte'
 
   import { DateTime } from 'luxon'
 
@@ -80,7 +81,10 @@
 
 <article class="padded">
   <h1 class="center">{form.titre}</h1>
-  <div class="padded"></div>
+  
+  {#if form.id === 'participer'}
+  <ParticiperSteps current={3} />
+  {/if}
 
   <div class="grid grid--thirds">
     <aside>

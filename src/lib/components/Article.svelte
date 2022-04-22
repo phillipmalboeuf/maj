@@ -18,6 +18,9 @@
 	export let page: PageDocument
   export let article: ArticleDocument
 
+  export let noBack = false
+  export let noComments = false
+
   let type = article.__typename.toLowerCase()
 
 
@@ -36,11 +39,15 @@
   
   <br>
 
+  <slot name="header" />
+
+  {#if !noBack}
   <center>
     <a href="/{{ 'activity': 'activite' }[type] || type}s" class="button">←</a>
   </center>
 
   <br>
+  {/if}
 
   <h1 class="d1 center">{article.titre}</h1>
   
@@ -48,7 +55,7 @@
 
   <div class="flex flex--center info">
     <span>{article.date && DateTime.fromISO(article.date).toFormat('yyyy.ll.dd')}</span>
-    {#if article.personnesCollection}<span>{article.personnesCollection.items.map(personne => [personne.nom, personne.position].join(', ')).join(', ')}</span>{/if}
+    {#if article.personnesCollection}<span>{article.personnesCollection.items.map(personne => [personne.nom, personne.position].filter(e => e).join(', ')).join(', ')}</span>{/if}
     <span>{readingTime} min</span>
   </div>
 
@@ -64,7 +71,7 @@
   <aside><Document body={article.intro} /></aside>
   {#if article.contenuCollection}<Contenu contenu={article.contenuCollection.items} />{/if}
 
-  <slot />
+  <slot name="extra" />
 </article>
 
 {#if article.theme}
@@ -116,7 +123,9 @@
 </nav>
 {/if}
 
+{#if !noComments}
 <Comments />
+{/if}
 
 
 <style lang="scss">
@@ -125,11 +134,13 @@
   }
 
   h1 {
-    margin-bottom: 0;
+    text-transform: uppercase;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   aside {
-    font-size: 1.5rem;
+    // font-size: 1.5rem;
   }
 
   .info {

@@ -65,6 +65,7 @@
   import Document from '$lib/components/document/Document.svelte'
   import Picture from '$lib/components/Picture.svelte'
   import Inputs from '$lib/components/Inputs.svelte'
+  import ParticiperSteps from '$lib/components/ParticiperSteps.svelte'
 
 	export let page: PageDocument
   export let form: FormDocument
@@ -75,6 +76,10 @@
 <article class="padded">
   <h1 class="center">{form.titre}</h1>
 
+  {#if form.id === 'participer'}
+  <ParticiperSteps current={2} />
+  {/if}
+
   <!-- <h1 class="d1 center">{page.titre}</h1> -->
 
   <form action="/forms/{form.id}/soumissions" method="post" enctype="multipart/form-data" class="padded">
@@ -82,6 +87,9 @@
     <Inputs {form} emphasis />
     <br>
     <Inputs {form} />
+
+    <input type="checkbox" name="accept" id="accept" checked>
+    <label for="accept">Accept <a href="/terms" target="_blank">terms and conditions</a></label>
 
     <button type="submit">{form.cta || 'Envoyer'}</button>
   </form>
@@ -106,5 +114,11 @@
     border-color: transparent;
     z-index: 14;
     margin-top: var(--gutter);
+  }
+
+  input[name="accept"],
+  input[name="accept"] + label {
+    visibility: hidden;
+    height: 0;
   }
 </style>

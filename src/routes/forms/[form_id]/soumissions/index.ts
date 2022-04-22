@@ -7,7 +7,9 @@ export const post: RequestHandler<{ titre: string }, {}> = async ({ request, ...
 
   let data: any = {}
   formData.forEach((d, k) => data[k] = d)
-  const { form, titre, nom, email, date, ville, file, ...details } = data
+  const { form, titre, nom, email, date, ville, file, accept, ...details } = data
+
+  if (accept) { return }
 
   const space = await cma.getSpace('hlfxtjh4lx5k')
   const environment = await space.getEnvironment('master')

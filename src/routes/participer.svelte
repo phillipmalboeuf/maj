@@ -3,6 +3,10 @@
   import { contenuCollection, media } from './[page].svelte'
 
   export interface ThemeDocument {
+    __typename: string
+    sys: {
+      id: string
+    }
     titre: string
     titreCourt?: string
     id: string
@@ -68,62 +72,24 @@
 <script lang="ts">
   import Page, { type PageDocument } from '$lib/components/Page.svelte'
   import { onMount } from 'svelte'
-  import { DateTime } from 'luxon'
-  import Document from '$lib/components/document/Document.svelte'
+  
+  import Article from '$lib/components/Article.svelte'
+  import ParticiperSteps from '$lib/components/ParticiperSteps.svelte'
 
   export let page: PageDocument
   export let theme: ThemeDocument
-
-  let readingTime: number
-  let element: HTMLElement
-  const wpm = 200
-
-  onMount(() => {
-    readingTime = Math.ceil(element.innerText.trim().split(/\s+/).length / wpm)
-  })
 </script>
 
 <Page {page} noTitre />
 
-<article bind:this={element} class="padded">
-  <h2 class="h1 center">{theme.titreCourt}</h2>
-
-  <div class="padded"></div>
-
-  <h1 class="d1 center">{theme.titre}</h1>
-
-  <div class="flex flex--center">
-    <span>{theme.date && DateTime.fromISO(theme.date).toFormat('yyyy.ll.dd')}</span>
-    <span>{theme.personnesCollection.items.map(personne => [personne.nom, personne.position].join(', ')).join(', ')}</span>
-    <span>{readingTime} min</span>
-  </div>
-
-  <figure class="padded">
-    <!-- {#if article.media}
-    <Picture media={article.media} />
-    {/if} -->
-  </figure>
-
-  <aside><Document body={theme.intro} /></aside>
-</article>
+<Article {page} article={theme} noBack noComments>
+  <svelte:fragment slot="header"><ParticiperSteps current={1} /></svelte:fragment>
+</Article>
 
 <a href="/forms/participer" class="button fixed">Participer</a>
 
 
 <style lang="scss">
-  // nav {
-  //   color: var(--color);
-  // }
-  
-  article {
-    color: var(--color);
-  }
-
-  h1 {
-    color: var(--dark);
-    margin-bottom: 0;
-  }
-
   .button.fixed {
     position: fixed;
     bottom: var(--gutter);
