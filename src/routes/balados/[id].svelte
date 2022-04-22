@@ -61,9 +61,8 @@
   
   import type { BaladoDocument } from './index.svelte'
   import Picture from '$lib/components/Picture.svelte'
-  import Contenu from '$lib/components/Contenu.svelte'
-  import Comments from '$lib/components/Comments.svelte'
   import Article from '$lib/components/Article.svelte'
+  import Audio from '$lib/components/Audio.svelte'
 
 	export let page: PageDocument
   export let balado: BaladoDocument
@@ -71,7 +70,20 @@
 
 <Page {page} noTitre />
 
-<Article {page} article={balado} />
+<Article {page} article={balado}>
+  <div class="padded" slot="extra">
+    <figure class="grid">
+      <span><Picture media={balado.media} /></span>
+      <Audio controls media={balado.audio} />
+    </figure>
+
+    <nav class="flex flex--center flex--tight">
+      {#each Object.entries(balado.liens) as [label, href]}
+      <a {href} target="_blank" class="button">{label}</a><br>
+      {/each}
+    </nav>
+  </div>
+</Article>
 
 
 <style lang="scss">
