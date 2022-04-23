@@ -5,7 +5,8 @@
   export let media: any
   export let visible: boolean = true
   export let duration: number = undefined
-  export let currentTime: number= undefined
+  export let currentTime: number = 0
+  export let paused: boolean = true
 
   let element: HTMLAudioElement
 </script>
@@ -13,16 +14,21 @@
 
 
 {#if media}
-<audio bind:this={element} bind:duration bind:currentTime src={media.url} />
+<audio bind:this={element} bind:paused bind:duration bind:currentTime src={media.url} />
 {#if visible}
 <figure class="flex flex--wrap flex--middle">
 
   <span>{currentTime ? Duration.fromMillis(currentTime*1000).toFormat('mm:ss') : '00:00'}</span>
 
-  <button on:click={() => element.paused ? element.play() : element.pause()}>
-    <svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="149.921" cy="149.922" r="149.155" stroke="#2F73D9"/>
-    <path d="M229.628 162.333L121.444 224.793C111.474 230.549 99.0116 223.354 99.0116 211.842L99.0116 86.9216C99.0116 75.4093 111.474 68.2141 121.444 73.9702L229.628 136.43C239.598 142.187 239.598 156.577 229.628 162.333Z" stroke="#2F73D9"/>
+  <button class:paused on:click={() => paused ? element.play() : element.pause()}>
+    <svg width="310" height="310" viewBox="0 0 310 310" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="155.254" cy="155.255" r="149.155"/>
+    {#if !paused}
+    <path d="M117 61V243" stroke-width="30"/>
+    <path d="M193 61V243" stroke-width="30"/>
+    {:else}
+    <path d="M234.961 141.763C244.931 147.519 244.931 161.909 234.961 167.666L126.777 230.126C116.807 235.882 104.344 228.687 104.344 217.174L104.344 92.2541C104.344 80.7418 116.807 73.5466 126.777 79.3027L234.961 141.763Z" />
+    {/if}
     </svg>
   </button>
 
@@ -53,8 +59,23 @@
     border: none;
     padding: 0;
 
-    path {
+    path,
+    circle {
+      stroke: var(--color);
       fill: none;
+      transition: stroke 333ms, fill 333ms;
+    }
+
+    &:hover,
+    &:focus {
+      circle {
+        fill: var(--color);
+      }
+
+      path {
+        fill: var(--light);
+        stroke: var(--light);
+      }
     }
   }
 
@@ -62,7 +83,7 @@
     width: 100%;
     margin: calc(var(--gutter)/2) 0 0;
 
-    cursor: col-resize;
+    cursor: pointer;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -77,6 +98,10 @@
     height: 1.25em;
     border-radius: 50%;
     background: var(--color);
+    transition: border-radius 333ms;
+  }
+  input[type="range"]:hover::-webkit-slider-thumb {
+    border-radius: 0;
   }
 
   input[type="range"]::-moz-range-thumb {
@@ -85,5 +110,9 @@
     height: 1.25em;
     border-radius: 50%;
     background: var(--color);      
+    transition: border-radius 333ms;
+  }
+  input[type="range"]:hover::-webkit-slider-thumb {
+    border-radius: 0;
   }
 </style>
