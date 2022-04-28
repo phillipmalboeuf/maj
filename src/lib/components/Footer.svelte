@@ -46,5 +46,6 @@
 <style lang="scss">
   hr {
     margin-bottom: 2rem;
+    border: none;
   }
 </style>

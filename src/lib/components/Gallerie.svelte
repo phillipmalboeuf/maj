@@ -34,7 +34,7 @@
 <div class:blur={entry.alignement === "Blur"} class="flex flex--wrap{entry.alignement === "Droite" ? ' flex--end' : ''}{entry.alignement === "Blur" ? ' flex--nogap' : ''}">
   {#if entry.mediasCollection}
   {#each entry.mediasCollection.items as media, i}
-  <figure style="top: {order[i] * (300/length)}px; left: {(order[i] * (66/length))+(66/length)}%; z-index: {length - order[i]}" class:current={order[i] === 0} class={entry.colonnes && { 2: 'flex__half', 3: 'flex__third', 4: 'flex__fourth' }[entry.colonnes]}><Picture {media} zoom={entry.alignement !== "Blur"} /></figure>
+  <figure style="top: {order[i] * (300/length)}px; left: {(order[i] * (66/length))+(66/length)}%; z-index: {length - order[i]}" class:current={order[i] === 0} class={entry.colonnes && { 2: 'flex__half', 3: 'flex__third', 4: 'flex__fourth' }[entry.colonnes]}><Picture {media} zoom={entry.alignement !== "Blur"} noDescription={entry.alignement === "Blur"} /></figure>
   {/each}
   {/if}
 </div>
@@ -54,11 +54,11 @@
 
     .blur & {
       position: absolute;
+      transform: translate3d(0,0,0);
       transition: filter 666ms, top 666ms, left 666ms;
 
       &:not(.current) {
         filter: blur(20px);
-        transform: translate3d(0,0,0);
       }
     }
   }

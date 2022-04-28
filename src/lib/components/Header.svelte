@@ -97,7 +97,7 @@
       background:  linear-gradient(180deg, rgba(251, 251, 251, 0.81) 71.35%, rgba(251, 251, 251, 0) 100%);
       -webkit-backdrop-filter: blur(20px);
       backdrop-filter: blur(20px);
-      padding-top: calc(var(--gutter) / 2);
+      padding-top: var(--gutter);
       padding-left: 24rem;
 
       > a {

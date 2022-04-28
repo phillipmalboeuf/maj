@@ -65,12 +65,12 @@
   }
 
   .beat {
-    animation: beat .420s infinite alternate;
+    animation: beat .666s infinite alternate;
     transform-origin: center;
   }
 
   @keyframes beat{
-    to { transform: scale(0.88); }
+    to { transform: scale(0.75); }
   }
 </style>
 

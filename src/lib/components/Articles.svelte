@@ -6,9 +6,10 @@
   export let articles: ArticleDocument[]
   export let thirds = false
   export let archives = false
+  export let tight = false
 </script>
 
-<ol class="grid {thirds ? 'grid--thirds' : 'grid--halves'}{archives ? ' grid--tight' : ''}">
+<ol class="grid {thirds ? 'grid--thirds' : 'grid--halves'}{archives ? ' grid--tight' : ''}{tight ? ' grid--nogap' : ''}">
   {#each articles as article}
   <li class={!archives && article.vedette && 'span__2'}>
     <a href="/{{
@@ -54,6 +55,10 @@
       max-width: 66rem;
       margin: 0 auto;
     }
+  }
+
+  figure {
+    margin-bottom: 0;
   }
 
   figcaption {

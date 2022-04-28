@@ -1,12 +1,12 @@
 :root {
   --width: 1680px;
 
-  --huge: max(5.5vw, 5.5vh);
-  --big: max(4vw, 4vh);
-  --medium: max(3vw, 3vh);
-  --small: max(1.66vw, 1.66vh);
+  --huge: 80px;
+  --big: 40px;
+  --medium: 32px;
+  --small: 16px;
 
-  --gutter: max(3vw, 3vh);
+  --gutter: var(--medium);
 
   --dark: black;
   --light: white;
@@ -21,17 +21,20 @@
   --rouge: #E12E07;
 
   --bodyfont: 'Basel Grotesk', sans-serif;
-  --altfont: 'Inter', sans-serif;
+  --altfont: 'Basel Grotesk', sans-serif;
 }
 
 @media (max-width: 888px) {
   :root {
-    --small: max(2w, 2vh);
   }
 }
 
 * {
 	box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 
@@ -117,7 +120,7 @@ h6, .h6 {
   @include text(20px, 24px);
 }
 
-.p1 {
+p, .p1 {
   @include text(14px, 17px);
 }
 
@@ -130,7 +133,7 @@ h6, .h6 {
 }
 
 small, .small {
-  @include text(10px, 12px, 0.02em);
+  @include text(12px, 14px, 0.02em);
 }
 
 a {
@@ -146,6 +149,7 @@ button,
 a.button {
   display: inline-flex;
   align-items: center;
+  font-family: var(--bodyfont);
   column-gap: var(--small);
 
   cursor: pointer;
@@ -192,6 +196,10 @@ svg {
 
   &.grid--tight {
     column-gap: calc(var(--small) / 3);
+  }
+
+  &.grid--nogap {
+    column-gap: 2px;
   }
 
   &.grid--sixths {

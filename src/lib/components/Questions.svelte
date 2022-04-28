@@ -45,7 +45,7 @@
     <li transition:fly={{ y: 10 }}>
       <p>{data.formCollection.items[0].titre}</p>
       <hr>
-      <form class="flex flex--middle" action="/question" method="post">
+      <form class="flex flex--tight flex--middle" action="/question" method="post">
         <Inputs form={data.formCollection.items[0]} />
         <button>{data.formCollection.items[0].cta}</button>
       </form>
@@ -62,6 +62,28 @@
 </Overlay>
 
 <style lang="scss">
+
+  form {
+    width: 100%;
+
+    :global(input) {
+      margin: 0;
+      width: 100%;
+      background-color: var(--bleu);
+    }
+
+    :global(fieldset) {
+      width: 100%;
+    }
+    
+    button {
+      margin: 0;
+      color: var(--bleu);
+      border: none;
+      background-color: var(--light);
+    }
+  }
+
   button.fixed {
     position: sticky;
     bottom: var(--gutter);

@@ -190,7 +190,7 @@ import Gallerie from '$lib/components/Gallerie.svelte'
   })
 </script>
 
-<p class="center padded">{index.description}</p>
+<p class="p2 center padded">{index.description}</p>
 
 {#each index.pagesCollection.items as page, i}
 <section bind:this={elements[page.id]} id={page.id}
@@ -226,7 +226,7 @@ import Gallerie from '$lib/components/Gallerie.svelte'
     {/if}
 
     {#if page.id === 'explorer'}
-    <Articles articles={[...articles,...activites,...balados]} />
+    <Articles tight articles={[...articles,...activites,...balados]} />
     {:else if page.id === 'expositions'}
     <Expositions {expositions} />
     {/if}
@@ -289,6 +289,7 @@ import Gallerie from '$lib/components/Gallerie.svelte'
 
       > :global(p) {
         font-size: 2rem;
+        line-height: 1;
         font-weight: bold;
 
         > :global(strong) {
