@@ -78,6 +78,8 @@
 
   export let page: PageDocument
   export let theme: ThemeDocument
+
+  page.titre = theme.titreCourt 
 </script>
 
 <Page {page} noTitre />
