@@ -34,7 +34,7 @@
     label {
       display: block;
       // color: var(--light);
-      margin: 0;
+      margin: 0 0 0.33em;
       width: 75%;
     }
 
@@ -46,12 +46,16 @@
       font-size: 1rem;
       line-height: 1;
       color: var(--light);
-      background: var(--grey);
+      background: var(--light-grey);
       border-radius: 1.5em;
       padding: 0.66em 1em;
       margin-bottom: 1em;
 
       width: 88%;
+
+      &:not(:placeholder-shown) {
+        background: var(--grey);
+      }
       
       &:focus {
         outline: none;

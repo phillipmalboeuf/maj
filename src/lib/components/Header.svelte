@@ -42,10 +42,9 @@
     <br>
     <a class="h4" href="/">En</a>
 
-    <div class="flex">
+    <div class="flex flex--thick">
       <span on:click|stopPropagation><NewsletterForm /></span>
       <a href="/">Facebook</a>
-      <a href="/">Twitter</a>
       <a href="/">YouTube</a>
       <a href="/">Instagram</a>
       <a href="/">Contact</a>

@@ -68,7 +68,7 @@
   </figure>
   {/if}
 
-  <aside><Document body={article.intro} /></aside>
+  <aside class="h5"><Document body={article.intro} /></aside>
   {#if article.contenuCollection}<Contenu contenu={article.contenuCollection.items} />{/if}
 
   <slot name="extra" />

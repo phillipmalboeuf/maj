@@ -242,8 +242,7 @@ import Gallerie from '$lib/components/Gallerie.svelte'
   p {
     width: 100%;
     max-width: 42rem;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
 
     &.center {
     @media (max-width: 888px) {

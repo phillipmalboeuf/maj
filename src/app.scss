@@ -11,6 +11,7 @@
   --dark: black;
   --light: white;
   --muted: rgba(0, 0, 0, 0.25);
+  --light-grey: #C2C2C2;
   --grey: #A8A8A8;
   --dark-grey: #696969;
   --highlight: currentColor;
@@ -108,7 +109,7 @@ h4, .h4 {
   @include text(28px, 34px, -0.02em);
 }
 
-h5, .h5 {
+h5, .h5, .h5 > p {
   @include text(23px, 28px, -0.02em);
 }
 
@@ -190,17 +191,14 @@ svg {
 
 .grid {
   display: grid;
-  column-gap: var(--small);
-  row-gap: calc(var(--small) / 2);
+  --gap: var(--medium);
+  column-gap: var(--gap);
+  row-gap: calc(var(--gap) / 2);
   grid-template-columns: repeat(4, 1fr);
 
-  &.grid--tight {
-    column-gap: calc(var(--small) / 3);
-  }
-
-  &.grid--nogap {
-    column-gap: 2px;
-  }
+  &.grid--nogap { --gap: 0%; }
+  &.grid--tight { --gap: var(--small); }
+  &.grid--thick { --gap: var(--big); }
 
   &.grid--sixths {
     grid-template-columns: repeat(6, 1fr);
@@ -223,17 +221,13 @@ svg {
   display: flex;
   flex-wrap: nowrap;
 
-  --gap: var(--small);
+  --gap: var(--medium);
   column-gap: var(--gap);
   row-gap: calc(var(--gap) / 2);
 
-  &.flex--nogap {
-    --gap: 0%;
-  }
-
-  &.flex--tight {
-    --gap: calc(var(--small) / 3);
-  }
+  &.flex--nogap { --gap: 0%; }
+  &.flex--tight { --gap: var(--small); }
+  &.flex--thick { --gap: var(--big); }
 
   &.flex--wrap {
     flex-wrap: wrap;
