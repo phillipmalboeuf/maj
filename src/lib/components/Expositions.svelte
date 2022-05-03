@@ -1,4 +1,6 @@
 <script lang="ts">
+import { date } from '$lib/formatters';
+
   import { DateTime } from 'luxon'
   import type { ExpositionDocument } from 'src/routes/expositions/[id].svelte'
   import Picture from './Picture.svelte'
@@ -14,7 +16,7 @@
         <Picture media={exposition.media} noDescription label="Voir l'exposition" />
         <figcaption class="flex flex--spaced">
           <span>{exposition.curatorsCollection.items.map(personne => [personne.nom].join(', ')).join(', ')}</span>
-          <span>{exposition.debut && DateTime.fromISO(exposition.debut).toFormat('yyyy.ll.dd')}</span>
+          <span>{date(exposition.debut)}</span>
         </figcaption>
       </figure>
       <h3>{exposition.titreCourt || exposition.titre}</h3>

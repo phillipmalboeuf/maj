@@ -1,4 +1,6 @@
 <script lang="ts">
+import { date } from '$lib/formatters';
+
   import { DateTime, Duration } from 'luxon'
   import type { BaladoDocument } from 'src/routes/balados/index.svelte'
   import Audio from './Audio.svelte'
@@ -40,7 +42,7 @@
 
       <span>{balado.titre}</span>
       <span>{balado.titreCourt}</span>
-      <span>{balado.date && DateTime.fromISO(balado.date).toFormat('yyyy.ll.dd')}</span>
+      <span>{date(balado.date)}</span>
       <span>{durations[balado.id] && Duration.fromMillis(durations[balado.id]*1000).toFormat('mm:ss')}</span>
     </li>
     {/each}

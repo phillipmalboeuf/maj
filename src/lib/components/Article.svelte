@@ -13,6 +13,7 @@
   import Comments from '$lib/components/Comments.svelte'
   import { media } from '../../routes/[page].svelte'
   import Articles from './Articles.svelte'
+import { date } from '$lib/formatters';
 
 
 	export let page: PageDocument
@@ -54,7 +55,7 @@
   <br>
 
   <div class="flex flex--center info">
-    <span>{article.date && DateTime.fromISO(article.date).toFormat('yyyy.ll.dd')}</span>
+    <span>{date(article.date)}</span>
     {#if article.personnesCollection}<span>{article.personnesCollection.items.map(personne => [personne.nom, personne.position].filter(e => e).join(', ')).join(', ')}</span>{/if}
     <span>{readingTime} min</span>
   </div>

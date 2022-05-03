@@ -123,7 +123,7 @@
   <h1 class="d1 center">{exposition.titre}</h1>
 
   <div class="flex flex--middle flex--spaced padded">
-    <span>{d?.toFormat('yyyy.ll.dd')} {f ? f.toFormat('yyyy.ll.dd') : ''}</span>
+    <span>{d?.toFormat('yyyy.mm.dd')} {f ? f.toFormat('yyyy.mm.dd') : ''}</span>
     <span>{curators.map(curator => [curator.nom, curator.position].join(', ')).join(', ')}</span>
     <span>{readingTime} min</span>
     <div><ExpoLinks expo={exposition} noDescription /></div>

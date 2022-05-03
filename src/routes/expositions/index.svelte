@@ -84,6 +84,7 @@
   import Overlay from '$lib/components/Overlay.svelte'
   import Document from '$lib/components/document/Document.svelte'
   import ExpoLinks from '$lib/components/ExpoLinks.svelte'
+import { date } from '$lib/formatters';
 
 	export let page: PageDocument
   export let expositions: ExpositionDocument[]
@@ -109,7 +110,7 @@
         <h5>{oeuvre.titre}</h5>
         <aside class="flex flex--spaced">
           <span>X</span>
-          <span>{DateTime.fromISO(oeuvre.date).toFormat('yyyy.ll.dd')}</span>
+          <span>{date(oeuvre.date)}</span>
         </aside>
         {#if oeuvre.media}<figure>
           <Picture media={oeuvre.media} noDescription />
@@ -131,7 +132,7 @@
         </p>
       <!-- 
         <div class="grid">
-          <span>{d?.toFormat('yyyy.ll.dd')} {f ? f.toFormat('yyyy.ll.dd') : ''}</span>
+          <span>{d?.toFormat('yyyy.mm.dd')} {f ? f.toFormat('yyyy.mm.dd') : ''}</span>
           <span>{curators.map(curator => [curator.nom, curator.position].join(', ')).join(', ')}</span>
           <span>{readingTime} min</span>
           <span><a href="/expositions/{exposition.id}/oeuvres">Oeuvres</a></span>

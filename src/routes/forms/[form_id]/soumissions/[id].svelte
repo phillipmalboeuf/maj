@@ -71,6 +71,7 @@
   import ParticiperSteps from '$lib/components/ParticiperSteps.svelte'
 
   import { DateTime } from 'luxon'
+import { date } from '$lib/formatters';
 
 	export let page: PageDocument
   export let form: FormDocument
@@ -92,7 +93,7 @@
       <h2>
         {soumission.nom}<br>
         {soumission.ville}<br>
-        {soumission.date && DateTime.fromISO(soumission.date).toFormat('yyyy.ll.dd')}
+        {date(soumission.date)}
       </h2>
 
       {#if soumission.details}

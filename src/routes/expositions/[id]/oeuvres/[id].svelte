@@ -87,7 +87,7 @@
   </p>
 <!-- 
   <div class="grid">
-    <span>{d?.toFormat('yyyy.ll.dd')} {f ? f.toFormat('yyyy.ll.dd') : ''}</span>
+    <span>{d?.toFormat('yyyy.mm.dd')} {f ? f.toFormat('yyyy.mm.dd') : ''}</span>
     <span>{curators.map(curator => [curator.nom, curator.position].join(', ')).join(', ')}</span>
     <span>{readingTime} min</span>
     <span><a href="/expositions/{exposition.id}/oeuvres">Oeuvres</a></span>

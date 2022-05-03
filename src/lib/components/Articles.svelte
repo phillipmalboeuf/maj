@@ -1,4 +1,6 @@
 <script lang="ts">
+import { date } from '$lib/formatters';
+
   import { DateTime } from 'luxon'
   import type { ArticleDocument } from 'src/routes/articles/index.svelte'
   import Picture from './Picture.svelte'
@@ -27,7 +29,7 @@
             'Activity': 'Activité',
             'Balado': 'Balado'
           }[article.__typename] || 'Article'}</span>
-          <span>{article.date && DateTime.fromISO(article.date).toFormat('yyyy.ll.dd')}</span>
+          <span>{date(article.date)}</span>
         </figcaption>
         {/if}
         <Picture media={article.media} noDescription label={{
@@ -37,7 +39,7 @@
         }[article.__typename] || 'Lire l\'article'} />
         {#if !archives}<figcaption class="flex flex--spaced">
           <span>{article.personnesCollection?.items.map(personne => [personne.nom].join(', ')).join(', ')}</span>
-          <span>{article.date && DateTime.fromISO(article.date).toFormat('yyyy.ll.dd')}</span>
+          <span>{date(article.date)}</span>
         </figcaption>{/if}
       </figure>
       {#if !archives}<h3>{article.titreCourt || article.titre}</h3>{/if}
