@@ -1,10 +1,17 @@
 <script>
+  import TextAnimation from '../TextAnimation.svelte'
+
   export let mark
+  export let animated = false
 </script>
 
 <style>
   a {
     text-decoration: underline;
+  }
+
+  u.noline {
+    text-decoration: none;
   }
 </style>
 
@@ -13,14 +20,18 @@
   {#if mark.marks[0].type === 'italic'}
   <em><svelte:self mark={{ ...mark, marks: mark.marks.slice(1) }} /></em>
   {:else if mark.marks[0].type === 'underline'}
-  <span class="underline"><svelte:self mark={{ ...mark, marks: mark.marks.slice(1) }} /></span>
+  <u class:noline={mark.value.includes(' / ')}><svelte:self mark={{ ...mark, marks: mark.marks.slice(1) }} animated /></u>
   {:else if mark.marks[0].type === 'bold'}
   <strong><svelte:self mark={{ ...mark, marks: mark.marks.slice(1) }} /></strong>
   {:else if mark.marks[0].type === 'code'}
   {@html mark.value}
   {/if}
 {:else}
+{#if animated}
+<TextAnimation {mark} />
+{:else}
 {@html mark.value.replace(/\\t/g, '&emsp;&emsp;&emsp;&emsp;')}
+{/if}
 {/if}
 {:else if mark.nodeType === 'hyperlink'}
 <a href="{mark.data.uri}" target="{mark.data.uri.indexOf('http') === 0 ? '_blank' : '_self'}">

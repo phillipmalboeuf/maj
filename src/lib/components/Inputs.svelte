@@ -53,12 +53,13 @@
 
       width: 88%;
 
-      &:not(:placeholder-shown) {
-        background: var(--grey);
-      }
+      // &:not(:placeholder-shown) {
+      //   background: var(--grey);
+      // }
       
       &:focus {
         outline: none;
+        background: var(--grey);
       }
 
       &::placeholder {
