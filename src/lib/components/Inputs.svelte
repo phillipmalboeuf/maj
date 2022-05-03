@@ -1,6 +1,7 @@
 <script lang="ts">
   import { fade, fly } from 'svelte/transition'
   import type { FormDocument } from '../../routes/forms/[id].svelte'
+import TextareaAuto from './TextareaAuto.svelte'
 
   export let form: FormDocument
   export let emphasis = false
@@ -19,7 +20,11 @@
   {:else if input.type === 'File'}
   <input type="file" id={input.id} placeholder={input.placeholder} name={input.id} />
   {:else}
+  {#if input.id === 'question'}
+  <TextareaAuto minRows={1} maxRows={6} id={input.id} placeholder={input.placeholder} name={input.id} />
+  {:else}
   <input id={input.id} placeholder={input.placeholder} name={input.id} />
+  {/if}
   {/if}
   </div>
 {/each}
@@ -39,7 +44,9 @@
     }
 
     input,
-    textarea {
+    textarea,
+    :global(textarea),
+    :global(pre) {
       display: block;
       border: none;
 

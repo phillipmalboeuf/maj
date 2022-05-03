@@ -66,7 +66,7 @@
   form {
     width: 100%;
 
-    :global(input) {
+    :global(textarea) {
       margin: 0;
       width: 100%;
       background-color: var(--bleu);
