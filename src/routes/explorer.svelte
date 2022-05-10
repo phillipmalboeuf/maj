@@ -105,7 +105,7 @@
   <Articles thirds {articles} />
 </section>
 <section class="padded dark">
-  <Balados {balados} selected={balados[0].id} />
+  <Balados {balados} />
 </section>
 <section class="padded">
   <Articles thirds articles={activites} />

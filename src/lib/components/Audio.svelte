@@ -74,7 +74,7 @@
 
       path {
         fill: var(--light);
-        stroke: var(--light);
+        stroke: var(--dark);
       }
     }
   }
