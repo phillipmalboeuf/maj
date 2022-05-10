@@ -226,6 +226,7 @@ svg {
   row-gap: calc(var(--gap) / 2);
 
   &.flex--nogap { --gap: 0%; }
+  &.flex--supertight { --gap: 4px; }
   &.flex--tight { --gap: var(--small); }
   &.flex--thick { --gap: var(--big); }
 
@@ -259,6 +260,10 @@ svg {
 
   .flex__fourth {
     width: calc((100% / 4) - var(--gap));
+  }
+
+  .flex__sixth {
+    width: calc((100% / 6) - var(--gap));
   }
 
   .flex__seventh {

@@ -79,12 +79,11 @@
   import { fade, fly } from 'svelte/transition'
   import Page, { type PageDocument } from '$lib/components/Page.svelte'
   import Picture from '$lib/components/Picture.svelte'
-  import { DateTime } from 'luxon'
   import Oeuvres from '$lib/components/Oeuvres.svelte'
   import Overlay from '$lib/components/Overlay.svelte'
   import Document from '$lib/components/document/Document.svelte'
   import ExpoLinks from '$lib/components/ExpoLinks.svelte'
-import { date } from '$lib/formatters';
+  import { date } from '$lib/formatters'
 
 	export let page: PageDocument
   export let expositions: ExpositionDocument[]

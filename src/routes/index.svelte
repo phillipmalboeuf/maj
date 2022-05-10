@@ -229,6 +229,10 @@ import Gallerie from '$lib/components/Gallerie.svelte'
     <Articles tight articles={[...articles,...activites,...balados]} />
     {:else if page.id === 'expositions'}
     <Expositions {expositions} />
+    <div class="flex flex--end">
+      <a href="/expositions" class="button">Voir l’Archive →</a>
+    </div>
+    <Expositions expositions={[...expositions, ...expositions, ...expositions]} tight />
     {/if}
   </div>
 
