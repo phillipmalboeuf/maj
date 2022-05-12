@@ -13,7 +13,7 @@
   import Comments from '$lib/components/Comments.svelte'
   import { media } from '../../routes/[page].svelte'
   import Articles from './Articles.svelte'
-import { date } from '$lib/formatters';
+  import { date } from '$lib/formatters'
 
 
 	export let page: PageDocument

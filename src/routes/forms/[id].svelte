@@ -106,6 +106,10 @@ import Questions from '$lib/components/Questions.svelte';
   form {
     max-width: 50vw;
     margin: 0 auto;
+
+    @media (max-width: 888px) {
+      max-width: none;
+    }
   }
 
   button,

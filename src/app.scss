@@ -83,10 +83,16 @@ main {
 
 .d1 {
   @include text(72px, 80px);
+  @media (max-width: 888px) {
+    @include text(39px, 44px, -0.02em);
+  }
 }
 
 .d2 {
   @include text(60px, 68px);
+  @media (max-width: 888px) {
+    @include text(39px, 44px, -0.02em);
+  }
 }
 
 h1, h2, h3, h4, h5, h6, p, figure {
@@ -96,22 +102,37 @@ h1, h2, h3, h4, h5, h6, p, figure {
 
 h1, .h1 {
   @include text(48px, 56px);
+  @media (max-width: 888px) {
+    @include text(23px, 28px, -0.02em);
+  }
 }
 
 h2, .h2 {
   @include text(39px, 44px, -0.02em);
+  @media (max-width: 888px) {
+    @include text(23px, 28px, -0.02em);
+  }
 }
 
 h3, .h3 {
   @include text(33px, 40px, -0.02em);
+  @media (max-width: 888px) {
+    @include text(23px, 28px, -0.02em);
+  }
 }
 
 h4, .h4 {
   @include text(28px, 34px, -0.02em);
+  @media (max-width: 888px) {
+    @include text(23px, 28px, -0.02em);
+  }
 }
 
 h5, .h5, .h5 > p {
   @include text(23px, 28px, -0.02em);
+  @media (max-width: 888px) {
+    @include text(16px, 19px);
+  }
 }
 
 h6, .h6 {

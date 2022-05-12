@@ -156,6 +156,12 @@
 <style lang="scss">
   section {
     color: var(--color);
+
+    @media (max-width: 888px) {
+      > div {
+        flex-direction: column;
+      }
+    }
   }
   
   ol {

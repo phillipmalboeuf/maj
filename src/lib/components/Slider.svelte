@@ -1,5 +1,5 @@
 <script lang="ts">
-import { swipe } from 'svelte-gestures';
+  import { swipe } from 'svelte-gestures'
 
   import Text from './Text.svelte'
 
@@ -37,7 +37,7 @@ import { swipe } from 'svelte-gestures';
 <article>
   {#if !entry.titreInvisible}<h2 class="d2 center">{entry.titre}</h2>{/if}
   {#if entry.slidesCollection}
-  <div class="flex" style="width: {length * 66}%; transform: translateX({(current * -(100 / length)) + 8}%)" use:swipe={{ timeframe: 500, minSwipeDistance: 25, touchAction: 'pan-y' }} on:swipe={(e) => {
+  <div class="flex flex--tight" style="width: {length * 66}%; transform: translateX({(current * -(100 / length)) + 8}%)" use:swipe={{ timeframe: 500, minSwipeDistance: 25, touchAction: 'pan-y' }} on:swipe={(e) => {
     if (e.detail.direction === 'right') {
       prev()
     } else {
