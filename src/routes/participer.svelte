@@ -75,6 +75,7 @@
   
   import Article from '$lib/components/Article.svelte'
   import ParticiperSteps from '$lib/components/ParticiperSteps.svelte'
+  import Questions from '$lib/components/Questions.svelte'
 
   export let page: PageDocument
   export let theme: ThemeDocument
@@ -88,14 +89,16 @@
   <svelte:fragment slot="header"><ParticiperSteps current={1} /></svelte:fragment>
 </Article>
 
+<Questions />
 <a href="/forms/participer" class="button fixed">Participer</a>
 
 
 <style lang="scss">
   .button.fixed {
-    position: fixed;
+    position: sticky;
     bottom: var(--gutter);
     right: var(--gutter);
+    float: right;
     color: var(--light);
     background-color: var(--rouge);
     border-color: transparent;

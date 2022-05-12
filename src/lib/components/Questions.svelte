@@ -7,10 +7,11 @@
   import Inputs from './Inputs.svelte'
   import Overlay from './Overlay.svelte'
 
+  export let spaced = false
   let open = false
 </script>
 
-<button class="fixed" on:click={() => open = !open}>Q/R</button>
+<button class:spaced class="fixed" on:click={() => open = !open}>Q/R</button>
 
 <Overlay bind:open={open}>
   <ol>
@@ -94,6 +95,10 @@
     border-bottom-right-radius: 0;
     z-index: 14;
     margin-top: var(--gutter);
+
+    &.spaced {
+      left: calc(var(--gutter) * 2.5);
+    }
   }
 
   ol {

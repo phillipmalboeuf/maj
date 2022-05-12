@@ -66,6 +66,7 @@
   import Picture from '$lib/components/Picture.svelte'
   import Inputs from '$lib/components/Inputs.svelte'
   import ParticiperSteps from '$lib/components/ParticiperSteps.svelte'
+import Questions from '$lib/components/Questions.svelte';
 
 	export let page: PageDocument
   export let form: FormDocument
@@ -82,7 +83,7 @@
 
   <!-- <h1 class="d1 center">{page.titre}</h1> -->
 
-  <form action="/forms/{form.id}/soumissions" method="post" enctype="multipart/form-data" class="padded">
+  <form id="soumissions" action="/forms/{form.id}/soumissions" method="post" enctype="multipart/form-data" class="padded">
     <input type="hidden" name="form" value={form.id}>
     <Inputs {form} emphasis />
     <br>
@@ -90,10 +91,12 @@
 
     <input type="checkbox" name="accept" id="accept" checked>
     <label for="accept">Accept <a href="/terms" target="_blank">terms and conditions</a></label>
-
-    <button type="submit">{form.cta || 'Envoyer'}</button>
   </form>
 </article>
+
+<a href="/participer" class="button">←</a>
+<Questions spaced />
+<button form="soumissions" type="submit">{form.cta || 'Envoyer'}</button>
 
 <style lang="scss">
   article {
@@ -105,8 +108,10 @@
     margin: 0 auto;
   }
 
-  button {
-    position: fixed;
+  button,
+  .button {
+    position: sticky;
+    float: right;
     bottom: var(--gutter);
     right: var(--gutter);
     color: var(--light);
@@ -114,6 +119,11 @@
     border-color: transparent;
     z-index: 14;
     margin-top: var(--gutter);
+  }
+
+  .button {
+    float: none;
+    left: var(--gutter);
   }
 
   input[name="accept"],

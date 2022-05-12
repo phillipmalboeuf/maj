@@ -14,7 +14,6 @@
   <slot />
 </main>
 
-<Questions />
 <Footer />
 
 <style lang="scss">
