@@ -48,4 +48,25 @@
     margin-bottom: 2rem;
     border: none;
   }
+  nav {
+    &:last-child {
+      opacity: 0.5;
+    }
+  }
+
+  @media (max-width: 888px) {
+    footer > div {
+      order: -1;
+    }
+
+    nav {
+      > div:first-child {
+        display: none;
+      }
+
+      &:last-child {
+        flex-direction: column;
+      }
+    }
+  }
 </style>

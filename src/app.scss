@@ -27,6 +27,7 @@
 
 @media (max-width: 888px) {
   :root {
+    --gutter: var(--small);
   }
 }
 
@@ -195,6 +196,7 @@ svg {
   column-gap: var(--gap);
   row-gap: calc(var(--gap) / 2);
   grid-template-columns: repeat(4, 1fr);
+  @media (max-width: 888px) { grid-template-columns: repeat(1, 1fr); }
 
   &.grid--nogap { --gap: 0%; }
   &.grid--tight { --gap: var(--small); }
@@ -202,14 +204,17 @@ svg {
 
   &.grid--sixths {
     grid-template-columns: repeat(6, 1fr);
+    @media (max-width: 888px) { grid-template-columns: repeat(1, 1fr); }
   }
 
   &.grid--thirds {
     grid-template-columns: repeat(3, 1fr);
+    @media (max-width: 888px) { grid-template-columns: repeat(1, 1fr); }
   }
 
   &.grid--halves {
     grid-template-columns: repeat(2, 1fr);
+    @media (max-width: 888px) { grid-template-columns: repeat(1, 1fr); }
   }
 
   .span__2 {
@@ -256,6 +261,7 @@ svg {
 
   .flex__third {
     width: calc((100% / 3) - var(--gap));
+    @media (max-width: 888px) { width: 100%; }
   }
 
   .flex__fourth {
@@ -264,6 +270,8 @@ svg {
 
   .flex__sixth {
     width: calc((100% / 6) - var(--gap));
+
+    @media (max-width: 888px) { width: calc((100% / 3) - var(--gap)); }
   }
 
   .flex__seventh {

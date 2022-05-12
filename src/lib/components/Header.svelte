@@ -42,8 +42,9 @@
     <br>
     <a class="h4" href="/">En</a>
 
-    <div class="flex flex--thick">
-      <span on:click|stopPropagation><NewsletterForm /></span>
+    <div on:click|stopPropagation><NewsletterForm /></div>
+
+    <div class="flex flex--thick">  
       <a href="/">Facebook</a>
       <a href="/">YouTube</a>
       <a href="/">Instagram</a>
@@ -74,6 +75,7 @@
 <style lang="scss">
   header {
     color: var(--color);
+
     transition: color 333ms;
     pointer-events: none;
 
@@ -99,6 +101,11 @@
       padding-top: var(--gutter);
       padding-left: 24rem;
 
+      @media (max-width: 888px) {
+        padding-top: calc(var(--gutter) * 7);
+        padding-left: var(--gutter);
+      }
+
       > a {
         display: block;
         margin-bottom: 0.33em;
@@ -111,11 +118,27 @@
         }
       }
 
-      > .flex {
+      > div {
         position: fixed;
         bottom: 30%;
+        left: 24rem;
+
+        @media (max-width: 888px) {
+          padding-top: calc(var(--gutter) * 3);
+          position: static;
+        }
+      }
+
+      > div:first-of-type {
         left: var(--gutter);
       }
+    }
+
+    > span:first-child {
+      // width: 100vw;
+      // background-color: rgba(255, 255, 255, 0.80);
+      // -webkit-backdrop-filter: blur(20px);
+      // backdrop-filter: blur(20px);
     }
 
     > span:last-child {

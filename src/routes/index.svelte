@@ -133,14 +133,14 @@
   import type { PageDocument } from '$lib/components/Page.svelte'
   import type { ArticleDocument } from './articles/index.svelte'
   import type { ExpositionDocument } from './expositions/[id].svelte'
+  import type { ActivityDocument } from './activites/index.svelte'
+  import type { BaladoDocument } from './balados/index.svelte'
 
   import Document from '$lib/components/document/Document.svelte'
   import Articles from '$lib/components/Articles.svelte'
   import Expositions from '$lib/components/Expositions.svelte'
   import Link from '$lib/components/Link.svelte'
-  import type { ActivityDocument } from './activites/index.svelte'
-  import type { BaladoDocument } from './balados/index.svelte'
-import Gallerie from '$lib/components/Gallerie.svelte'
+  import Gallerie from '$lib/components/Gallerie.svelte'
 
 	export let index: {
     titre: string
@@ -246,7 +246,7 @@ import Gallerie from '$lib/components/Gallerie.svelte'
   p {
     width: 100%;
     max-width: 42rem;
-    margin: 0 auto;
+    margin: 0 auto 1em;
 
     &.center {
     @media (max-width: 888px) {
@@ -258,6 +258,17 @@ import Gallerie from '$lib/components/Gallerie.svelte'
   section {
     min-height: 100vh;
     padding-bottom: 25vh;
+
+    @media (max-width: 888px) {
+      padding-bottom: 10vh;
+
+      aside {
+        h2 {
+          text-align: center;
+          padding-bottom: var(--gutter);
+        }
+      }
+    }
 
     .sticky {
       top: 10rem;
@@ -271,6 +282,10 @@ import Gallerie from '$lib/components/Gallerie.svelte'
       .jumps {
         display: flex;
         justify-content: space-between;
+
+        @media (max-width: 888px) {
+          display: none;
+        }
       }
 
       @media (max-width: 888px) {

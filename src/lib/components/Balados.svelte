@@ -56,6 +56,10 @@ import { date } from '$lib/formatters';
 <style lang="scss">
   figure {
     padding: calc(var(--gutter) * 2) 0;
+
+    @media (max-width: 888px) {
+      flex-direction: column;
+    }
   }
 
   ol {

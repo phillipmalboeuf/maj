@@ -59,6 +59,13 @@
     border: none;
     padding: 0;
 
+    @media (max-width: 888px) {
+      svg {
+        width: 200px !important;
+        height: 200px !important;
+      }
+    }
+
     path,
     circle {
       stroke: var(--color);
