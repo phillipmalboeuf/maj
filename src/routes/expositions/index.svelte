@@ -56,6 +56,7 @@
                   titre
                   id
                   date
+                  nom
                   media ${media}
                 }
               }
@@ -88,7 +89,6 @@
 	export let page: PageDocument
   export let expositions: ExpositionDocument[]
 
-  let current: string
   let open: string
 </script>
 
@@ -96,19 +96,18 @@
 
 <section>
   {#each [...expositions, ...expositions, ...expositions, ...expositions] as expo, i}
-  <div class="flex flex--spaced padded" id={expo.id}>
-    <h3>{expo.titreCourt || expo.titre}</h3>
+  <div class="flex flex--center padded" id={expo.id}>
+    <!-- <h3>{expo.titreCourt || expo.titre}</h3> -->
     <ExpoLinks {expo} type="folder" />
   </div>
-  <ol class="padded flex flex--nogap"  on:pointerleave={() => current = undefined}>
+  <ol class="padded flex flex--supertight">
     {#each [...expo.oeuvresCollection.items,...expo.oeuvresCollection.items,...expo.oeuvresCollection.items] as oeuvre, j}
-    <li class:current={current === `${i}.${j}`}>
+    <li>
       <a href="/expositions/{expo.id}/oeuvres/{oeuvre.id}"
-        on:click|preventDefault={() => open = `${i}.${j}`}
-        on:pointerenter={() => current = `${i}.${j}`}>
+        on:click|preventDefault={() => open = `${i}.${j}`}>
         <h5>{oeuvre.titre}</h5>
         <aside class="flex flex--spaced">
-          <span>X</span>
+          <span>{oeuvre.nom}</span>
           <span>{date(oeuvre.date)}</span>
         </aside>
         {#if oeuvre.media}<figure>
@@ -129,13 +128,6 @@
           {#if oeuvre.ville}{oeuvre.ville}<br>{/if}
           {#if oeuvre.date}{oeuvre.date}<br>{:else}Non datée<br>{/if}
         </p>
-      <!-- 
-        <div class="grid">
-          <span>{d?.toFormat('yyyy.mm.dd')} {f ? f.toFormat('yyyy.mm.dd') : ''}</span>
-          <span>{curators.map(curator => [curator.nom, curator.position].join(', ')).join(', ')}</span>
-          <span>{readingTime} min</span>
-          <span><a href="/expositions/{exposition.id}/oeuvres">Oeuvres</a></span>
-        </div> -->
         <div>
           <Document body={oeuvre.description} />
         </div>
@@ -173,19 +165,14 @@
 
       transition: flex 420ms;
 
-      &:hover {
-        flex: 1.1;
-      }
+      // &:hover {
+      //   flex: 1.1;
+      // }
       
       // > a,
       // > aside {
       //   max-width: 56.875rem;
       //   margin: 0 auto;
-      // }
-      
-      // &.current {
-      //   color: white;
-      //   background: linear-gradient(180deg, #188507 23.44%, rgba(24, 133, 7, 0) 100%);
       // }
     }
   }
@@ -200,6 +187,14 @@
     > aside,
     > h5 {
       padding: 0 0.5rem;
+    }
+
+    > h5 {
+      margin-bottom: 0;
+    }
+
+    > aside {
+      margin-bottom: 0.5rem;
     }
   }
 

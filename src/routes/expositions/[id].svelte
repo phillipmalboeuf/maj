@@ -90,12 +90,15 @@
 <script lang="ts">
   import { DateTime } from "luxon"
   import { onMount } from 'svelte'
+  import { fade, fly } from 'svelte/transition'
+  import { goto } from '$app/navigation'
 
   import Page, { type PageDocument } from '$lib/components/Page.svelte'
   import Oeuvres, { type OeuvreDocument } from '$lib/components/Oeuvres.svelte'
   import Document from '$lib/components/document/Document.svelte'
   import Comments from '$lib/components/Comments.svelte'
   import ExpoLinks from '$lib/components/ExpoLinks.svelte'
+  import Overlay from '$lib/components/Overlay.svelte'
 
 	export let page: PageDocument
   export let exposition: ExpositionDocument
@@ -116,26 +119,30 @@
 
 <Page {page} noTitre />
 
-<article bind:this={element} class="padded">
-  <h2 class="center">{exposition.titreCourt}</h2>
-  <br><br>
+<Overlay open onClose={() => goto(`/expositions#${exposition.id}`)}>
+  <article transition:fly={{ y: 100 }} bind:this={element} class="padded">
+    <a class="button" href="/expositions#{exposition.id}" transition:fade area-label="Close">Close</a>
 
-  <h1 class="d1 center">{exposition.titre}</h1>
+    <h2 class="center">{exposition.titreCourt}</h2>
+    <br><br>
 
-  <div class="flex flex--middle flex--spaced padded">
-    <span>{d?.toFormat('yyyy.mm.dd')} {f ? f.toFormat('yyyy.mm.dd') : ''}</span>
-    <span>{curators.map(curator => [curator.nom, curator.position].join(', ')).join(', ')}</span>
-    <span>{readingTime} min</span>
-    <div><ExpoLinks expo={exposition} noDescription /></div>
-  </div>
+    <h1 class="d1 center">{exposition.titre}</h1>
 
-  <div class="description">
-    <Document body={exposition.description} />
-  </div>
-  <Oeuvres {oeuvres} />
-</article>
+    <div class="flex flex--middle flex--spaced padded">
+      <span>{d?.toFormat('yyyy.mm.dd')} {f ? f.toFormat('yyyy.mm.dd') : ''}</span>
+      <span>{curators.map(curator => [curator.nom, curator.position].join(', ')).join(', ')}</span>
+      <span>{readingTime} min</span>
+      <div><ExpoLinks expo={exposition} noDescription /></div>
+    </div>
 
-<Comments />
+    <div class="description">
+      <Document body={exposition.description} />
+    </div>
+    <Oeuvres {oeuvres} />
+  </article>
+
+  <Comments />
+</Overlay>
 
 
 <style lang="scss">
@@ -145,6 +152,21 @@
     .description {
       padding-top: 4rem;
       padding-bottom: 4rem;
+    }
+  }
+
+  article {
+    position: relative;
+    max-width: 911px;
+    margin: var(--gutter) auto;
+    background-color: var(--light);
+    border-radius: 1.5rem;
+    padding: calc(var(--gutter) / 2);
+
+    > .button {
+      position: absolute;
+      top: calc(var(--gutter) / 2);
+      right: calc(var(--gutter) / 2);
     }
   }
 

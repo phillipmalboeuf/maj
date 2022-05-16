@@ -3,11 +3,15 @@
   import { fade, fly } from 'svelte/transition'
 
   export let open: boolean | string = false
+  export let onClose: Function = undefined
 </script>
 
 {#if open}
 <aside>
-  <button transition:fade on:click={() => open = false} area-label="Close" />
+  <button transition:fade on:click={() => {
+    open = false
+    onClose && onClose()
+  }} area-label="Close" />
   <slot />
 </aside>
 {/if}
