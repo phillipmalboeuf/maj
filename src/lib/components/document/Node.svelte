@@ -1,6 +1,6 @@
 <script lang="ts">
   import { query } from '$lib/clients/contentful'
-  import { media } from '../../../routes/[page].svelte'
+  import { contenuCollection, media } from '$lib/nodes'
 
   import Picture from '../Picture.svelte'
   import Mark from './Mark.svelte'

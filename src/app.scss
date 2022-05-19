@@ -47,8 +47,8 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: var(--muted);
-  -webkit-scroll-behavior: smooth;
-  scroll-behavior: smooth;
+  // -webkit-scroll-behavior: smooth;
+  // scroll-behavior: smooth;
 
   @media (max-width: 888px) {
     font-size: 14px;

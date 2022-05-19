@@ -1,54 +1,6 @@
 <script context="module" lang="ts">
   import { query } from '$lib/clients/contentful'
-
-  export const media = `{
-    fileName
-    url
-    contentType
-    title
-    description
-    width
-    height
-  }`
-
-  export const contenuCollection = `contenuCollection(limit: 12) {
-      items {
-        __typename
-        ... on Text {
-          titre
-          titreInvisible
-          pleinePage
-          media ${media}
-          corps {
-            json
-          }
-        }
-        ... on Gallerie {
-          titre
-          titreInvisible
-          colonnes
-          alignement
-          mediasCollection(limit: 8) {
-            items ${media}
-          }
-        }
-        ... on Slider {
-          titre
-          titreInvisible
-          slidesCollection(limit: 12) {
-            items {
-              ... on Text {
-                titre
-                titreInvisible
-                corps {
-                  json
-                }
-              }
-            }
-          }
-        }
-      }
-    }`
+  import { contenuCollection, media } from '$lib/nodes'
 
    /** @type {import('@sveltejs/kit').Load} */
   export async function load({ fetch, params }) {
@@ -81,6 +33,7 @@
 <script lang="ts">
   import Page, { type PageDocument } from '$lib/components/Page.svelte'
   import Picture from '$lib/components/Picture.svelte'
+
   export let page: PageDocument
 </script>
 

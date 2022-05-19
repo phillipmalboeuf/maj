@@ -8,26 +8,23 @@
   let hide = false
   let words = mark.value.split(' / ')
   let outinterval
+  let interval
 
   onMount(() => {
-    if (words.length > 1) {
-      let interval = setInterval(() => {
-        next()
+    // if (words.length > 1) {
+    //   interval = setInterval(() => {
+    //     next()
 
-        outinterval = setTimeout(() => {
-          hide = true
-        }, duration * 2)
+    //     outinterval = setTimeout(() => {
+    //       hide = false
+    //     }, duration * 1)
+    //   }, duration * 3)
 
-        outinterval = setTimeout(() => {
-          hide = false
-        }, duration * 3)
-      }, duration * 3)
-
-      return () => {
-        clearInterval(interval)
-        clearTimeout(outinterval)
-      }
-    }
+    //   return () => {
+    //     clearInterval(interval)
+    //     clearTimeout(outinterval)
+    //   }
+    // }
   })
 
   function next() {

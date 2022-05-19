@@ -11,7 +11,7 @@
   import Picture from '$lib/components/Picture.svelte'
   import Contenu from '$lib/components/Contenu.svelte'
   import Comments from '$lib/components/Comments.svelte'
-  import { media } from '../../routes/[page].svelte'
+  import { contenuCollection, media } from '$lib/nodes'
   import Articles from './Articles.svelte'
   import { date } from '$lib/formatters'
 

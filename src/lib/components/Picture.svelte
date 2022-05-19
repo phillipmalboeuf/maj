@@ -1,6 +1,6 @@
 <script lang="ts">
   import { fade, fly } from 'svelte/transition'
-  import Overlay from './Overlay.svelte'
+  // import Overlay from './Overlay.svelte'
 
   export let media: any
   export let small = false
@@ -111,11 +111,11 @@
 {/if}
 
 {#if zoom}
-<Overlay bind:open={open}>
+<!-- <Overlay bind:open={open}>
   <figure transition:fade>
     <svelte:self {media} />
   </figure>
-</Overlay>
+</Overlay> -->
 {/if}
 {/if}
 {/if}

@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
   import { query } from '$lib/clients/contentful'
-  import { contenuCollection, media } from './[page].svelte'
+  import { contenuCollection, media } from '$lib/nodes'
 
   export interface ThemeDocument {
     __typename: string
@@ -23,8 +23,8 @@
     }
   }
 
-  /** @type {import('@sveltejs/kit').Load} */
-  export async function load({ fetch, params }) {
+  import type { Load } from '@sveltejs/kit'
+  export const load: Load = async ({ fetch, params }) => {
     const { data } = await query(fetch, `
       query($id: String!) {
         pageCollection(limit: 1, where: {id: $id}) {

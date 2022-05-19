@@ -1,9 +1,9 @@
 <script context="module" lang="ts">
   import { query } from '$lib/clients/contentful'
-  import { media } from './[page].svelte'
+  import { contenuCollection, media } from '$lib/nodes'
 
-  /** @type {import('@sveltejs/kit').Load} */
-  export async function load({ fetch, params }) {
+  import type { Load } from '@sveltejs/kit'
+  export const load: Load = async ({ fetch, params }) => {
     const { data } = await query(fetch, `
       query {
         index(id: "1AWDRdqrE2Jks9micYfzwG") {
@@ -128,7 +128,6 @@
 
 <script lang="ts">
   import { onMount } from 'svelte'
-  import { page } from '$app/stores'
 
   import type { PageDocument } from '$lib/components/Page.svelte'
   import type { ArticleDocument } from './articles/index.svelte'

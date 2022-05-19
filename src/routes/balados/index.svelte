@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
   import { query } from '$lib/clients/contentful'
-  import { contenuCollection, media } from '../[page].svelte'
+  import { contenuCollection, media } from '$lib/nodes'
 
   export interface BaladoDocument {
     __typename: string
