@@ -13,7 +13,8 @@
 {:else if entry.__typename === 'Gallerie'}
 <Gallerie {entry} />
 {:else if entry.__typename === 'Slider'}
-<Slider {entry} />
+<Slider {entry} autoplay />
 {/if}
+<br>
 {/each}
 {/if}

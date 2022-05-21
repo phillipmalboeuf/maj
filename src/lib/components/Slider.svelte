@@ -1,4 +1,6 @@
 <script lang="ts">
+import { onMount } from 'svelte';
+
   import { swipe } from 'svelte-gestures'
 
   import Text from './Text.svelte'
@@ -20,6 +22,8 @@
     }[]
     }
   }
+  export let autoplay = false
+  let paused = false
 
   let current = 0
   let length = entry.slidesCollection.items.length
@@ -29,8 +33,17 @@
   }
 
   function next() {
-    current = current === length - 1 ? current = 0 : current + 1
+    current = paused ? current : (current === length - 1 ? current = 0 : current + 1)
   }
+
+  onMount(() => {
+    if (autoplay) {
+      const interval = window.setInterval(next, 3000)
+
+      return () => window.clearInterval(interval)
+    }
+
+  })
 </script>
 
 
@@ -43,6 +56,12 @@
     } else {
       next()
     }
+  }}
+  on:pointerenter={() => {
+    if (autoplay) { paused = true }
+  }}
+  on:pointerleave={() => {
+    if (autoplay) { paused = false }
   }}>
     {#each entry.slidesCollection.items as slide}
     <Text entry={slide} />
@@ -94,6 +113,16 @@
     button {
       color: var(--color);
       border: none;
+      transition: transform 333ms;
+
+      &:hover,
+      &:focus {
+        transform: translateX(var(--small));
+
+        &:first-child {
+          transform: translateX(calc(var(--small) * -1));
+        }
+      }
     }
   }
 </style>

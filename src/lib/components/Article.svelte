@@ -60,8 +60,7 @@
     <span>{readingTime} min</span>
   </div>
 
-  <br>
-  <br>
+  <div class="padded"><br><br></div>
 
   {#if article.media}
   <figure>

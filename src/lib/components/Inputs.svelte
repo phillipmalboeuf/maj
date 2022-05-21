@@ -76,10 +76,11 @@ import TextareaAuto from './TextareaAuto.svelte'
 
     input[type="file"] {
       cursor: pointer;
-      padding-top: 12em;
+      // padding-top: 12em;
     }
 
     textarea {
+      font-family: inherit;
       width: 100%;
       height: 12em;
     }
