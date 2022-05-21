@@ -66,7 +66,7 @@
   import Picture from '$lib/components/Picture.svelte'
   import Inputs from '$lib/components/Inputs.svelte'
   import ParticiperSteps from '$lib/components/ParticiperSteps.svelte'
-import Questions from '$lib/components/Questions.svelte';
+  import Questions from '$lib/components/Questions.svelte'
 
 	export let page: PageDocument
   export let form: FormDocument

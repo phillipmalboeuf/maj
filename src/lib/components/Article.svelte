@@ -44,10 +44,10 @@
 
   {#if !noBack}
   <center>
-    <a href="/{{ 'activity': 'activite' }[type] || type}s" class="button">←</a>
+    <a href="/{{ 'activity': 'activite' }[type] || type}s" class="button button--tight">← Retour</a>
   </center>
 
-  <br>
+  <br><br><br>
   {/if}
 
   <h1 class="d1 center">{article.titre}</h1>
