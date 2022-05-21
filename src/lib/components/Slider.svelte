@@ -47,7 +47,13 @@ import { onMount } from 'svelte';
 </script>
 
 
-<article>
+<article
+  on:pointerenter={() => {
+    if (autoplay) { paused = true }
+  }}
+  on:pointerleave={() => {
+    if (autoplay) { paused = false }
+  }}>
   {#if !entry.titreInvisible}<h2 class="d2 center">{entry.titre}</h2>{/if}
   {#if entry.slidesCollection}
   <div class="flex flex--tight" style="width: {length * 66}%; transform: translateX({(current * -(100 / length)) + 8}%)" use:swipe={{ timeframe: 500, minSwipeDistance: 25, touchAction: 'pan-y' }} on:swipe={(e) => {
@@ -56,12 +62,6 @@ import { onMount } from 'svelte';
     } else {
       next()
     }
-  }}
-  on:pointerenter={() => {
-    if (autoplay) { paused = true }
-  }}
-  on:pointerleave={() => {
-    if (autoplay) { paused = false }
   }}>
     {#each entry.slidesCollection.items as slide}
     <Text entry={slide} />
