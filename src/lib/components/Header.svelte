@@ -6,12 +6,14 @@
   import NewsletterForm from './NewsletterForm.svelte'
 
   let visible = false
+  let scrollY: number = 0
 </script>
 
 <svelte:body on:click={() => visible = false} />
+<svelte:window bind:scrollY />
 
-<header class:visible id="header">
-  <span class="padded">
+<header class:visible class:scrolled={scrollY > 0} id="header">
+  <span class="padded logo">
     <a href="/#top" aria-label="Accueil">
       <Logo />
     </a>
@@ -34,7 +36,7 @@
     }
   `) then { data } }
   {#if visible}
-  <nav class="padded" transition:fly={{ y: 0 }}>
+  <nav class="padded" transition:fly={{ y: -100 }}>
     {#each data.index.pagesCollection.items as page, i}
     {#if i === data.index.pagesCollection.items.length - 1}<br>{/if}
     <a class="h4" href="/{page.id}">{page.titre}</a>
@@ -74,21 +76,43 @@
 
 <style lang="scss">
   header {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100vw;
     color: var(--color);
+    background: transparent;
+    transition: background-color 333ms;
 
-    transition: color 333ms;
-    pointer-events: none;
-
-    a, button {
-      pointer-events: auto;
+    :global(svg) {
+      transition: height 333ms, width 333ms;
     }
 
+    &.scrolled {
+      background:  linear-gradient(180deg, rgba(251, 251, 251, 0.81) 71.35%, rgba(251, 251, 251, 0) 100%);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
+      height: var(--huge);
+
+      @media (min-width: 888px) {
+      > span {
+        padding-top: calc(var(--gutter) / 2);
+      }
+
+      .logo :global(svg) {
+        width: 120px;
+        height: 42px;
+      }
+      }
+    }
     nav,
     > span {
       position: fixed;
       z-index: 10;
       top: 0;
       left: 0;
+      transition: padding-top 333ms;
     }
 
     nav {
@@ -164,19 +188,19 @@
   }
 
   :global(body.dark) header {
-    color: var(--color);
+    // color: var(--color);
 
-    &:not(.visible) > span > a {
-      color: var(--light);
-    }
+    // &:not(.visible) > span > a {
+    //   color: var(--light);
+    // }
 
-    button {
-      background: var(--light);
+    // button {
+    //   background: var(--light);
 
-      line,
-      path {
-        stroke: var(--color);
-      }
-    }
+    //   line,
+    //   path {
+    //     stroke: var(--color);
+    //   }
+    // }
   }
 </style>
