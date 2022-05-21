@@ -1,7 +1,6 @@
 <script lang="ts">
-import { date } from '$lib/formatters';
+  import { date } from '$lib/formatters'
 
-  import { DateTime } from 'luxon'
   import type { ArticleDocument } from 'src/routes/articles/index.svelte'
   import Picture from './Picture.svelte'
 
@@ -11,7 +10,7 @@ import { date } from '$lib/formatters';
   export let tight = false
 </script>
 
-<ol class="grid {thirds ? 'grid--thirds' : 'grid--halves'}{archives ? ' grid--tight' : ''}{tight ? ' grid--nogap' : ''}">
+<ol class="grid {thirds ? 'grid--thirds' : 'grid--halves'}{archives ? ' grid--tight' : ''}{tight ? ' grid--supertight' : ''}">
   {#each articles as article}
   <li class={!archives && article.vedette && 'span__2'}>
     <a href="/{{

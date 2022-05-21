@@ -220,6 +220,7 @@ svg {
   @media (max-width: 888px) { grid-template-columns: repeat(1, 1fr); }
 
   &.grid--nogap { --gap: 0%; }
+  &.grid--supertight { --gap: 4px; }
   &.grid--tight { --gap: var(--small); }
   &.grid--thick { --gap: var(--big); }
 
