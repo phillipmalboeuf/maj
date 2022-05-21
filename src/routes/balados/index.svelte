@@ -85,7 +85,7 @@
 
 <ExplorerLinks current="balados" />
 
-<section class="padded">
+<section class="padded dark">
   <Balados {balados} />
 </section>
 

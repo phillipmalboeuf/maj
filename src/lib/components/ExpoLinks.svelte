@@ -32,6 +32,13 @@
         }
       }
     }
+
+    &.active {
+
+      &:after {
+        content: " ×";
+      }
+    }
   }
 </style>
 

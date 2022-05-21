@@ -81,8 +81,16 @@
 
       path {
         fill: var(--light);
-        stroke: var(--dark);
       }
+    }
+  }
+
+  :global(.dark) button {
+    &:hover,
+    &:focus {
+    path { 
+      stroke: var(--dark);
+    }
     }
   }
 

@@ -104,7 +104,7 @@
 <section class="padded">
   <Articles thirds {articles} />
 </section>
-<section class="padded dark">
+<section class="padded dark" style="--color: white">
   <Balados {balados} />
 </section>
 <section class="padded">

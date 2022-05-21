@@ -58,7 +58,10 @@
   
 
   <span class:visible class="padded">
-    <button on:click|stopPropagation={() => visible = !visible}>
+    <button on:click|stopPropagation={e => {
+      e.currentTarget.blur()
+      visible = !visible
+    }}>
       {#if !visible}
       <svg width="45" height="24" viewBox="0 0 45 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <line x1="10.3848" y1="8" x2="35.3078" y2="8" stroke="white" stroke-width="2"/>

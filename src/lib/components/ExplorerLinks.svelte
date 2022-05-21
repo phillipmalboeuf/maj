@@ -32,6 +32,13 @@
         fill: var(--color);
       }
     }
+
+    &.active {
+
+      &:after {
+        content: "×";
+      }
+    }
   }
 </style>
 
