@@ -24,9 +24,12 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import Contenu from './Contenu.svelte'
+  import { titre } from '$lib/stores'
 
 	export let page: PageDocument
   export let noTitre = false
+
+  if (!noTitre) { titre.set(page.titre) }
 </script>
 
 {@html `<style>body { --color: var(--${page.couleur?.toLowerCase()}) !important; }</style>`}

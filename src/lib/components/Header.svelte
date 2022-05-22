@@ -1,5 +1,6 @@
 <script lang="ts">
   import { query } from '$lib/clients/contentful'
+  import { titre } from '$lib/stores'
 
   import { fade, fly } from 'svelte/transition'
   import Logo from './Logo.svelte'
@@ -55,6 +56,12 @@
   </nav>
   {/if}
   {/await}
+
+  {#if scrollY > 0 && $titre}
+  <span class="titre padded" transition:fade={{ duration: 333 }}>
+    <h2>{$titre}</h2>
+  </span>
+  {/if}
   
 
   <span class:visible class="padded">
@@ -93,10 +100,20 @@
     }
 
     &.scrolled {
-      background:  linear-gradient(180deg, rgba(251, 251, 251, 0.81) 71.35%, rgba(251, 251, 251, 0) 100%);
-      -webkit-backdrop-filter: blur(20px);
-      backdrop-filter: blur(20px);
-      height: var(--huge);
+
+      &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: var(--huge);
+        background:  linear-gradient(180deg, rgba(251, 251, 251, 0.81) 71.35%, rgba(251, 251, 251, 0) 100%);
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+        filter: blur(4px);  
+      }
+      
 
       @media (min-width: 888px) {
       > span {
@@ -109,6 +126,7 @@
       }
       }
     }
+
     nav,
     > span {
       position: fixed;
@@ -166,6 +184,12 @@
       // background-color: rgba(255, 255, 255, 0.80);
       // -webkit-backdrop-filter: blur(20px);
       // backdrop-filter: blur(20px);
+    }
+
+    > .titre {
+      right: 0;
+      width: 100%;
+      text-align: center;
     }
 
     > span:last-child {

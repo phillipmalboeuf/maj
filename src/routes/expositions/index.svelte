@@ -77,6 +77,7 @@
 </script>
 
 <script lang="ts">
+  import { onMount } from 'svelte'
   import { fade, fly } from 'svelte/transition'
   import Page, { type PageDocument } from '$lib/components/Page.svelte'
   import Picture from '$lib/components/Picture.svelte'
@@ -85,18 +86,40 @@
   import Document from '$lib/components/document/Document.svelte'
   import ExpoLinks from '$lib/components/ExpoLinks.svelte'
   import { date } from '$lib/formatters'
+  import { titre } from '$lib/stores'
 
 	export let page: PageDocument
   export let expositions: ExpositionDocument[]
 
+  let elements: {[key: string]: HTMLElement} = {}
   let open: string
+
+  onMount(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(node => {
+          if (node.isIntersecting) {
+            titre.set(node.target.getAttribute('data-titre'))
+          }
+        })
+      },
+      { threshold: 0, rootMargin: '-40% 0% -40%' }
+    )
+
+    Object.values(elements).forEach(element => observer.observe(element))
+
+    return () => {
+      observer.disconnect()
+    }
+  })
 </script>
 
 <Page {page} />
 
 <section>
   {#each [...expositions, ...expositions, ...expositions, ...expositions] as expo, i}
-  <div class="flex flex--center padded" id={expo.id}>
+  <div class="flex flex--center padded" bind:this={elements[i]} id={expo.id}
+    data-titre={expo.titreCourt || expo.titre}>
     <!-- <h3>{expo.titreCourt || expo.titre}</h3> -->
     <ExpoLinks {expo} type="folder" />
   </div>

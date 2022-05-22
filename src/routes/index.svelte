@@ -140,6 +140,7 @@
   import Expositions from '$lib/components/Expositions.svelte'
   import Link from '$lib/components/Link.svelte'
   import Gallerie from '$lib/components/Gallerie.svelte'
+import { titre } from '$lib/stores';
 
 	export let index: {
     titre: string
@@ -165,6 +166,7 @@
           if (node.isIntersecting) {
             const color = node.target.getAttribute('data-color')
             const background = node.target.getAttribute('data-background-color')
+            titre.set(node.target.getAttribute('data-titre'))
 
             if (background) {
               document.body.classList.add('dark')
@@ -195,6 +197,7 @@
 <section bind:this={elements[page.id]} id={page.id}
   data-color={page.couleur ? page.couleur.toLowerCase() : 'dark'}
   data-background-color={page.fonce ? page.couleur ? page.couleur.toLowerCase() : 'dark' : undefined}
+  data-titre={page.titre}
   class="padded">
   <aside class="sticky">
     <div>
