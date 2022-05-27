@@ -67,15 +67,18 @@
   import Inputs from '$lib/components/Inputs.svelte'
   import ParticiperSteps from '$lib/components/ParticiperSteps.svelte'
   import Questions from '$lib/components/Questions.svelte'
+  import { titre } from '$lib/stores'
 
 	export let page: PageDocument
   export let form: FormDocument
+
+  titre.set(form.titre)
 </script>
 
 <Page {page} noTitre />
 
 <article class="padded">
-  <h1 class="center">{form.titre}</h1>
+  <h1 class="center h2">{form.titre}</h1>
 
   {#if form.id === 'participer'}
   <ParticiperSteps current={2} />

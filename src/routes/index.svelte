@@ -140,7 +140,7 @@
   import Expositions from '$lib/components/Expositions.svelte'
   import Link from '$lib/components/Link.svelte'
   import Gallerie from '$lib/components/Gallerie.svelte'
-import { titre } from '$lib/stores';
+  import { titre } from '$lib/stores'
 
 	export let index: {
     titre: string
@@ -201,7 +201,7 @@ import { titre } from '$lib/stores';
   class="padded">
   <aside class="sticky">
     <div>
-      <h2 class="p3"><a href="/{page.id}" class="button" sveltekit:prefetch>{page.titre} <svg width="53" height="32" viewBox="0 0 53 32" fill="none" xmlns="http://www.w3.org/2000/svg"> <line x1="15.623" y1="15.8079" x2="-0.000949809" y2="15.8079" stroke="white" stroke-width="1.15"/> <path d="M38.023 31.616L52.9991 15.808L38.023 0H36.423L50.823 15.232H15.623V16.384H50.823L36.423 31.616H38.023Z" fill="white"/> </svg> </a></h2>
+      <h2 class="p3"><a href="/{page.id}" class="button" sveltekit:prefetch>{page.titre} <svg width="53" height="32" viewBox="0 0 53 32" fill="none" xmlns="http://www.w3.org/2000/svg"> <line x1="15.623" y1="15.8079" x2="-0.000949809" y2="15.8079" stroke="currentColor" stroke-width="1.15"/> <path d="M38.023 31.616L52.9991 15.808L38.023 0H36.423L50.823 15.232H15.623V16.384H50.823L36.423 31.616H38.023Z" fill="currentColor"/> </svg> </a></h2>
       {#if page.description}<p>{page.description}</p>{/if}
       {#if page.liensCollection}
       <nav>
@@ -215,7 +215,7 @@ import { titre } from '$lib/stores';
     <nav class="jumps">
       {#each index.pagesCollection.items as _page, _i}
       {#if page.id !== _page.id}
-      <a href="#{_page.id}">{_page.titre} {#if _i > i}↓{:else}↑{/if}</a>
+      <a href="#{_page.id}">{_page.titre} {#if _i > i}<span class="down">↓</span>{:else}<span class="up">↑</span>{/if}</a>
       {/if}
       {/each}
     </nav>
@@ -243,7 +243,7 @@ import { titre } from '$lib/stores';
 {/each}
 
 <style lang="scss">
-  $height: calc(100vh - 18rem);
+  $height: calc(100vh - 11rem);
 
   p {
     width: 100%;
@@ -285,6 +285,26 @@ import { titre } from '$lib/stores';
         display: flex;
         justify-content: space-between;
 
+        a {
+          font-size: 0.88em;
+
+          span {
+            display: inline-block;
+            transition: transform 333ms;
+          }
+
+          &:hover,
+          &:focus {
+            span {
+              transform: translateY(-0.25em);
+
+              &.down {
+                transform: translateY(0.25em);
+              }
+            }
+          }
+        }
+
         @media (max-width: 888px) {
           display: none;
         }
@@ -314,6 +334,7 @@ import { titre } from '$lib/stores';
 
         > :global(strong) {
           font-size: 6rem;
+          font-weight: normal;
 
           @media (max-width: 888px) {
             font-size: 4rem;

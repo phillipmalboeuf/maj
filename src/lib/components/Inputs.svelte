@@ -1,7 +1,7 @@
 <script lang="ts">
   import { fade, fly } from 'svelte/transition'
   import type { FormDocument } from '../../routes/forms/[id].svelte'
-import TextareaAuto from './TextareaAuto.svelte'
+  import TextareaAuto from './TextareaAuto.svelte'
 
   export let form: FormDocument
   export let emphasis = false
@@ -58,7 +58,7 @@ import TextareaAuto from './TextareaAuto.svelte'
       padding: 0.66em 1em;
       margin-bottom: 1em;
 
-      width: 88%;
+      width: 100%;
 
       // &:not(:placeholder-shown) {
       //   background: var(--grey);
@@ -81,7 +81,6 @@ import TextareaAuto from './TextareaAuto.svelte'
 
     textarea {
       font-family: inherit;
-      width: 100%;
       height: 12em;
     }
 </style>

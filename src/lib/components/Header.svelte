@@ -179,14 +179,8 @@
       }
     }
 
-    > span:first-child {
-      // width: 100vw;
-      // background-color: rgba(255, 255, 255, 0.80);
-      // -webkit-backdrop-filter: blur(20px);
-      // backdrop-filter: blur(20px);
-    }
-
     > .titre {
+      z-index: 8;
       right: 0;
       width: 100%;
       text-align: center;

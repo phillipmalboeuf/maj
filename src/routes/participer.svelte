@@ -102,7 +102,7 @@
     color: var(--light);
     background-color: var(--rouge);
     border-color: transparent;
-    z-index: 14;
+    z-index: 9;
     margin-top: var(--gutter);
   }
 </style>

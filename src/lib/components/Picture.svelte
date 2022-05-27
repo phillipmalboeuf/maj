@@ -1,6 +1,6 @@
 <script lang="ts">
   import { fade, fly } from 'svelte/transition'
-  // import Overlay from './Overlay.svelte'
+  import Overlay from './Overlay.svelte'
 
   export let media: any
   export let small = false
@@ -61,11 +61,11 @@
   span {
     pointer-events: none;
     position: absolute;
-    background-color: var(--light);
-    background:rgba(251, 251, 251, 0.81);
-    -webkit-backdrop-filter: blur(20px);
-    backdrop-filter: blur(20px);
-    border: 1px solid;
+    color: var(--light);
+    background-color: var(--color);
+    // -webkit-backdrop-filter: blur(20px);
+    // backdrop-filter: blur(20px);
+    border: 1px solid transparent;
     padding: 0.5em;
   }
 
@@ -111,11 +111,11 @@
 {/if}
 
 {#if zoom}
-<!-- <Overlay bind:open={open}>
+<Overlay bind:open={open}>
   <figure transition:fade>
     <svelte:self {media} />
   </figure>
-</Overlay> -->
+</Overlay>
 {/if}
 {/if}
 {/if}

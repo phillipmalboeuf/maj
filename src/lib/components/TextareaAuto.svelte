@@ -25,6 +25,8 @@
 	}
 	
 	pre, textarea {
+		width: 100%;
+		white-space: pre-line;
 		font-family: inherit;
 		box-sizing: border-box;
 		/* border: 1px solid #eee; */

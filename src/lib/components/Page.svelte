@@ -29,7 +29,7 @@
 	export let page: PageDocument
   export let noTitre = false
 
-  if (!noTitre) { titre.set(page.titre) }
+  if (!noTitre) { titre.set(page.titre) } else { titre.set(undefined) }
 </script>
 
 {@html `<style>body { --color: var(--${page.couleur?.toLowerCase()}) !important; }</style>`}
