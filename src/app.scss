@@ -117,7 +117,7 @@ h2, .h2 {
 h3, .h3 {
   @include text(33px, 40px, -0.02em);
   @media (max-width: 888px) {
-    @include text(23px, 28px, -0.02em);
+    @include text(28px, 34px, -0.02em);
   }
 }
 

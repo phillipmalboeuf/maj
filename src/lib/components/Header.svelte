@@ -40,10 +40,10 @@
   <nav class="padded" transition:fly={{ y: -100 }}>
     {#each data.index.pagesCollection.items as page, i}
     {#if i === data.index.pagesCollection.items.length - 1}<br>{/if}
-    <a class="h4" href="/{page.id}">{page.titre}</a>
+    <a class="h3" href="/{page.id}">{page.titre}</a>
     {/each}
     <br>
-    <a class="h4" href="/">En</a>
+    <a class="h3" href="/">En</a>
 
     <div on:click|stopPropagation><NewsletterForm /></div>
 
@@ -125,6 +125,17 @@
         height: 42px;
       }
       }
+
+      @media (max-width: 888px) {
+      &:before {
+        height: calc(var(--huge) * 0.88);
+      }
+
+      .logo :global(svg) {
+        width: 66px;
+        height: 30px;
+      }
+      }
     }
 
     nav,
@@ -147,7 +158,7 @@
       padding-left: 24rem;
 
       @media (max-width: 888px) {
-        padding-top: calc(var(--gutter) * 7);
+        padding-top: calc(var(--gutter) * 8);
         padding-left: var(--gutter);
       }
 
@@ -156,7 +167,7 @@
         margin-bottom: 0.33em;
         text-decoration: none;
         transition: padding-left 333ms;
-
+        
         &:hover,
         &:focus {
           padding-left: 1em;

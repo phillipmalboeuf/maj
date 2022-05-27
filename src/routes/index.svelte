@@ -266,7 +266,7 @@
 
       aside {
         h2 {
-          text-align: center;
+          // text-align: center;
           padding-bottom: var(--gutter);
         }
       }
