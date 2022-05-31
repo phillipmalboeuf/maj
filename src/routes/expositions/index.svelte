@@ -51,6 +51,9 @@
                   titre
                   id
                   media ${media}
+                  description {
+                    json
+                  }
                 }
                 ... on Soumission {
                   titre
@@ -58,6 +61,10 @@
                   date
                   nom
                   media ${media}
+                  bref
+                  description {
+                    json
+                  }
                 }
               }
             }
@@ -152,7 +159,11 @@
           {#if oeuvre.date}{oeuvre.date}<br>{:else}Non datée<br>{/if}
         </p>
         <div>
+          {#if oeuvre.description}
           <Document body={oeuvre.description} />
+          {:else}
+          <p>{oeuvre.bref}</p>
+          {/if}
         </div>
         <figure>
           <Picture media={oeuvre.media} />

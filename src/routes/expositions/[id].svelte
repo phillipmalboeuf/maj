@@ -61,6 +61,7 @@
                   titre
                   id
                   media ${media}
+                  bref
                   description {
                     json
                   }

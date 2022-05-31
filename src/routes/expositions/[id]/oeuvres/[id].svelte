@@ -31,6 +31,7 @@
             ville
             media ${media}
             details
+            bref
             description {
               json
             }
@@ -93,7 +94,11 @@
     <span><a href="/expositions/{exposition.id}/oeuvres">Oeuvres</a></span>
   </div> -->
   <div>
+    {#if oeuvre.description}
     <Document body={oeuvre.description} />
+    {:else}
+    <p>{oeuvre.bref}</p>
+    {/if}
   </div>
   <figure>
     <Picture media={oeuvre.media} />

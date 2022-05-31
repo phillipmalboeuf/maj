@@ -7,7 +7,7 @@ export const post: RequestHandler<{ titre: string }, {}> = async ({ request, ...
 
   let data: any = {}
   formData.forEach((d, k) => data[k] = d)
-  const { form, titre, nom, email, date, ville, file, accept, ...details } = data
+  const { form, titre, nom, email, date, ville, file, accept, bref, ...details } = data
 
   if (accept) { return }
 
@@ -42,6 +42,7 @@ export const post: RequestHandler<{ titre: string }, {}> = async ({ request, ...
       email: { 'fr-CA': email },
       date: { 'fr-CA': date },
       ville: { 'fr-CA': ville },
+      bref: { 'fr-CA': bref },
       details: { 'fr-CA': details },
       media: { 'fr-CA': { sys: {
         id: asset.sys.id,

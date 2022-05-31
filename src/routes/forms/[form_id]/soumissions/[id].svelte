@@ -11,6 +11,7 @@
     nom: string
     ville: string
     details: object
+    bref: string
     description: {
       json: object
     }
@@ -40,6 +41,7 @@
             date
             ville
             media ${media}
+            bref
             details
           }
         }
@@ -70,8 +72,7 @@
   import Picture from '$lib/components/Picture.svelte'
   import ParticiperSteps from '$lib/components/ParticiperSteps.svelte'
 
-  import { DateTime } from 'luxon'
-import { date } from '$lib/formatters';
+  import { date } from '$lib/formatters'
 
 	export let page: PageDocument
   export let form: FormDocument
@@ -95,6 +96,8 @@ import { date } from '$lib/formatters';
         {soumission.ville}<br>
         {date(soumission.date)}
       </h2>
+
+      <p>{soumission.bref}</p>
 
       {#if soumission.details}
       {#each Object.values(soumission.details) as detail}

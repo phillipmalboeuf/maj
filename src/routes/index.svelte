@@ -170,7 +170,7 @@
 
             if (background) {
               document.body.classList.add('dark')
-              document.body.setAttribute('style', `--color: var(--${color}); background-color: var(--${background}); color: var(--light);`)
+              document.body.setAttribute('style', `--color: var(--${color}); --faded-color: var(--${color}-faded); background-color: var(--${background}); color: var(--light);`)
             } else {
               document.body.classList.remove('dark')
               document.body.setAttribute('style', `--color: var(--${color}); color: var(--color);`)

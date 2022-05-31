@@ -5,6 +5,7 @@
     description?: object
     media?: object
     date: string
+    bref: string
   }
 </script>
 
@@ -45,7 +46,11 @@
 
     <aside>
       <h6>{oeuvre.titre}</h6>
+      {#if oeuvre.description}
       <Document body={oeuvre.description} />
+      {:else}
+      <p>{oeuvre.bref}</p>
+      {/if}
     </aside>
   </li>
   {/each}
