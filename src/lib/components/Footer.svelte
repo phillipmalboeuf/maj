@@ -1,27 +1,42 @@
 <script lang="ts">
+  import { query } from '$lib/clients/contentful'
+
   import Locale from './Locale.svelte'
+  import Link from './Link.svelte'
   import NewsletterForm from './NewsletterForm.svelte'
 </script>
 
 <footer class="grid grid--halves small padded">
+  {#await query(fetch, `
+    query {
+      navigationCollection(limit: 3, order: sys_publishedAt_ASC) {
+        items {
+          titre
+          liensCollection {
+            items {
+              titre
+              lien
+              externe
+            }
+          }
+        }
+      }
+    }
+  `) then { data } }
   <nav>
     <div class="grid grid--sixths">
     <a href="/">Accueil</a>
-    <a href="/">Expositions</a>
-    <a href="/">Explorer</a>
-    <a href="/">À propos</a>
-    <a href="/">Participer</a>
-    <a href="/">Soutenir</a>
+    {#each data.navigationCollection.items[0].liensCollection.items as lien, i}
+    <Link {lien} />
+    {/each}
     </div>
 
     <br>
 
     <div class="grid grid--sixths">
-    <a href="/">Facebook</a>
-    <a href="/">Twitter</a>
-    <a href="/">YouTube</a>
-    <a href="/">Instagram</a>
-    <a href="/">Contact</a>
+    {#each data.navigationCollection.items[1].liensCollection.items as lien, i}
+    <Link {lien} />
+    {/each}
     </div>
   </nav>
 
@@ -37,10 +52,11 @@
   </nav>
 
   <nav class="flex flex--end">
-    <a href="/">Privacy policy</a>
-    <a href="/">© 2022 par Musée d'art de Joliette</a>
-    <a href="/">Designed by Paprika</a>
+    {#each data.navigationCollection.items[2].liensCollection.items as lien, i}
+    <Link {lien} />
+    {/each}
   </nav>
+  {/await}
 </footer>
 
 <style lang="scss">

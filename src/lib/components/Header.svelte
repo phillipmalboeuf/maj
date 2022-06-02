@@ -3,6 +3,7 @@
   import { titre } from '$lib/stores'
 
   import { fade, fly } from 'svelte/transition'
+  import Link from './Link.svelte'
   import Logo from './Logo.svelte'
   import NewsletterForm from './NewsletterForm.svelte'
 
@@ -22,36 +23,36 @@
 
   {#await query(fetch, `
     query {
-      index(id: "1AWDRdqrE2Jks9micYfzwG") {
+      navigationCollection(limit: 2, order: sys_publishedAt_ASC) {
+        items {
           titre
-          id
-          pagesCollection {
+          liensCollection {
             items {
-              ... on Page {
-                titre
-                id
-              }
+              titre
+              lien
+              externe
             }
           }
         }
+      }
     }
   `) then { data } }
   {#if visible}
   <nav class="padded" transition:fly={{ y: -100 }}>
-    {#each data.index.pagesCollection.items as page, i}
-    {#if i === data.index.pagesCollection.items.length - 1}<br>{/if}
-    <a class="h3" href="/{page.id}">{page.titre}</a>
+    {#each data.navigationCollection.items[0].liensCollection.items as lien, i}
+    {#if i === data.navigationCollection.items[0].liensCollection.items.length - 1}<br>{/if}
+    <h3><Link {lien} /></h3>
     {/each}
+    
     <br>
     <a class="h3" href="/">En</a>
 
     <div on:click|stopPropagation><NewsletterForm /></div>
 
     <div class="flex flex--thick">  
-      <a href="/">Facebook</a>
-      <a href="/">YouTube</a>
-      <a href="/">Instagram</a>
-      <a href="/">Contact</a>
+      {#each data.navigationCollection.items[1].liensCollection.items as lien, i}
+      <Link {lien} />
+      {/each}
     </div>
   </nav>
   {/if}
@@ -162,7 +163,8 @@
         padding-left: var(--gutter);
       }
 
-      > a {
+      > :global(a),
+      > h3 :global(a) {
         display: block;
         margin-bottom: 0.33em;
         text-decoration: none;
