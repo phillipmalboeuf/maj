@@ -10,6 +10,9 @@
     fin: string
     description?: string
     media?: object
+    sys?: {
+      id: string
+    }
     curatorsCollection?: {
       items: CuratorDocument[]
     }
@@ -96,15 +99,17 @@
 
   import Page, { type PageDocument } from '$lib/components/Page.svelte'
   import Oeuvres, { type OeuvreDocument } from '$lib/components/Oeuvres.svelte'
+  import type { SoumissionDocument } from '../forms/[form_id]/soumissions/[id].svelte'
   import Document from '$lib/components/document/Document.svelte'
   import Comments from '$lib/components/Comments.svelte'
   import ExpoLinks from '$lib/components/ExpoLinks.svelte'
   import Overlay from '$lib/components/Overlay.svelte'
 
+
 	export let page: PageDocument
   export let exposition: ExpositionDocument
   export let curators: CuratorDocument[]
-  export let oeuvres: OeuvreDocument[]
+  export let oeuvres: SoumissionDocument[]
   
   const d = exposition.debut && DateTime.fromISO(exposition.debut)
   const f = exposition.fin && DateTime.fromISO(exposition.fin)
@@ -139,7 +144,7 @@
     <div class="description">
       <Document body={exposition.description} />
     </div>
-    <Oeuvres {oeuvres} />
+    <!-- <Oeuvres {exposition} {oeuvres} /> -->
   </article>
 
   <Comments />

@@ -28,7 +28,13 @@
                 ... on Soumission {
                   titre
                   id
+                  bref
+                  date
+                  nom
                   media ${media}
+                  description {
+                    json
+                  }
                 }
               }
             }
@@ -57,6 +63,7 @@
 
   import Page, { type PageDocument } from '$lib/components/Page.svelte'
   import Oeuvres, { type OeuvreDocument } from '$lib/components/Oeuvres.svelte'
+  import type { SoumissionDocument } from 'src/routes/forms/[form_id]/soumissions/[id].svelte'
   import Document from '$lib/components/document/Document.svelte'
   
   import type { ExpositionDocument } from '../[id].svelte'
@@ -64,7 +71,7 @@
 
 	export let page: PageDocument
   export let exposition: ExpositionDocument
-  export let oeuvres: OeuvreDocument[]
+  export let oeuvres: SoumissionDocument[]
 </script>
 
 <Page {page} noTitre />
@@ -73,7 +80,7 @@
   <h1 class="center">{exposition.titreCourt}</h1>
   <center class="flex flex--center"><ExpoLinks type={$p.url.searchParams.get('type') || 'slider'} expo={exposition} /></center>
   {#key $p.url}
-  <Oeuvres {oeuvres} type={$p.url.searchParams.get('type') || 'slider'} />
+  <Oeuvres {exposition} {oeuvres} type={$p.url.searchParams.get('type') || 'slider'} />
   {/key}
 </article>
 

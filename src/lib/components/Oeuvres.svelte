@@ -10,13 +10,19 @@
 </script>
 
 <script lang="ts">
+  import type { ExpositionDocument } from 'src/routes/expositions/[id].svelte'
+  import type { SoumissionDocument } from 'src/routes/forms/[form_id]/soumissions/[id].svelte'
+
   import { onMount } from 'svelte'
   import { swipe } from 'svelte-gestures'
+  import { fly, fade } from 'svelte/transition'
 
   import Document from './document/Document.svelte'
+  import OeuvreOverlay from './OeuvreOverlay.svelte'
   import Picture from './Picture.svelte'
 
-  export let oeuvres: OeuvreDocument[]
+  export let exposition: ExpositionDocument
+  export let oeuvres: SoumissionDocument[]
   export let type = 'columns'
 
   let list: HTMLUListElement
@@ -34,6 +40,7 @@
   })
 
   let current: number = 3
+  let open: string
 </script>
 
 {#if type === 'columns'}
@@ -57,12 +64,19 @@
 </ul>
 {:else if type === 'mur'}
 <ul bind:this={list} class="masonry">
-  {#each [...oeuvres, ...oeuvres, ...oeuvres, ...oeuvres] as oeuvre, i}
+  {#each oeuvres as oeuvre, i}
   <li>
-    <figure>
-      <Picture media={oeuvre.media} ar={i % 2 ? 1 : 2} />
-    </figure>
+    <a href="/expositions/{exposition.id}/oeuvres/{oeuvre.id}"
+        on:click|preventDefault={() => open = oeuvre.id}>
+      <figure>
+        <Picture media={oeuvre.media} ar={i % 2 ? 1 : 2} />
+      </figure>
+    </a>
   </li>
+
+    {#if open === oeuvre.id}
+    <OeuvreOverlay bind:open={open} {oeuvre} />
+    {/if}
   {/each}
 </ul>
 {:else if type === 'slider'}
@@ -73,13 +87,13 @@
         current = current - 1
       }
     } else {
-      if (current < [...oeuvres, ...oeuvres, ...oeuvres, ...oeuvres].length - 1) {
+      if (current < oeuvres.length - 1) {
         current = current + 1
       }
     }
   }}
-  style="width: {100 + (([...oeuvres, ...oeuvres, ...oeuvres, ...oeuvres].length - 7) * (100/7))}%; transform: translateX({(current - 3) * -(8)}%);">
-  {#each [...oeuvres, ...oeuvres, ...oeuvres, ...oeuvres] as oeuvre, i}
+  style="width: {100 + ((oeuvres.length - 7) * (100/7))}%; transform: translateX({(current - 3) * -(8)}%);">
+  {#each oeuvres as oeuvre, i}
   <li class:current={current === i}>
     <figure>
       <Picture media={oeuvre.media} ar={i % 2 ? 1 : 2} />

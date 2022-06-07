@@ -234,7 +234,7 @@
     <div class="flex flex--end">
       <a href="/expositions" class="button">Voir l’Archive →</a>
     </div>
-    <Expositions expositions={[...expositions, ...expositions, ...expositions]} tight />
+    <Expositions {expositions} tight />
     {/if}
   </div>
 

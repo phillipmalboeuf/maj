@@ -94,6 +94,7 @@
   import ExpoLinks from '$lib/components/ExpoLinks.svelte'
   import { date } from '$lib/formatters'
   import { titre } from '$lib/stores'
+  import OeuvreOverlay from '$lib/components/OeuvreOverlay.svelte'
 
 	export let page: PageDocument
   export let expositions: ExpositionDocument[]
@@ -124,14 +125,14 @@
 <Page {page} />
 
 <section>
-  {#each [...expositions, ...expositions, ...expositions, ...expositions] as expo, i}
+  {#each expositions as expo, i}
   <div class="flex flex--center padded" bind:this={elements[i]} id={expo.id}
     data-titre={expo.titreCourt || expo.titre}>
     <!-- <h3>{expo.titreCourt || expo.titre}</h3> -->
     <ExpoLinks {expo} type="folder" />
   </div>
   <ol class="padded flex flex--supertight">
-    {#each [...expo.oeuvresCollection.items,...expo.oeuvresCollection.items,...expo.oeuvresCollection.items] as oeuvre, j}
+    {#each expo.oeuvresCollection.items as oeuvre, j}
     <li>
       <a href="/expositions/{expo.id}/oeuvres/{oeuvre.id}"
         on:click|preventDefault={() => open = `${i}.${j}`}>
@@ -147,36 +148,12 @@
     </li>
 
     {#if open === `${i}.${j}`}
-    <Overlay bind:open={open}>
-      <article class="padded" transition:fly={{ y: 100 }}>
-        <button transition:fade on:click={() => open = undefined} area-label="Close">Close</button>
-
-        <h1 class="">{oeuvre.titre}</h1>
-
-        <p>
-          {#if oeuvre.nom}{oeuvre.nom}<br>{/if}
-          {#if oeuvre.ville}{oeuvre.ville}<br>{/if}
-          {#if oeuvre.date}{oeuvre.date}<br>{:else}Non datée<br>{/if}
-        </p>
-        <div>
-          {#if oeuvre.description}
-          <Document body={oeuvre.description} />
-          {:else}
-          <p>{oeuvre.bref}</p>
-          {/if}
-        </div>
-        <figure>
-          <Picture media={oeuvre.media} />
-        </figure>
-      </article>
-    </Overlay>
+    <OeuvreOverlay bind:open={open} {oeuvre} />
     {/if}
     {/each}
   </ol>
   {/each}
 </section>
-
-
 
 
 <style lang="scss">
@@ -229,21 +206,6 @@
 
     > aside {
       margin-bottom: 0.5rem;
-    }
-  }
-
-  article {
-    position: relative;
-    max-width: 911px;
-    margin: var(--gutter) auto;
-    background-color: var(--light);
-    border-radius: 1.5rem;
-    padding: calc(var(--gutter) / 2);
-
-    > button {
-      position: absolute;
-      top: calc(var(--gutter) / 2);
-      right: calc(var(--gutter) / 2);
     }
   }
 </style>

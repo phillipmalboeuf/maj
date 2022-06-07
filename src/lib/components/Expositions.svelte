@@ -28,7 +28,7 @@ import { date } from '$lib/formatters';
         </figcaption>
         {/if}
       </figure>
-      {#if !tight}<h3>{exposition.titreCourt || exposition.titre}</h3>{/if}
+      {#if !tight}<h3>{exposition.titre}</h3>{/if}
     </a>
   </li>
   {/each}

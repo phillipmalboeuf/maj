@@ -103,7 +103,7 @@
 {/if}
 
 {#if !noDescription && media.title !== 'Heartbeat' && (media.title || media.description)}
-<p class="small">{media.title} {media.description}</p>
+<p class="small">{media.title} {media.description || ''}</p>
 {/if}
 
 {#if label && labelVisible}

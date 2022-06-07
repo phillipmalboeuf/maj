@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model airtable_schema {
+  id          Int       @id @default(dbgenerated("nextval('_airtable_schema_id_seq'::regclass)"))
+  resource_id String    @db.Uuid
+  payload     Json
+  fingerprint String
+  inserted_at DateTime? @default(now()) @db.Timestamptz(6)
+
+  @@unique([resource_id, fingerprint], map: "idx_resource_id_fingerprint")
+  @@map("_airtable_schema")
+}
+
+model pending_fks {
+  source_id       String
+  target_id       String
+  constraint_name String
+  inserted_at     DateTime? @default(now()) @db.Timestamp(6)
+
+  @@unique([source_id, constraint_name], map: "_pending_fks_source_constraint_key")
+  @@map("_pending_fks")
+}
+
+model sync_event {
+  id          Int       @id(map: "_sync_event_pk") @default(dbgenerated("nextval('_sync_event_id_seq'::regclass)"))
+  event_type  String?
+  inserted_at DateTime? @db.Timestamp(6)
+  object_type String?
+  payload     Json?
+
+  @@index([inserted_at])
+  @@map("_sync_event")
+}
+
+model sync_event_cursor {
+  id           Int       @id(map: "_sync_event_cursor_pk") @default(dbgenerated("nextval('_sync_event_cursor_id_seq'::regclass)"))
+  group_name   String?
+  group_offset Int?
+  heartbeat    DateTime? @default(now()) @db.Timestamp(6)
+
+  @@map("_sync_event_cursor")
+}
+
+model sync_meta {
+  id            Int                      @id
+  started_at    DateTime?                @db.Timestamptz(6)
+  completed_at  DateTime?                @db.Timestamptz(6)
+  duration_last Unsupported("interval")?
+
+  @@map("_sync_meta")
+}
+
+model expositions {
+  id                           String    @id(map: "tbleZc8WUy92YLZF5_pk")
+  sync_inserted_at             DateTime? @default(now()) @map("_sync_inserted_at") @db.Timestamp(6)
+  sync_updated_at              DateTime? @default(now()) @map("_sync_updated_at") @db.Timestamp(6)
+  conservateurice              String?
+  created_time                 DateTime? @db.Timestamp(6)
+  date_de_d_but                DateTime? @map("date_de_début") @db.Date
+  date_de_fin                  DateTime? @db.Date
+  description                  String?
+  excerpt                      String?
+  num_ro                       Int?      @map("numéro")
+  oeuvres                      String[]
+  titre                        String?
+  oeuvres_expositionsTooeuvres oeuvres[]
+
+  @@index([oeuvres])
+}
+
+model oeuvres {
+  id                   String       @id(map: "tblswcIlXzlpCg9u3_pk")
+  sync_inserted_at     DateTime?    @default(now()) @map("_sync_inserted_at") @db.Timestamp(6)
+  sync_updated_at      DateTime?    @default(now()) @map("_sync_updated_at") @db.Timestamp(6)
+  commentaires         String?
+  courriel_du_cr_ateur String?      @map("courriel_du_créateur")
+  created_time         DateTime?    @db.Timestamp(6)
+  date_de_soumission   DateTime?    @db.Date
+  description          String?
+  exposition           String?
+  fichier_photo        String?
+  nom_du_cr_ateur      String?      @map("nom_du_créateur")
+  titre_de_loeuvre     String?
+  ville_du_cr_ateur    String?      @map("ville_du_créateur")
+  ge_du_cr_ateur       Decimal?     @map("âge_du_créateur") @db.Decimal
+  expositions          expositions? @relation(fields: [exposition], references: [id], onUpdate: NoAction, map: "oeuvres_exposition_fk")
+
+  @@index([exposition])
+}
