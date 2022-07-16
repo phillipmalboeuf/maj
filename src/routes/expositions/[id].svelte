@@ -127,7 +127,7 @@
 
 <Overlay open onClose={() => goto(`/expositions#${exposition.id}`)}>
   <article transition:fly={{ y: 100 }} bind:this={element} class="padded">
-    <a class="button" href="/expositions#{exposition.id}" transition:fade area-label="Close">Close</a>
+    <a class="button" href="/expositions#{exposition.id}" transition:fade>Fermer</a>
 
     <h2 class="center">{exposition.titreCourt}</h2>
     <br><br>

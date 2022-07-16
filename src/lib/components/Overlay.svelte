@@ -4,10 +4,10 @@
   import { onMount } from 'svelte'
   import { fade, fly } from 'svelte/transition'
 
-  export let open: boolean = false
+  export let open: boolean | string = false
   export let onClose: Function = undefined
 
-  $: browser && document.documentElement.classList.toggle('noscroll', open)
+  $: browser && document.documentElement.classList.toggle('noscroll', !!open)
 </script>
 
 {#if open}
@@ -15,7 +15,7 @@
   <button transition:fade on:click={() => {
     open = false
     onClose && onClose()
-  }} area-label="Close" />
+  }} aria-label="Fermer" />
   <slot />
 </aside>
 {/if}

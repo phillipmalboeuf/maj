@@ -12,7 +12,7 @@
 
 <Overlay bind:open={open}>
   <article class="padded" transition:fly={{ y: 100 }}>
-    <button transition:fade on:click={() => open = undefined} area-label="Close">Close</button>
+    <button transition:fade on:click={() => open = undefined}>Fermer</button>
 
     <h1 class="">{oeuvre.titre}</h1>
 
