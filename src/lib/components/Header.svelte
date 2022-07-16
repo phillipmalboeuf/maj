@@ -197,6 +197,7 @@
       right: 0;
       width: 100%;
       text-align: center;
+      pointer-events: none;
     }
 
     > span:last-child {
