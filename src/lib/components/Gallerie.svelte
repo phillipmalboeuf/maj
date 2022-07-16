@@ -17,24 +17,30 @@
   
   let length = entry.mediasCollection.items.length
   let order = [...new Array(length)].map((_, i) => i)
+  const blur = entry.alignement === "Blur"
 
   onMount(() => {
-    
-    const interval = setInterval(() => {
-      // current = current === length - 1 ? 0 : current + 1
-      order.unshift(order.pop())
-      order = [...order]
-    }, 2666)
+    if (blur) {
+      const interval = setInterval(() => {
+        // current = current === length - 1 ? 0 : current + 1
+        order.unshift(order.pop())
+        order = [...order]
+      }, 2666)
 
-    return () => clearInterval(interval)
+      return () => clearInterval(interval)
+    }
   })
 </script>
 
 {#if !entry.titreInvisible}<h2 class="d2 center">{entry.titre}</h2>{/if}
-<div class:blur={entry.alignement === "Blur"} class="flex flex--wrap{entry.alignement === "Droite" ? ' flex--end' : ''}{entry.alignement === "Blur" ? ' flex--nogap' : ''}">
+<div class:blur class="flex flex--wrap{entry.alignement === "Droite" ? ' flex--end' : ''}{entry.alignement === "Blur" ? ' flex--nogap' : ''}">
   {#if entry.mediasCollection}
   {#each entry.mediasCollection.items as media, i}
-  <figure style="top: {order[i] * (200/length)}px; left: {(order[i] * (66/length))+(66/length)}%; z-index: {length - order[i]}" class:current={order[i] === 0} class={entry.colonnes && { 2: 'flex__half', 3: 'flex__third', 4: 'flex__fourth' }[entry.colonnes]}><Picture {media} zoom={entry.alignement !== "Blur"} noDescription={entry.alignement === "Blur"} /></figure>
+  {#if blur}
+  <figure style="top: {order[i] * (200/length)}px; left: {(order[i] * (66/length))+(66/length)}%; z-index: {length - order[i]}" class:current={order[i] === 0} class={entry.colonnes && { 2: 'flex__half', 3: 'flex__third', 4: 'flex__fourth' }[entry.colonnes]}><Picture {media} noDescription /></figure>
+  {:else}
+  <figure class={entry.colonnes && { 2: 'flex__half', 3: 'flex__third', 4: 'flex__fourth' }[entry.colonnes]}><Picture {media} zoom /></figure>
+  {/if}
   {/each}
   {/if}
 </div>

@@ -48,9 +48,12 @@
   figure {
     pointer-events: none;
     padding: var(--gutter);
-    max-height: 100vh;
+    min-height: 100vh;
     margin: 0;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
     :global(img) {
       max-height: calc(100vh - (var(--gutter) * 2));
