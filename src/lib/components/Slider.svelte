@@ -33,12 +33,14 @@ import { onMount } from 'svelte';
   }
 
   function next() {
-    current = paused ? current : (current === length - 1 ? current = 0 : current + 1)
+    current = current === length - 1 ? current = 0 : current + 1
   }
 
   onMount(() => {
     if (autoplay) {
-      const interval = window.setInterval(next, 3000)
+      const interval = window.setInterval(() => {
+        if (!paused) { next() }
+      }, 3000)
 
       return () => window.clearInterval(interval)
     }
