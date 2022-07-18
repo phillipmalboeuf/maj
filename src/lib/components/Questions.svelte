@@ -1,5 +1,6 @@
 <script lang="ts">
   import { query } from '$lib/clients/contentful'
+  import { enhance } from '$lib/form'
 
   import { onMount } from 'svelte'
   import { fade, fly } from 'svelte/transition'
@@ -9,6 +10,8 @@
 
   export let spaced = false
   let open = false
+  let pending = false
+  let success = false
 </script>
 
 <button class:spaced class="fixed" on:click={() => open = !open}>Q/R</button>
@@ -46,10 +49,30 @@
     <li transition:fly={{ y: 10 }}>
       <p>{data.formCollection.items[0].titre}</p>
       <hr>
-      <form class="flex flex--tight flex--middle" action="/question" method="post">
+      {#if success}
+      <p>Votre question a été parvenu, nous vous répondrons sous peu.</p>
+      {:else}
+      <form class="flex flex--tight flex--middle" action="/question" method="post" use:enhance={{
+        error: () => {
+          pending = undefined
+        },
+        pending: () => {
+          pending = true
+        },
+        result: async ({ response }) => {
+          const json = await response.json()
+          console.log(json)
+          pending = undefined
+          success = true
+          // candidat = json.candidat
+          // endroits = json.endroits
+          // circonscription = [json.adresses.adresses[0].nom_circonscription, json.adresses.adresses[0].nom_municipalite].join(', ')
+        }
+      }}>
         <Inputs form={data.formCollection.items[0]} />
         <button>{data.formCollection.items[0].cta}</button>
       </form>
+      {/if}
     </li>
     {#each data.questionCollection.items as question, i}
     <li transition:fly={{ y: 10, delay: 100*i }}>
