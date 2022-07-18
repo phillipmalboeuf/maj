@@ -99,7 +99,7 @@
 
   import Page, { type PageDocument } from '$lib/components/Page.svelte'
   import Oeuvres, { type OeuvreDocument } from '$lib/components/Oeuvres.svelte'
-  import type { SoumissionDocument } from '../forms/[form_id]/soumissions/[id].svelte'
+  import type { SoumissionDocument } from '../../forms/[form_id]/soumissions/[id].svelte'
   import Document from '$lib/components/document/Document.svelte'
   import Comments from '$lib/components/Comments.svelte'
   import ExpoLinks from '$lib/components/ExpoLinks.svelte'

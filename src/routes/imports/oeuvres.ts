@@ -3,13 +3,19 @@ import { cma } from '$lib/clients/contentful_management'
 import { prisma } from '$lib/clients/prisma'
 import type { RequestHandler } from '@sveltejs/kit'
 import slugify from 'slugify'
-import type { ExpositionDocument } from '../expositions/[id].svelte'
 
 export const GET: RequestHandler<{ titre: string }, {}> = async ({ request, ...event }) => {
 
   const { data: { expositionCollection } } = await query<{
       expositionCollection: {
-        items: ExpositionDocument[]
+        items: {
+          titre: string
+          titreCourt?: string
+          id: string
+          sys?: {
+            id: string
+          }
+        }[]
       }
     }>(fetch, `
       query {

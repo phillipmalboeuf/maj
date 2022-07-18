@@ -85,6 +85,7 @@
 
 <script lang="ts">
   import { onMount } from 'svelte'
+  import { browser } from '$app/env'
   import { fade, fly } from 'svelte/transition'
   import Page, { type PageDocument } from '$lib/components/Page.svelte'
   import Picture from '$lib/components/Picture.svelte'
@@ -96,31 +97,27 @@
   import { titre } from '$lib/stores'
   import OeuvreOverlay from '$lib/components/OeuvreOverlay.svelte'
 
+
 	export let page: PageDocument
   export let expositions: ExpositionDocument[]
 
   let elements: {[key: string]: HTMLElement} = {}
   let open: string
+  let scrollY: number
+  let innerHeight: number
 
-  onMount(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(node => {
-          if (node.isIntersecting) {
-            titre.set(node.target.getAttribute('data-titre'))
-          }
-        })
-      },
-      { threshold: 0, rootMargin: '-40% 0% -40%' }
-    )
-
-    Object.values(elements).forEach(element => observer.observe(element))
-
-    return () => {
-      observer.disconnect()
+  $: {
+    if (browser) {
+      Object.values(elements).forEach(element => {
+        if (element.offsetTop < scrollY + (innerHeight / 2)) {
+          titre.set(element.getAttribute('data-titre'))
+        }
+      })
     }
-  })
+  }
 </script>
+
+<svelte:window bind:scrollY bind:innerHeight />
 
 <Page {page} />
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { ExpositionDocument } from '../../routes/expositions/[id].svelte'
+  import type { ExpositionDocument } from '../../routes/expositions/[id]/index.svelte'
 
   export let expo: ExpositionDocument
   export let type = 'slider'

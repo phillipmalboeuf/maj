@@ -128,10 +128,11 @@
 
 <script lang="ts">
   import { onMount } from 'svelte'
+  import { browser } from '$app/env'
 
   import type { PageDocument } from '$lib/components/Page.svelte'
   import type { ArticleDocument } from './articles/index.svelte'
-  import type { ExpositionDocument } from './expositions/[id].svelte'
+  import type { ExpositionDocument } from './expositions/[id]/index.svelte'
   import type { ActivityDocument } from './activites/index.svelte'
   import type { BaladoDocument } from './balados/index.svelte'
 
@@ -141,6 +142,7 @@
   import Link from '$lib/components/Link.svelte'
   import Gallerie from '$lib/components/Gallerie.svelte'
   import { titre } from '$lib/stores'
+
 
 	export let index: {
     titre: string
@@ -156,40 +158,40 @@
   export let expositions: ExpositionDocument[]
 
   let elements: {[key: string]: HTMLElement} = {}
+  let scrollY: number
+  let innerHeight: number
 
   onMount(() => {
     document.body.setAttribute('style', `--color: var(--${elements[index.pagesCollection.items[0].id].getAttribute('data-color')}); color: var(--color);`)
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(node => {
-          if (node.isIntersecting) {
-            const color = node.target.getAttribute('data-color')
-            const background = node.target.getAttribute('data-background-color')
-            titre.set(node.target.getAttribute('data-titre'))
-
-            if (background) {
-              document.body.classList.add('dark')
-              document.body.setAttribute('style', `--color: var(--${color}); --faded-color: var(--${color}-faded); background-color: var(--${background}); color: var(--light);`)
-            } else {
-              document.body.classList.remove('dark')
-              document.body.setAttribute('style', `--color: var(--${color}); color: var(--color);`)
-            }
-          }
-        })
-      },
-      { threshold: 0, rootMargin: '-40% 0% -40%' }
-    )
-
-    Object.values(elements).forEach(element => observer.observe(element))
-
     return () => {
       document.body.classList.remove('dark')
       document.body.removeAttribute('style')
-      observer.disconnect()
     }
   })
+
+  $: {
+    if (browser) {
+      Object.values(elements).forEach(element => {
+        if (element.offsetTop < scrollY + (innerHeight / 2)) {
+          const color = element.getAttribute('data-color')
+          const background = element.getAttribute('data-background-color')
+          titre.set(element.getAttribute('data-titre'))
+
+          if (background) {
+            document.body.classList.add('dark')
+            document.body.setAttribute('style', `--color: var(--${color}); --faded-color: var(--${color}-faded); background-color: var(--${background}); color: var(--light);`)
+          } else {
+            document.body.classList.remove('dark')
+            document.body.setAttribute('style', `--color: var(--${color}); color: var(--color);`)
+          }
+        }
+      })
+    }
+  }
 </script>
+
+<svelte:window bind:scrollY bind:innerHeight />
 
 <p class="p2 center padded">{index.description}</p>
 

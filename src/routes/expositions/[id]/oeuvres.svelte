@@ -66,7 +66,7 @@
   import type { SoumissionDocument } from 'src/routes/forms/[form_id]/soumissions/[id].svelte'
   import Document from '$lib/components/document/Document.svelte'
   
-  import type { ExpositionDocument } from '../[id].svelte'
+  import type { ExpositionDocument } from './index.svelte'
   import ExpoLinks from '$lib/components/ExpoLinks.svelte'
 
 	export let page: PageDocument

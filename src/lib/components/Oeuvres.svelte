@@ -10,7 +10,7 @@
 </script>
 
 <script lang="ts">
-  import type { ExpositionDocument } from 'src/routes/expositions/[id].svelte'
+  import type { ExpositionDocument } from 'src/routes/expositions/[id]/index.svelte'
   import type { SoumissionDocument } from 'src/routes/forms/[form_id]/soumissions/[id].svelte'
 
   import { onMount } from 'svelte'

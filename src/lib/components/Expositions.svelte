@@ -2,7 +2,7 @@
 import { date } from '$lib/formatters';
 
   import { DateTime } from 'luxon'
-  import type { ExpositionDocument } from 'src/routes/expositions/[id].svelte'
+  import type { ExpositionDocument } from 'src/routes/expositions/[id]/index.svelte'
   import Picture from './Picture.svelte'
 
   export let expositions: ExpositionDocument[]
