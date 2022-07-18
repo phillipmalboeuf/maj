@@ -32,6 +32,7 @@
             id
             type
             emphasis
+            optionel
           }
         }
       }

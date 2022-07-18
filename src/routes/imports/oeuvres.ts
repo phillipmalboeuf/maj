@@ -5,7 +5,7 @@ import type { RequestHandler } from '@sveltejs/kit'
 import slugify from 'slugify'
 import type { ExpositionDocument } from '../expositions/[id].svelte'
 
-export const get: RequestHandler<{ titre: string }, {}> = async ({ request, ...event }) => {
+export const GET: RequestHandler<{ titre: string }, {}> = async ({ request, ...event }) => {
 
   const { data: { expositionCollection } } = await query<{
       expositionCollection: {

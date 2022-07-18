@@ -5,6 +5,7 @@
   export let id
   export let placeholder
   export let name
+	export let required
 	
 	$: minHeight = `${1 + minRows * 1.2}em`;
 	$: maxHeight = maxRows ? `${1 + maxRows * 1.2}em` : `auto`;
@@ -16,7 +17,7 @@
 		style="min-height: {minHeight}; max-height: {maxHeight}"
 	>{value + '\n'}</pre>
 
-	<textarea {id} {placeholder} {name} bind:value></textarea>	
+	<textarea maxlength="50000" {id} {placeholder} {name} {required} bind:value></textarea>	
 </div>
 
 <style>

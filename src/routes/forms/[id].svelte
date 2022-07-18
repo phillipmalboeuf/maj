@@ -12,6 +12,7 @@
         placeholder: string
         type: string
         emphasis: boolean
+        optionel: boolean
       }[]
     }
   }
@@ -38,6 +39,7 @@
                 id
                 type
                 emphasis
+                optionel
               }
             }
           }

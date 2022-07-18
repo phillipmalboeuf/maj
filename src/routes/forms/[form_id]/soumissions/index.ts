@@ -2,7 +2,7 @@ import { cma } from '$lib/clients/contentful_management'
 import type { RequestHandler } from '@sveltejs/kit'
 import slugify from 'slugify'
 
-export const post: RequestHandler<{ titre: string }, {}> = async ({ request, ...event }) => {
+export const POST: RequestHandler<{ titre: string }, {}> = async ({ request, ...event }) => {
   const formData = await request.formData()
 
   let data: any = {}
