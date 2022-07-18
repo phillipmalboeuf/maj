@@ -1,13 +1,17 @@
 <script lang="ts">
   import { browser } from '$app/env'
 
-  import { onMount } from 'svelte'
+  import { onDestroy, onMount } from 'svelte'
   import { fade, fly } from 'svelte/transition'
 
   export let open: boolean | string = false
   export let onClose: Function = undefined
 
   $: browser && document.documentElement.classList.toggle('noscroll', !!open)
+
+  onDestroy(() => {
+    document.documentElement.classList.remove('noscroll')
+  })
 </script>
 
 {#if open}
