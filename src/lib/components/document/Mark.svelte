@@ -28,8 +28,8 @@
   {/if}
 {:else}
 {#if animated}
-<!-- <TextAnimation {mark} /> -->
-{mark.value}
+<TextAnimation {mark} />
+<!-- {mark.value} -->
 {:else}
 {@html mark.value.replace(/\\t/g, '&emsp;&emsp;&emsp;&emsp;')}
 {/if}

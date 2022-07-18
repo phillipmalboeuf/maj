@@ -11,20 +11,21 @@
   let interval
 
   onMount(() => {
-    // if (words.length > 1) {
-    //   interval = setInterval(() => {
-    //     next()
+    if (words.length > 1) {
+      interval = setInterval(() => {
+        hide = true
+        next()
 
-    //     outinterval = setTimeout(() => {
-    //       hide = false
-    //     }, duration * 1)
-    //   }, duration * 3)
+        outinterval = setTimeout(() => {
+          hide = false
+        }, duration * 1)
+      }, duration * 3)
 
-    //   return () => {
-    //     clearInterval(interval)
-    //     clearTimeout(outinterval)
-    //   }
-    // }
+      return () => {
+        clearInterval(interval)
+        clearTimeout(outinterval)
+      }
+    }
   })
 
   function next() {
