@@ -9,6 +9,10 @@
 
   let visible = false
   let scrollY: number = 0
+
+  function linkClick(e: Event) {
+    (e.currentTarget as HTMLAnchorElement).blur()
+  }
 </script>
 
 <svelte:body on:click={() => visible = false} />
@@ -41,7 +45,7 @@
   <nav class="padded" transition:fly={{ y: -100 }}>
     {#each data.navigationCollection.items[0].liensCollection.items as lien, i}
     {#if i === data.navigationCollection.items[0].liensCollection.items.length - 1}<br>{/if}
-    <h3><Link {lien} /></h3>
+    <h3><Link {lien} on:click={e => linkClick(e)} /></h3>
     {/each}
     
     <br>
