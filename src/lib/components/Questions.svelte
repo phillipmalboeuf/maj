@@ -122,6 +122,10 @@
 
     &.spaced {
       left: calc(var(--gutter) * 2.5);
+
+      @media (max-width: 888px) {
+        left: calc(var(--gutter) * 3.5);
+      }
     }
   }
 
