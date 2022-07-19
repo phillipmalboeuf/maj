@@ -1,8 +1,10 @@
 <script>
-  import TextAnimation from '../TextAnimation.svelte'
+  import { getContext } from 'svelte'
 
   export let mark
   export let animated = false
+
+  const animation = getContext('animation')
 </script>
 
 <style>
@@ -27,9 +29,8 @@
   {@html mark.value}
   {/if}
 {:else}
-{#if animated}
-<TextAnimation {mark} />
-<!-- {mark.value} -->
+{#if animation && animated}
+<svelte:component this={animation} {mark} />
 {:else}
 {@html mark.value.replace(/\\t/g, '&emsp;&emsp;&emsp;&emsp;')}
 {/if}

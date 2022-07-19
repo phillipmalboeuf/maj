@@ -3,7 +3,7 @@
   import { fade, blur } from 'svelte/transition'
 
   export let mark
-  const duration = 1000
+  let duration = 1000
   let current = 0
   let hide = false
   let words = mark.value.split(' / ')
@@ -22,6 +22,7 @@
       }, duration * 3)
 
       return () => {
+        duration = 0
         clearInterval(interval)
         clearTimeout(outinterval)
       }

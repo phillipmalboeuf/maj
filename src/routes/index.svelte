@@ -141,6 +141,7 @@
   import Expositions from '$lib/components/Expositions.svelte'
   import Link from '$lib/components/Link.svelte'
   import Gallerie from '$lib/components/Gallerie.svelte'
+  import TextAnimation from '$lib/components/TextAnimation.svelte'
   import { titre } from '$lib/stores'
 
 
@@ -226,7 +227,7 @@
   </aside>
 
   <div>
-    <Document body={page.intro} />
+    <Document body={page.intro} animation={TextAnimation} />
     {#if page.gallerie}
     <Gallerie entry={page.gallerie} />
     {/if}
