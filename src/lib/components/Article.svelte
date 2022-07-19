@@ -44,7 +44,9 @@
 
   {#if !noBack}
   <center>
-    <a href="/{{ 'activity': 'activite' }[type] || type}s" class="button button--tight">← Retour</a>
+    <a href="/{{ 'activity': 'activite' }[type] || type}s" on:click={() => {
+      history.back()
+    }} class="button button--tight">← Retour</a>
   </center>
 
   <br><br><br>
