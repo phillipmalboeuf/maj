@@ -78,7 +78,7 @@
 
 {#if article.theme}
 <nav class="padded">
-  <center><button>Contenus connexes</button></center>
+  <center><h4>Contenus connexes</h4></center>
   {#await query(fetch, `
       query($themeId: String!) {
         themeCollection(limit: 1, where: { id: $themeId }) {
