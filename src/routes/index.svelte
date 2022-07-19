@@ -214,6 +214,7 @@
       {/if}
     </div>
 
+    {#if i < index.pagesCollection.items.length - 1}
     <nav class="jumps">
       {#each index.pagesCollection.items as _page, _i}
       {#if page.id !== _page.id}
@@ -221,6 +222,7 @@
       {/if}
       {/each}
     </nav>
+    {/if}
   </aside>
 
   <div>
