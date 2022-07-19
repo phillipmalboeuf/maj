@@ -10,7 +10,9 @@
   $: browser && document.documentElement.classList.toggle('noscroll', !!open)
 
   onDestroy(() => {
-    document.documentElement.classList.remove('noscroll')
+    if (browser) {
+      document.documentElement.classList.remove('noscroll')
+    }
   })
 </script>
 
