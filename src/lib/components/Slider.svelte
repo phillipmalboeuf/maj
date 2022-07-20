@@ -1,76 +1,79 @@
 <script lang="ts">
-import { onMount } from 'svelte';
+  import { onMount } from 'svelte'
+  // import { swipe } from 'svelte-gestures'
 
-  import { swipe } from 'svelte-gestures'
+  // import Text from './Text.svelte'
 
-  import Text from './Text.svelte'
-
-  export let entry: {
-    titre: string
-    titreInvisible: boolean
-    colonnes: number
-    alignement: string
-    slidesCollection: {
-      items: {
-        titre: string;
-        titreInvisible: boolean;
-        pleinePage: boolean;
-        media: object;
-        corps: {
-            json: object;
-        };
-    }[]
-    }
-  }
+  // export let entry: {
+  //   titre: string
+  //   titreInvisible: boolean
+  //   colonnes: number
+  //   alignement: string
+  //   slidesCollection: {
+  //     items: {
+  //       titre: string;
+  //       titreInvisible: boolean;
+  //       pleinePage: boolean;
+  //       media: object;
+  //       corps: {
+  //           json: object;
+  //       };
+  //   }[]
+  //   }
+  // }
   export let autoplay = false
-  let paused = false
+  export let arrows = true
+  export let particlesToShow: number = undefined
 
-  let current = 0
-  let length = entry.slidesCollection.items.length
+  let Carousel
+  let carousel
+  onMount(async () => {
+    const module = await import('svelte-carousel')
+    Carousel = module.default
+  })
+
+  // let paused = false
+
+  // let current = 0
+  // let length = entry.slidesCollection.items.length
 
   function prev() {
-    current = current === 0 ? current = length - 1 : current - 1
+    carousel.goToPrev()
   }
 
   function next() {
-    current = current === length - 1 ? current = 0 : current + 1
+    carousel.goToNext()
   }
 
-  onMount(() => {
-    if (autoplay) {
-      const interval = window.setInterval(() => {
-        if (!paused) { next() }
-      }, 3000)
+  // onMount(() => {
+  //   if (autoplay) {
+  //     const interval = window.setInterval(() => {
+  //       if (!paused) { next() }
+  //     }, 3000)
 
-      return () => window.clearInterval(interval)
-    }
+  //     return () => window.clearInterval(interval)
+  //   }
 
-  })
+  // })
 </script>
 
-
-<article
-  on:pointerenter={() => {
-    if (autoplay) { paused = true }
-  }}
-  on:pointerleave={() => {
-    if (autoplay) { paused = false }
-  }}>
-  {#if !entry.titreInvisible}<h2 class="d2 center">{entry.titre}</h2>{/if}
-  {#if entry.slidesCollection}
-  <div class="flex flex--tight" style="width: {length * 66}%; transform: translateX({(current * -(100 / length)) + 8}%)" use:swipe={{ timeframe: 500, minSwipeDistance: 25, touchAction: 'pan-y' }} on:swipe={(e) => {
-    if (e.detail.direction === 'right') {
-      prev()
-    } else {
-      next()
-    }
-  }}>
-    {#each entry.slidesCollection.items as slide}
-    <Text entry={slide} />
-    {/each}
+<article>
+  <div>
+  <svelte:component
+    this={Carousel}
+    bind:this={carousel}
+    arrows={false}
+    dots={false}
+    pauseOnFocus
+    {autoplay}
+    {particlesToShow}
+    particlesToScroll={Math.ceil((particlesToShow || 2)/2)}
+  >
+    <slot />
+  </svelte:component>
   </div>
-  {/if}
 
+  {#if arrows}
   <center>
     <button on:click={prev} class="arrow arrow--prev">
       <svg width="99" height="32" viewBox="0 0 99 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -85,7 +88,31 @@ import { onMount } from 'svelte';
       </svg>
     </button>
   </center>
+  {/if}
 </article>
+
+<!-- <article
+  on:pointerenter={() => {
+    if (autoplay) { paused = true }
+  }}
+  on:pointerleave={() => {
+    if (autoplay) { paused = false }
+  }}>
+  
+  {#if entry.slidesCollection}
+  <div class="flex flex--tight" style="width: {length * 66}%; transform: translateX({(current * -(100 / length)) + 8}%)" use:swipe={{ timeframe: 500, minSwipeDistance: 25, touchAction: 'pan-y' }} on:swipe={(e) => {
+    if (e.detail.direction === 'right') {
+      prev()
+    } else {
+      next()
+    }
+  }}>
+    {#each entry.slidesCollection.items as slide}
+    <Text entry={slide} />
+    {/each}
+  </div>
+  {/if}
+</article> -->
 
 <style lang="scss">
   article {

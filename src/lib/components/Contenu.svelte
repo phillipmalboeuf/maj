@@ -13,7 +13,12 @@
 {:else if entry.__typename === 'Gallerie'}
 <Gallerie {entry} />
 {:else if entry.__typename === 'Slider'}
-<Slider {entry} autoplay />
+{#if !entry.titreInvisible}<h2 class="d2 center">{entry.titre}</h2>{/if}
+<Slider>
+  {#each entry.slidesCollection.items as slide}
+  <Text entry={slide} />
+  {/each}
+</Slider>
 {/if}
 <br>
 {/each}

@@ -80,7 +80,7 @@
   <h1 class="center">{exposition.titreCourt}</h1>
   <center class="flex flex--center"><ExpoLinks type={$p.url.searchParams.get('type') || 'slider'} expo={exposition} /></center>
   {#key $p.url}
-  <Oeuvres {exposition} {oeuvres} type={$p.url.searchParams.get('type') || 'slider'} />
+  <Oeuvres {exposition} oeuvres={oeuvres.filter(oeuvre => oeuvre.media)} type={$p.url.searchParams.get('type') || 'slider'} />
   {/key}
 </article>
 

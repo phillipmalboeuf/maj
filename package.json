@@ -29,6 +29,7 @@
     "sass": "^1.53.0",
     "slugify": "^1.6.5",
     "svelte": "^3.49.0",
+    "svelte-carousel": "^1.0.19",
     "svelte-check": "^2.8.0",
     "svelte-gestures": "^1.4.1",
     "svelte-preprocess": "^4.10.7",

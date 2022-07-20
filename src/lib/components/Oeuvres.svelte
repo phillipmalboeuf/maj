@@ -14,12 +14,11 @@
   import type { SoumissionDocument } from 'src/routes/forms/[form_id]/soumissions/[id].svelte'
 
   import { onMount } from 'svelte'
-  import { swipe } from 'svelte-gestures'
-  import { fly, fade } from 'svelte/transition'
 
   import Document from './document/Document.svelte'
   import OeuvreOverlay from './OeuvreOverlay.svelte'
   import Picture from './Picture.svelte'
+  import Slider from './Slider.svelte'
 
   export let exposition: ExpositionDocument
   export let oeuvres: SoumissionDocument[]
@@ -39,7 +38,6 @@
     }
   })
 
-  let current: number = 3
   let open: string
 </script>
 
@@ -80,26 +78,16 @@
   {/each}
 </ul>
 {:else if type === 'slider'}
-<ul class="flex flex--tight slider"
-  use:swipe={{ timeframe: 500, minSwipeDistance: 25, touchAction: 'pan-y' }} on:swipe={(e) => {
-    if (e.detail.direction === 'right') {
-      if (current > 0) {
-        current = current - 1
-      }
-    } else {
-      if (current < oeuvres.length - 1) {
-        current = current + 1
-      }
-    }
-  }}
-  style="width: {100 + ((oeuvres.length - 7) * (100/7))}%; transform: translateX({(current - 3) * -(8)}%);">
-  {#each oeuvres as oeuvre, i}
-  <li class:current={current === i}>
-    <figure>
-      <Picture media={oeuvre.media} ar={i % 2 ? 1 : 2} />
-    </figure>
-  </li>
-  {/each}
+<ul class="slider">
+  <Slider particlesToShow={4}>
+    {#each oeuvres as oeuvre, i}
+    <li>
+      <figure>
+        <Picture media={oeuvre.media} ar={i % 2 ? 1 : 2} />
+      </figure>
+    </li>
+    {/each}
+  </Slider>
 </ul>
 {/if}
 
@@ -110,25 +98,18 @@
     padding: 0;
   }
 
-    .slider {
-      cursor: ew-resize;
-      transition: transform 333ms;
+  .slider {
 
-      li {
-        flex: 1;
-        transition: flex 333ms;
-        -webkit-user-select: none;
-        user-select: none;
+    li {
+      -webkit-user-select: none;
+      user-select: none;
 
-        &.current {
-          flex: 4;
-        }
-
-        figure {
-          pointer-events: none;
-        }
+      figure {
+        pointer-events: none;
+        padding: 0 calc(var(--small) / 2);
       }
     }
+  }
 
   .masonry {
     li {

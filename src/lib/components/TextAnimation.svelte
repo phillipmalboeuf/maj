@@ -1,4 +1,6 @@
 <script>
+import { beforeNavigate } from '$app/navigation';
+
   import { onMount } from 'svelte'
   import { fade, blur } from 'svelte/transition'
 
@@ -22,11 +24,14 @@
       }, duration * 3)
 
       return () => {
-        duration = 0
         clearInterval(interval)
         clearTimeout(outinterval)
       }
     }
+  })
+
+  beforeNavigate(() => {
+    duration = 0
   })
 
   function next() {
