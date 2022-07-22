@@ -88,13 +88,13 @@
 
   <!-- <h1 class="d1 center">{page.titre}</h1> -->
 
-  <form id="soumissions" action="/forms/{form.id}/soumissions" method="post" enctype="multipart/form-data" class="padded">
+  <form id="soumissions" action="/forms/{form.id}/soumettre" method="POST" enctype="multipart/form-data" class="padded">
     <input type="hidden" name="form" value={form.id}>
     <Inputs {form} emphasis />
     <br>
     <Inputs {form} />
 
-    <input type="checkbox" name="accept" id="accept" checked>
+    <input type="checkbox" name="accept" id="accept">
     <label for="accept">Accept <a href="/terms" target="_blank">terms and conditions</a></label>
   </form>
 </article>

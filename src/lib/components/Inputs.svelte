@@ -1,6 +1,7 @@
 <script lang="ts">
   import { fade, fly } from 'svelte/transition'
   import type { FormDocument } from '../../routes/forms/[id].svelte'
+  import FileInput from './FileInput.svelte'
   import TextareaAuto from './TextareaAuto.svelte'
 
   export let form: FormDocument
@@ -18,7 +19,7 @@
   {:else if input.type === 'Date'}
   <input required={!input.optionel} maxlength="256" type="text" id={input.id} placeholder={input.placeholder} name={input.id} />
   {:else if input.type === 'File'}
-  <input required={!input.optionel} type="file" id={input.id} placeholder={input.placeholder} name={input.id} />
+  <FileInput required={!input.optionel} id={input.id} placeholder={input.placeholder} name={input.id} />
   {:else}
   {#if input.id === 'question'}
   <TextareaAuto required={!input.optionel} minRows={1} maxRows={6} id={input.id} placeholder={input.placeholder} name={input.id} />
@@ -41,42 +42,6 @@
       // color: var(--light);
       margin: 0 0 0.33em;
       width: 75%;
-    }
-
-    input,
-    textarea,
-    :global(textarea),
-    :global(pre) {
-      display: block;
-      border: none;
-
-      font-size: 1rem;
-      line-height: 1;
-      color: var(--light);
-      background: var(--light-grey);
-      border-radius: 1.5em;
-      padding: 0.66em 1em;
-      margin-bottom: 1em;
-
-      width: 100%;
-
-      // &:not(:placeholder-shown) {
-      //   background: var(--grey);
-      // }
-      
-      &:focus {
-        outline: none;
-        background: var(--grey);
-      }
-
-      &::placeholder {
-        color: var(--light);
-      }
-    }
-
-    input[type="file"] {
-      cursor: pointer;
-      // padding-top: 12em;
     }
 
     textarea {

@@ -196,6 +196,41 @@ a.button {
   }
 }
 
+input,
+textarea,
+pre {
+  display: block;
+  border: none;
+
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--light);
+  background: var(--light-grey);
+  border-radius: 1.5em;
+  padding: 0.66em 1em;
+  margin-bottom: 1em;
+
+  width: 100%;
+
+  // &:not(:placeholder-shown) {
+  //   background: var(--grey);
+  // }
+  
+  &:focus {
+    outline: none;
+    background: var(--grey);
+  }
+
+  &::placeholder {
+    color: var(--light);
+  }
+}
+
+input[type="file"] {
+  cursor: pointer;
+  // padding-top: 12em;
+}
+
 svg {
 
   path,

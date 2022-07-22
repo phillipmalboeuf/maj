@@ -4,7 +4,7 @@ import slugify from 'slugify'
 
 export const POST: RequestHandler<{ titre: string }, {}> = async ({ request, ...event }) => {
   const formData = await request.formData()
-
+  
   let data: any = {}
   formData.forEach((d, k) => data[k] = d)
   const { form, titre, nom, email, date, ville, file, accept, bref, ...details } = data
@@ -14,7 +14,8 @@ export const POST: RequestHandler<{ titre: string }, {}> = async ({ request, ...
   const space = await cma.getSpace('hlfxtjh4lx5k')
   const environment = await space.getEnvironment('master')
 
-  const asset = await environment.createAssetFromFiles({
+  const [id, contentType, fileName] = file.split('.')
+  const asset = await environment.createAsset({
     fields: {
       title: {
         'fr-CA': titre
@@ -24,9 +25,15 @@ export const POST: RequestHandler<{ titre: string }, {}> = async ({ request, ...
       },
       file: {
         'fr-CA': {
-          contentType: file.type,
-          fileName: file.name,
-          file: await file.arrayBuffer()
+          contentType,
+          fileName,
+          uploadFrom: {
+            sys: {
+              type: "Link",
+              linkType: "Upload",
+              id
+            }
+          }
         }
       }
     }
@@ -57,5 +64,5 @@ export const POST: RequestHandler<{ titre: string }, {}> = async ({ request, ...
     headers: {
       location: `/forms/${form}/soumissions/${entry.fields.id['fr-CA']}`
     }
-  };
+  }
 }
