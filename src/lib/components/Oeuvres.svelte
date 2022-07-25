@@ -67,14 +67,10 @@
     <a href="/expositions/{exposition.id}/oeuvres/{oeuvre.id}"
         on:click|preventDefault={() => open = oeuvre.id}>
       <figure>
-        <Picture media={oeuvre.media} ar={i % 2 ? 1 : 2} />
+        <Picture media={oeuvre.media} />
       </figure>
     </a>
   </li>
-
-    {#if open === oeuvre.id}
-    <OeuvreOverlay bind:open={open} {oeuvre} />
-    {/if}
   {/each}
 </ul>
 {:else if type === 'slider'}
@@ -82,13 +78,20 @@
   <Slider particlesToShow={4}>
     {#each oeuvres as oeuvre, i}
     <li>
-      <figure>
-        <Picture media={oeuvre.media} ar={i % 2 ? 1 : 2} />
-      </figure>
+      <a href="/expositions/{exposition.id}/oeuvres/{oeuvre.id}"
+        on:click|preventDefault={() => open = oeuvre.id}>
+        <figure>
+          <Picture media={oeuvre.media} />
+        </figure>
+      </a>
     </li>
     {/each}
   </Slider>
 </ul>
+{/if}
+
+{#if open}
+<OeuvreOverlay bind:open={open} oeuvre={oeuvres.find(o => o.id === open)} />
 {/if}
 
 <style lang="scss">

@@ -133,14 +133,14 @@
     <li>
       <a href="/expositions/{expo.id}/oeuvres/{oeuvre.id}"
         on:click|preventDefault={() => open = `${i}.${j}`}>
-        <h5>{oeuvre.titre}</h5>
-        <aside class="flex flex--spaced">
-          <span>{oeuvre.nom}</span>
-          <span>{date(oeuvre.date)}</span>
-        </aside>
         {#if oeuvre.media}<figure>
           <Picture media={oeuvre.media} noDescription />
         </figure>{/if}
+        <h5>{oeuvre.titre}</h5>
+        <aside class="flex flex--spaced">
+          <span>{oeuvre.nom}</span>
+          <!-- <span>{date(oeuvre.date)}</span> -->
+        </aside>
       </a>
     </li>
 
