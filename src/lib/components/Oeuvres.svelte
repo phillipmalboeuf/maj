@@ -109,7 +109,7 @@
 
       figure {
         pointer-events: none;
-        padding: 0 calc(var(--small) / 2);
+        padding: 0 calc(var(--small) / 4);
       }
     }
   }

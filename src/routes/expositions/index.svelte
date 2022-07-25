@@ -102,6 +102,7 @@
   let open: string
   let scrollY: number
   let innerHeight: number
+  let innerWidth: number
 
   $: {
     if (browser) {
@@ -114,7 +115,7 @@
   }
 </script>
 
-<svelte:window bind:scrollY bind:innerHeight />
+<svelte:window bind:scrollY bind:innerHeight bind:innerWidth />
 
 <Page {page} />
 
@@ -126,7 +127,7 @@
     <ExpoLinks {expo} type="folder" />
   </div>
   <ol class="padded slider">
-    <Slider particlesToShow={7}>
+    <Slider particlesToShow={innerWidth < 888 ? 3 : 7}>
     {#each expo.oeuvresCollection.items as oeuvre, j}
     <li>
       <a href="/expositions/{expo.id}/oeuvres/{oeuvre.id}"
