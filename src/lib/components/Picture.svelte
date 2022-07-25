@@ -37,7 +37,10 @@
     max-width: 100%;
     max-height: 50vh;
     object-fit: contain;
-    background-color: var(--color);
+
+    &:not(.beat) {
+      background-color: var(--color);
+    }
 
     &.zoom {
       cursor: zoom-in;
