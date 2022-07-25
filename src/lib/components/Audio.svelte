@@ -82,6 +82,10 @@
       path {
         fill: var(--light);
       }
+
+      path[stroke-width] {
+        stroke: var(--light);
+      }
     }
   }
 

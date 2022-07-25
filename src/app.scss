@@ -196,7 +196,7 @@ a.button {
   }
 }
 
-input,
+input:not([type="range"]),
 textarea,
 pre {
   display: block;
