@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { page } from '$app/stores'
   import { query } from '$lib/clients/contentful'
   import { titre } from '$lib/stores'
 
@@ -43,6 +44,9 @@
   `) then { data } }
   {#if visible}
   <nav class="padded" transition:fly={{ y: -100 }}>
+    {#if $page.routeId}
+    <h3><Link lien={{ titre: 'Accueil', lien: '/', externe: false }} on:click={e => linkClick(e)} /></h3>  
+    {/if}
     {#each data.navigationCollection.items[0].liensCollection.items as lien, i}
     {#if i === data.navigationCollection.items[0].liensCollection.items.length - 1}<br>{/if}
     <h3><Link {lien} on:click={e => linkClick(e)} /></h3>
