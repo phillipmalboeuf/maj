@@ -45,7 +45,7 @@
             titreCourt
             id
             debut
-            oeuvresCollection(limit: 7) {
+            oeuvresCollection(limit: 30) {
               items {
                 ... on Oeuvre {
                   titre
@@ -86,16 +86,13 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import { browser } from '$app/env'
-  import { fade, fly } from 'svelte/transition'
   import Page, { type PageDocument } from '$lib/components/Page.svelte'
   import Picture from '$lib/components/Picture.svelte'
-  import Oeuvres from '$lib/components/Oeuvres.svelte'
-  import Overlay from '$lib/components/Overlay.svelte'
-  import Document from '$lib/components/document/Document.svelte'
   import ExpoLinks from '$lib/components/ExpoLinks.svelte'
   import { date } from '$lib/formatters'
   import { titre } from '$lib/stores'
   import OeuvreOverlay from '$lib/components/OeuvreOverlay.svelte'
+  import Slider from '$lib/components/Slider.svelte'
 
 
 	export let page: PageDocument
@@ -128,7 +125,8 @@
     <!-- <h3>{expo.titreCourt || expo.titre}</h3> -->
     <ExpoLinks {expo} type="folder" />
   </div>
-  <ol class="padded flex flex--supertight">
+  <ol class="padded slider">
+    <Slider particlesToShow={7}>
     {#each expo.oeuvresCollection.items as oeuvre, j}
     <li>
       <a href="/expositions/{expo.id}/oeuvres/{oeuvre.id}"
@@ -143,13 +141,15 @@
         </aside>
       </a>
     </li>
-
-    {#if open === `${i}.${j}`}
-    <OeuvreOverlay bind:open={open} {oeuvre} />
-    {/if}
     {/each}
+    </Slider>
   </ol>
   {/each}
+
+  {#if open}
+  {@const [e, o] = open.split('.')}
+  <OeuvreOverlay bind:open={open} oeuvre={expositions[e].oeuvresCollection.items[o]} />
+  {/if}
 </section>
 
 
@@ -170,6 +170,7 @@
     li {
       position: relative;
       flex: 1;
+      text-align: left;
 
       transition: flex 420ms;
 
@@ -182,6 +183,19 @@
       //   max-width: 56.875rem;
       //   margin: 0 auto;
       // }
+    }
+  }
+
+  .slider {
+
+    li {
+      -webkit-user-select: none;
+      user-select: none;
+
+      figure {
+        pointer-events: none;
+        padding: 0 calc(var(--small) / 8);
+      }
     }
   }
 
