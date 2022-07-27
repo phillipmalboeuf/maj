@@ -6,12 +6,12 @@
 
 <style lang="scss">
   input {
-    border: none;
     border-bottom: 1px solid;
+    border-radius: 0;
     background-color: transparent;
     font-size: 1em;
-    line-height: 1;
     padding: 0 1em;
+    margin-bottom: 0;
     color: currentColor;
     pointer-events: auto;
 

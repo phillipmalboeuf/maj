@@ -1,10 +1,12 @@
 <script lang="ts">
   import type { SoumissionDocument } from '../../routes/forms/[form_id]/soumissions/[id].svelte'
   import { fly, fade } from 'svelte/transition'
+  import { page } from '$app/stores'
 
   import Overlay from './Overlay.svelte'
   import Picture from './Picture.svelte'
   import Document from './document/Document.svelte'
+  import Comments from './Comments.svelte'
 
   export let open: string
   export let oeuvre: SoumissionDocument
@@ -31,6 +33,8 @@
     <figure>
       <Picture media={oeuvre.media} zoom maxHeight noDescription />
     </figure>
+
+    <Comments url={`${$page.url.protocol}//${$page.url.host}/oeuvres/${oeuvre.id}`} />
   </article>
 </Overlay>
 

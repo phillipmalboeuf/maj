@@ -75,8 +75,6 @@
 
 	export let page: PageDocument
   export let oeuvre: SoumissionDocument
-
-  console.log($p.params)
 </script>
 
 <Page {page} />

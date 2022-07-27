@@ -1,9 +1,12 @@
 <script lang="ts">
-  import type { ExpositionDocument } from '../../routes/expositions/[id]/index.svelte'
+  import type { CuratorDocument, ExpositionDocument } from '../../routes/expositions/[id]/index.svelte'
+  import ExpoOverlay from './ExpoOverlay.svelte'
 
   export let expo: ExpositionDocument
   export let type = 'slider'
   export let noDescription = false
+
+  let open = false
 </script>
 
 <style lang="scss">
@@ -43,7 +46,7 @@
 </style>
 
 <span class="flex flex--middle flex--tight">
-  {#if !noDescription}<a href="/expositions/{expo.id}" class="button">Description de l’expo</a>{/if}
+  {#if !noDescription}<a href="/expositions/{expo.id}" class="button" on:click|preventDefault={() => open = true}>Description de l’expo</a>{/if}
   <a class:active={type === 'folder'} href="/expositions#{expo.id}">
     <svg class="folder" width="21" height="17" viewBox="0 0 21 17" fill="none">
     <path d="M2.5 1.5C1.94772 1.5 1.5 1.94772 1.5 2.5V14.5001C1.5 15.0524 1.94771 15.5001 2.5 15.5001H18.3889C18.9412 15.5001 19.3889 15.0524 19.3889 14.5001V4.83342C19.3889 4.28114 18.9412 3.83342 18.3889 3.83342H11.6818V2.5C11.6818 1.94772 11.2341 1.5 10.6818 1.5H2.5Z" fill="none"/>
@@ -66,5 +69,6 @@
     <rect x="8.81104" y="8.81104" width="7.81092" height="7.81092" stroke="currentColor"/>
     </svg>
   </a>
-
 </span>
+
+<ExpoOverlay bind:open={open} exposition={expo} />
