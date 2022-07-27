@@ -103,6 +103,7 @@
   let scrollY: number
   let innerHeight: number
   let innerWidth: number
+  let swiping: boolean
 
   $: {
     if (browser) {
@@ -126,12 +127,12 @@
     <!-- <h3>{expo.titreCourt || expo.titre}</h3> -->
     <ExpoLinks {expo} type="folder" />
   </div>
-  <ol class="padded slider">
-    <Slider particlesToShow={innerWidth < 888 ? 3 : 7}>
+  <ol class="padded">
+    <Slider particlesToShow={innerWidth < 888 ? 3 : 7} bind:swiping>
     {#each expo.oeuvresCollection.items as oeuvre, j}
     <li>
       <a href="/expositions/{expo.id}/oeuvres/{oeuvre.id}"
-        on:click|preventDefault={() => open = `${i}.${j}`}>
+        on:click|preventDefault={() => { if (!swiping) { open = `${i}.${j}` } }}>
         {#if oeuvre.media}<figure>
           <Picture media={oeuvre.media} noDescription maxHeight />
         </figure>{/if}
@@ -184,19 +185,6 @@
       //   max-width: 56.875rem;
       //   margin: 0 auto;
       // }
-    }
-  }
-
-  .slider {
-
-    li {
-      -webkit-user-select: none;
-      user-select: none;
-
-      figure {
-        pointer-events: none;
-        padding: 0 calc(var(--small) / 8);
-      }
     }
   }
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from 'svelte'
+  import { onMount, tick } from 'svelte'
   // import { swipe } from 'svelte-gestures'
 
   // import Text from './Text.svelte'
@@ -32,7 +32,8 @@
     Carousel = module.default
   })
 
-  // let paused = false
+  let down = false
+  export let swiping = false
 
   // let current = 0
   // let length = entry.slidesCollection.items.length
@@ -58,10 +59,21 @@
 </script>
 
 <article>
-  <div>
+  <div class:swiping
+    on:pointerdown={() => {
+      down = true
+    }}
+    on:pointermove={() => {
+      if (down && !swiping) { swiping = true }
+    }}
+    on:pointerup={async () => {
+      down = false
+      setTimeout(() => swiping = false, 200)
+    }}>
   <svelte:component
     this={Carousel}
     bind:this={carousel}
+    
     arrows={false}
     dots={false}
     pauseOnFocus
@@ -121,18 +133,31 @@
     cursor: ew-resize;
   }
 
-  h2 {
-    margin-top: var(--gutter);
-  }
-
   div {
-    text-align: center;
+    // text-align: center;
     transition: transform 666ms;
     -webkit-user-select: none;
     user-select: none;
 
     :global(div) {
       color: var(--color) !important;
+    }
+
+    &.swiping {
+      :global(a) {
+        pointer-events: none;
+      }
+    }
+
+    :global(a),
+    :global(img) {
+      -webkit-user-drag: none;
+      -moz-user-drag: none;
+      user-drag: none;
+    }
+
+    :global(figure) {
+      padding: 0 calc(var(--small) / 6);
     }
   }
 

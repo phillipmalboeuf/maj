@@ -11,8 +11,9 @@
       json: object
     }
   }
+  export let center = false
 </script>
-<article class="padded{entry.media ? " grid grid--thirds" : ""}" class:media={entry.media} class:h1={entry.pleinePage} class:full={entry.pleinePage}>
+<article class:center class="padded{entry.media ? " grid grid--thirds" : ""}" class:media={entry.media} class:h1={entry.pleinePage} class:full={entry.pleinePage}>
   {#if entry.media}<figure class="span__2"><Picture media={entry.media} /></figure>{/if}
   <aside>
     {#if !entry.titreInvisible}<h2 class="d2">{entry.titre}</h2>{/if}
@@ -30,6 +31,10 @@
 
     &.media {
 
+    }
+
+    &.center {
+      text-align: center;
     }
   }
 

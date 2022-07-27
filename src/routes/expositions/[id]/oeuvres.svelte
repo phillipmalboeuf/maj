@@ -68,16 +68,22 @@
   
   import type { ExpositionDocument } from './index.svelte'
   import ExpoLinks from '$lib/components/ExpoLinks.svelte'
+  import { titre } from '$lib/stores'
 
 	export let page: PageDocument
   export let exposition: ExpositionDocument
   export let oeuvres: SoumissionDocument[]
+
+  onMount(() => {
+    titre.set(exposition.titreCourt || exposition.titre)
+  })
+  
 </script>
 
 <Page {page} noTitre />
 
 <article class="padded">
-  <h1 class="center">{exposition.titreCourt}</h1>
+  <h1 class="center h2">{exposition.titreCourt}</h1>
   <center class="flex flex--center"><ExpoLinks type={$p.url.searchParams.get('type') || 'slider'} expo={exposition} /></center>
   {#key $p.url}
   <Oeuvres {exposition} oeuvres={oeuvres.filter(oeuvre => oeuvre.media)} type={$p.url.searchParams.get('type') || 'slider'} />
@@ -89,5 +95,13 @@
   article {
     color: var(--color);
     overflow-x: hidden;
+  }
+
+  h1 {
+    margin-bottom: var(--gutter);
+
+    @media (max-width: 888px) {
+      display: none;
+    }
   }
 </style>

@@ -16,7 +16,7 @@
 {#if !entry.titreInvisible}<h2 class="d2 center">{entry.titre}</h2>{/if}
 <Slider>
   {#each entry.slidesCollection.items as slide}
-  <Text entry={slide} />
+  <Text entry={slide} center />
   {/each}
 </Slider>
 {/if}

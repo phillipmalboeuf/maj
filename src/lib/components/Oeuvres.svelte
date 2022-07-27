@@ -39,6 +39,7 @@
   })
 
   let open: string
+  let swiping: boolean
 </script>
 
 {#if type === 'columns'}
@@ -75,11 +76,14 @@
 </ul>
 {:else if type === 'slider'}
 <ul class="slider">
-  <Slider particlesToShow={4}>
+  <Slider particlesToShow={4} bind:swiping>
     {#each oeuvres as oeuvre, i}
     <li>
       <a href="/expositions/{exposition.id}/oeuvres/{oeuvre.id}"
-        on:click|preventDefault={() => open = oeuvre.id}>
+        on:dragstart={() => false}
+        on:click|preventDefault={() => {
+          if (!swiping) { open = oeuvre.id }
+        }}>
         <figure>
           <Picture media={oeuvre.media} maxHeight />
         </figure>
@@ -99,19 +103,6 @@
   ul {
     list-style: none;
     padding: 0;
-  }
-
-  .slider {
-
-    li {
-      -webkit-user-select: none;
-      user-select: none;
-
-      figure {
-        pointer-events: none;
-        padding: 0 calc(var(--small) / 4);
-      }
-    }
   }
 
   .masonry {
