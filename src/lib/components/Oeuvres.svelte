@@ -47,7 +47,7 @@
   {#each oeuvres as oeuvre}
   <li>
     <figure>
-      <Picture media={oeuvre.media} maxHeight />
+      <Picture media={{ ...oeuvre.media, title: `${oeuvre.titre}, ${oeuvre.nom}` }} maxHeight />
     </figure>
 
     <aside>
@@ -68,7 +68,7 @@
     <a href="/expositions/{exposition.id}/oeuvres/{oeuvre.id}"
         on:click|preventDefault={() => open = oeuvre.id}>
       <figure>
-        <Picture media={oeuvre.media} maxHeight />
+        <Picture media={{ ...oeuvre.media, title: `${oeuvre.titre}, ${oeuvre.nom}` }} maxHeight />
       </figure>
     </a>
   </li>
@@ -85,7 +85,7 @@
           if (!swiping) { open = oeuvre.id }
         }}>
         <figure>
-          <Picture media={oeuvre.media} maxHeight />
+          <Picture media={{ ...oeuvre.media, title: `${oeuvre.titre}, ${oeuvre.nom}` }} maxHeight />
         </figure>
       </a>
     </li>
