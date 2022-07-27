@@ -108,7 +108,7 @@
     </div>
   </aside>
   <figure>
-    <Picture media={oeuvre.media} />
+    <Picture media={oeuvre.media} noDescription maxHeight />
   </figure>
 </article>
 

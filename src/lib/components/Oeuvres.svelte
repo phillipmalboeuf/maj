@@ -46,7 +46,7 @@
   {#each oeuvres as oeuvre}
   <li>
     <figure>
-      <Picture media={oeuvre.media} />
+      <Picture media={oeuvre.media} maxHeight />
     </figure>
 
     <aside>
@@ -67,7 +67,7 @@
     <a href="/expositions/{exposition.id}/oeuvres/{oeuvre.id}"
         on:click|preventDefault={() => open = oeuvre.id}>
       <figure>
-        <Picture media={oeuvre.media} />
+        <Picture media={oeuvre.media} maxHeight />
       </figure>
     </a>
   </li>
@@ -81,7 +81,7 @@
       <a href="/expositions/{exposition.id}/oeuvres/{oeuvre.id}"
         on:click|preventDefault={() => open = oeuvre.id}>
         <figure>
-          <Picture media={oeuvre.media} />
+          <Picture media={oeuvre.media} maxHeight />
         </figure>
       </a>
     </li>

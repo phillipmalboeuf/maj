@@ -94,6 +94,9 @@
     <br>
     <Inputs {form} />
 
+    <!-- <input type="checkbox" name="conditions" id="conditions"> -->
+    <label for="conditions">En envoyant votre création à JAM, vous autorisez le Musée à la reproduire sur cette plateforme et dans d'autres médias pour des fins promotionnelles seulement.</label>
+
     <input type="checkbox" name="accept" id="accept">
     <label for="accept">Accept <a href="/terms" target="_blank">terms and conditions</a></label>
   </form>

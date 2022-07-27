@@ -29,7 +29,7 @@
       {/if}
     </div>
     <figure>
-      <Picture media={oeuvre.media} />
+      <Picture media={oeuvre.media} zoom maxHeight />
     </figure>
   </article>
 </Overlay>
