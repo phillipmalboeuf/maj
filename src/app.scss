@@ -306,6 +306,10 @@ svg {
     align-items: center;
   }
 
+  &.flex--bottom {
+    align-items: flex-end;
+  }
+
   &.flex--spaced {
     justify-content: space-between;
   }

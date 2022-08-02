@@ -39,4 +39,8 @@ import { date } from '$lib/formatters';
     list-style: none;
     padding: 0;
   }
+
+  figure {
+    margin-bottom: 0;
+  }
 </style>
