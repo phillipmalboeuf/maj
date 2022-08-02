@@ -12,7 +12,7 @@ import { date } from '$lib/formatters';
 <ol class={tight ? "flex flex--supertight flex--end" : "grid grid--halves"}>
   {#each expositions as exposition, i}
   <li class={tight ? 'flex__sixth' : i === 0 && 'span__2'}>
-    <a href="/expositions#{exposition.id}">
+    <a href="/expositions/{exposition.id}/oeuvres?type=mur">
       <figure>
         {#if tight}
         <figcaption class="flex flex--spaced">

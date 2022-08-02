@@ -40,7 +40,10 @@
 
   let open: string
   let swiping: boolean
+  let innerWidth: number
 </script>
+
+<svelte:window bind:innerWidth />
 
 {#if type === 'columns'}
 <ul class="grid">
@@ -76,7 +79,7 @@
 </ul>
 {:else if type === 'slider'}
 <ul class="slider">
-  <Slider particlesToShow={4} bind:swiping>
+  <Slider particlesToShow={innerWidth < 888 ? 2 : 4} bind:swiping>
     {#each oeuvres as oeuvre, i}
     <li>
       <a href="/expositions/{exposition.id}/oeuvres/{oeuvre.id}"
@@ -108,7 +111,7 @@
   .masonry {
     li {
       display: inline-block;
-      width: calc(33% - 8px);
+      width: calc(33% - 4px);
       vertical-align: top;
 
       figure,

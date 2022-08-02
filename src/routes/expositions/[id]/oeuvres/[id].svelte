@@ -88,7 +88,7 @@
     <span><a href="/expositions/{exposition.id}/oeuvres">Oeuvres</a></span>
   </div> -->
   <center class="span__2">
-    <a href="/expositions#" class="button">← Retour à l'exposition</a>
+    <a href="/expositions" class="button">← Retour à l'exposition</a>
   </center>
   <aside>
     <h1 class="">{oeuvre.titre}</h1>
