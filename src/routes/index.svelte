@@ -256,6 +256,7 @@ import { page } from '$app/stores'
 
 <style lang="scss">
   $height: calc(100vh - 11rem);
+  $columnwidth: 25%;
 
   p {
     width: 100%;
@@ -286,7 +287,7 @@ import { page } from '$app/stores'
 
     .sticky {
       top: 10rem;
-      width: 24rem;
+      width: $columnwidth;
       height: $height;
 
       display: flex;
@@ -326,12 +327,13 @@ import { page } from '$app/stores'
         position: relative;
         top: 0;
         height: auto;
+        width: 100%;
       }
     }
 
     > div {
       margin-top: calc($height * -1);
-      margin-left: 24rem;
+      margin-left: $columnwidth;
       padding-left: var(--gutter);
 
       @media (max-width: 888px) {
