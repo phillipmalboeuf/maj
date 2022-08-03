@@ -85,6 +85,7 @@
 
 <script lang="ts">
   import { onMount } from 'svelte'
+  import { fade, fly } from 'svelte/transition'
   import { browser } from '$app/env'
   import Page, { type PageDocument } from '$lib/components/Page.svelte'
   import Picture from '$lib/components/Picture.svelte'
@@ -93,7 +94,7 @@
   import { titre } from '$lib/stores'
   import OeuvreOverlay from '$lib/components/OeuvreOverlay.svelte'
   import Slider from '$lib/components/Slider.svelte'
-
+  import Overlay from '$lib/components/Overlay.svelte'
 
 	export let page: PageDocument
   export let expositions: ExpositionDocument[]
@@ -104,6 +105,7 @@
   let innerHeight: number
   let innerWidth: number
   let swiping: boolean
+  let openList: boolean
 
   $: {
     if (browser) {
@@ -118,7 +120,29 @@
 
 <svelte:window bind:scrollY bind:innerHeight bind:innerWidth />
 
-<Page {page} />
+<Page {page}>
+  <h1 class="center h2 padded" slot="titre" on:click={() => openList = true}>{page.titre} <span class="button">+</span></h1>
+</Page>
+
+{#if openList}
+<Overlay bind:open={openList}>
+<nav>
+  <div class="padded fixed flex flex--end">
+    <button transition:fly={{ y: 10 }} on:click={() => openList = false}>Fermer</button>
+  </div>
+  <ol class="padded">
+    {#each expositions as expo, i}
+    <li class="sh" transition:fly={{ y: 10, delay: 100*i }}>
+      <a href="/expositions/{expo.id}/oeuvres?type=mur" class="grid grid--thirds">
+        <span>{expo.titreCourt}</span>
+        <span>{expo.titre}</span>
+      </a>
+    </li>
+    {/each}
+  </ol>
+</nav>
+</Overlay>
+{/if}
 
 <section>
   {#each expositions as expo, i}
@@ -156,6 +180,23 @@
 
 
 <style lang="scss">
+  h1 {
+    cursor: pointer;
+    color: var(--color);
+
+    .button {
+      padding: 0.05em 0.33em;
+    }
+  }
+
+  nav {
+    color: var(--color);
+
+    li {
+      // font-size: ;
+    }
+  }
+
   section {
     color: var(--color);
 

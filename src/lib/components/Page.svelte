@@ -34,7 +34,11 @@
 
 {@html `<style>body { --color: var(--${page.couleur?.toLowerCase()}) !important; }</style>`}
 {#if !noTitre}
+{#if $$slots.titre}
+<slot name="titre" />
+{:else}
 <h1 class="center h2 padded">{page.titre}</h1>
+{/if}
 <Contenu contenu={page.contenuCollection?.items} />
 {/if}
 
