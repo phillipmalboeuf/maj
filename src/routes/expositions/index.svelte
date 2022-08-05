@@ -212,20 +212,7 @@
 
     li {
       position: relative;
-      flex: 1;
       text-align: left;
-
-      transition: flex 420ms;
-
-      // &:hover {
-      //   flex: 1.1;
-      // }
-      
-      // > a,
-      // > aside {
-      //   max-width: 56.875rem;
-      //   margin: 0 auto;
-      // }
     }
   }
 

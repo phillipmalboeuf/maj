@@ -1,5 +1,8 @@
 <script lang="ts">
   import { onMount, tick } from 'svelte'
+  import emblaCarouselSvelte, { type EmblaCarouselType } from 'embla-carousel-svelte'
+  import AutoHeight from 'embla-carousel-auto-height'
+  import AutoPlay from 'embla-carousel-autoplay'
   // import { swipe } from 'svelte-gestures'
 
   // import Text from './Text.svelte'
@@ -25,12 +28,14 @@
   export let arrows = true
   export let particlesToShow: number = undefined
 
-  let Carousel
-  let carousel
-  onMount(async () => {
-    const module = await import('svelte-carousel')
-    Carousel = module.default
-  })
+  let embla: EmblaCarouselType
+
+  // let Carousel
+  // let carousel
+  // onMount(async () => {
+  //   const module = await import('svelte-carousel')
+  //   Carousel = module.default
+  // })
 
   let down = false
   export let swiping = false
@@ -39,11 +44,11 @@
   // let length = entry.slidesCollection.items.length
 
   function prev() {
-    carousel.goToPrev()
+    embla.scrollPrev()
   }
 
   function next() {
-    carousel.goToNext()
+    embla.scrollNext()
   }
 
   // onMount(() => {
@@ -70,19 +75,21 @@
       down = false
       setTimeout(() => swiping = false, 200)
     }}>
-  <svelte:component
-    this={Carousel}
-    bind:this={carousel}
-    
-    arrows={false}
-    dots={false}
-    pauseOnFocus
-    {autoplay}
-    {particlesToShow}
-    particlesToScroll={Math.ceil((particlesToShow || 2)/2)}
+  <div class="embla"
+    use:emblaCarouselSvelte={{
+      options: {
+        loop: true,
+        slidesToScroll: particlesToShow > 1 ? 2 : 1
+      },
+      plugins: [AutoHeight(), AutoPlay({ stopOnMouseEnter: true, playOnInit: autoplay })]
+    }}
+    on:init={event => embla = event.detail}
+    style="--width: {100/particlesToShow}%;"
   >
-    <slot />
-  </svelte:component>
+    <div class="embla__container">
+      <slot />
+    </div>
+  </div>
   </div>
 
   {#if arrows}
@@ -133,27 +140,18 @@
     cursor: ew-resize;
   }
 
-  div {
-    // text-align: center;
-    transition: transform 666ms;
-    -webkit-user-select: none;
-    user-select: none;
+  .embla {
+    overflow: hidden;
+  }
 
-    :global(div) {
+  .embla__container {
+    display: flex;
+    align-items: flex-start;
+    transition: height 333ms;
+
+    > :global(li) {
+      flex: 0 0 var(--width);
       color: var(--color) !important;
-    }
-
-    &.swiping {
-      :global(a) {
-        pointer-events: none;
-      }
-    }
-
-    :global(a),
-    :global(img) {
-      -webkit-user-drag: none;
-      -moz-user-drag: none;
-      user-drag: none;
     }
 
     :global(figure) {

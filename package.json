@@ -38,6 +38,9 @@
   },
   "type": "module",
   "dependencies": {
-    "@prisma/client": "^3.14.0"
+    "@prisma/client": "^3.14.0",
+    "embla-carousel-auto-height": "^7.0.0",
+    "embla-carousel-autoplay": "^7.0.0",
+    "embla-carousel-svelte": "^7.0.0"
   }
 }
