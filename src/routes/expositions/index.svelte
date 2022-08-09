@@ -35,7 +35,7 @@
           description
           couleur
         }
-        expositionCollection {
+        expositionCollection(order: [debut_DESC]) {
           items {
             sys {
               id
@@ -132,7 +132,7 @@
   </div>
   <ol class="padded">
     {#each expositions as expo, i}
-    <li class="sh" transition:fly={{ y: 10, delay: 100*i }}>
+    <li class="sh" transition:fly={{ y: 10, delay: 10*i }}>
       <a href="/expositions/{expo.id}/oeuvres?type=mur" class="grid grid--thirds">
         <span>{expo.titreCourt}</span>
         <span>{expo.titre}</span>
@@ -154,11 +154,12 @@
   <ol class="padded">
     <Slider particlesToShow={innerWidth < 888 ? 3 : 7} bind:swiping>
     {#each expo.oeuvresCollection.items as oeuvre, j}
+    {#if oeuvre}
     <li>
       <a href="/expositions/{expo.id}/oeuvres/{oeuvre.id}"
         on:click|preventDefault={() => { if (!swiping) { open = `${i}.${j}` } }}>
         {#if oeuvre.media}<figure>
-          <Picture media={oeuvre.media} noDescription maxHeight />
+          <Picture media={oeuvre.media} noDescription maxHeight small />
         </figure>{/if}
         <h5>{oeuvre.titre}</h5>
         <aside class="flex flex--spaced">
@@ -167,6 +168,7 @@
         </aside>
       </a>
     </li>
+    {/if}
     {/each}
     </Slider>
   </ol>

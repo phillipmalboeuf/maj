@@ -93,7 +93,7 @@
             }
           }
         }
-        expositionCollection {
+        expositionCollection(order: [debut_DESC], limit: 10) {
           items {
             __typename
             titre
@@ -143,8 +143,7 @@
   import Gallerie from '$lib/components/Gallerie.svelte'
   import TextAnimation from '$lib/components/TextAnimation.svelte'
   import { titre } from '$lib/stores'
-import { page } from '$app/stores'
-
+  import { page } from '$app/stores'
 
 	export let index: {
     titre: string
@@ -242,11 +241,11 @@ import { page } from '$app/stores'
     {#if page.id === 'explorer'}
     <Articles tight articles={[...articles,...activites,...balados]} />
     {:else if page.id === 'expositions'}
-    <Expositions {expositions} />
+    <Expositions expositions={expositions.slice(0, 3)} />
     <div class="flex flex--end">
       <a href="/expositions" class="button">Voir l’Archive →</a>
     </div>
-    <Expositions {expositions} tight />
+    <Expositions expositions={expositions.slice(3, 10)} tight />
     {/if}
   </div>
 

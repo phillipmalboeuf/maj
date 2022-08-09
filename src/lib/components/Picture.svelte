@@ -96,7 +96,7 @@
 {#if media.title !== '[SPACER]'}
 {#if media.contentType?.startsWith('video/')}
 <video class:zoom class:label class:maxHeight src="{media.url}" autoplay muted loop playsinline />
-{:else}
+{:else if media.contentType?.startsWith('image/')}
 <picture>
   {#if small}
 <source srcSet="{media.url}?w=400{ar ? `&h=${Math.round(ar * 400)}&fit=fill` : ''}" media="(max-width: 900px)" />
