@@ -13,6 +13,15 @@
           description
           couleur
         }
+        expos: expositionCollection(order: [debut_DESC]) {
+          items {
+            sys {
+              id
+            }
+            titre
+            id
+          }
+        }
         expositionCollection(limit: 1, where: {id: $id}) {
           items {
             titre
@@ -50,6 +59,7 @@
         props: { 
           page: data.page,
           exposition: data.expositionCollection.items[0],
+          expos: data.expos.items,
           oeuvres: data.expositionCollection.items[0].oeuvresCollection.items
         }
       }
@@ -71,6 +81,7 @@
   import { titre } from '$lib/stores'
 
 	export let page: PageDocument
+  export let expos: ExpositionDocument[]
   export let exposition: ExpositionDocument
   export let oeuvres: SoumissionDocument[]
 
@@ -82,17 +93,44 @@
 
 <Page {page} noTitre />
 
+{#key exposition.id}
+{#if exposition}
+{@const type = $p.url.searchParams.get('type') || 'slider'}
+{@const index = expos.findIndex(expo => exposition.id === expo.id)}
+{@const prev = index > 0 && expos[index - 1]}
+{@const next = expos.length - 1 > index && expos[index + 1]}
+
 <article class="padded">
   <h1 class="center h2">{exposition.titreCourt}</h1>
-  <center class="flex flex--center"><ExpoLinks type={$p.url.searchParams.get('type') || 'slider'} expo={exposition} /></center>
+  <center class="flex flex--center"><ExpoLinks {type} expo={exposition} /></center>
   {#key $p.url}
-  <Oeuvres {exposition} oeuvres={oeuvres.filter(oeuvre => oeuvre.media)} type={$p.url.searchParams.get('type') || 'slider'} />
+  <Oeuvres {exposition} oeuvres={oeuvres.filter(oeuvre => oeuvre.media)} {type} />
   {/key}
 </article>
 
+<aside class="padded flex flex--spaced">
+  
+  {#if prev}
+  <a href="/expositions/{prev.id}/oeuvres?type={type}" class="button">
+    <svg width="53" height="32" style="transform: rotate(180deg);" viewBox="0 0 53 32" fill="none" xmlns="http://www.w3.org/2000/svg"> <line x1="15.623" y1="15.8079" x2="-0.000949809" y2="15.8079" stroke="currentColor" stroke-width="1.15"/> <path d="M38.023 31.616L52.9991 15.808L38.023 0H36.423L50.823 15.232H15.623V16.384H50.823L36.423 31.616H38.023Z" fill="currentColor"/> </svg>
+    {prev.titre}
+  </a>
+  {:else}
+  <span></span>
+  {/if}
+  {#if next}
+  <a href="/expositions/{next.id}/oeuvres?type={type}" class="button">
+    {next.titre}
+    <svg width="53" height="32" viewBox="0 0 53 32" fill="none" xmlns="http://www.w3.org/2000/svg"> <line x1="15.623" y1="15.8079" x2="-0.000949809" y2="15.8079" stroke="currentColor" stroke-width="1.15"/> <path d="M38.023 31.616L52.9991 15.808L38.023 0H36.423L50.823 15.232H15.623V16.384H50.823L36.423 31.616H38.023Z" fill="currentColor"/> </svg>
+  </a>
+  {/if}
+</aside>
+{/if}
+{/key}
 
 <style lang="scss">
-  article {
+  article,
+  aside {
     color: var(--color);
     overflow-x: hidden;
   }
