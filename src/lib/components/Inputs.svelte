@@ -17,7 +17,7 @@
   {:else if input.type === 'Email'}
   <input required={!input.optionel} maxlength="256" type="email" id={input.id} placeholder={input.placeholder} name={input.id} />
   {:else if input.type === 'Date'}
-  <input required={!input.optionel} maxlength="256" type="text" id={input.id} placeholder={input.placeholder} name={input.id} />
+  <input required={!input.optionel} maxlength="256" type="date" id={input.id} placeholder={input.placeholder} name={input.id} />
   {:else if input.type === 'File'}
   <FileInput required={!input.optionel} id={input.id} placeholder={input.placeholder} name={input.id} />
   {:else}
