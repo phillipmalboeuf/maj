@@ -8,6 +8,8 @@
   export let thirds = false
   export let archives = false
   export let tight = false
+
+  export let p: number = undefined
 </script>
 
 <ol class="grid {thirds ? 'grid--thirds' : 'grid--halves'}{archives ? ' grid--tight' : ''}{tight ? ' grid--supertight' : ''}">
@@ -46,6 +48,24 @@
   </li>
   {/each}
 </ol>
+
+{#if p !== undefined}
+<div class="flex flex--center">
+  {#if p > 0}
+  <a href="/{{
+      'Article': 'articles',
+      'Activity': 'activites',
+      'Balado': 'balados'
+    }[articles[0].__typename] || 'articles'}?p={p-1}" class="button">Articles précédents</a>
+  {/if}
+
+  <a href="/{{
+      'Article': 'articles',
+      'Activity': 'activites',
+      'Balado': 'balados'
+    }[articles[0].__typename] || 'articles'}?p={p+1}" class="button">Articles suivants</a>
+</div>
+{/if}
 
 <style lang="scss">
   ol {

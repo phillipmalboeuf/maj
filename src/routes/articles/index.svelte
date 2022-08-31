@@ -34,14 +34,14 @@
   }
 
   /** @type {import('@sveltejs/kit').Load} */
-  export async function load({ fetch, params }) {
+  export async function load({ fetch, params, url }) {
     const { data } = await query<{
       page: PageDocument
       articleCollection: {
         items: ArticleDocument[]
       }
     }>(fetch, `
-      query {
+      query($skip: Int) {
         page(id: "2iqQrSM1C0u4j1Tzhmoamx") {
           titre
           id
@@ -49,7 +49,7 @@
           couleur
           ${contenuCollection}
         }
-        articleCollection(order: [date_DESC], limit: 10) {
+        articleCollection(order: [date_DESC], limit: 12, skip: $skip) {
           items {
             titre
             titreCourt
@@ -68,12 +68,15 @@
           }
         }
       }
-    `)
+    `, {
+      skip: url.searchParams.has('p') ? parseInt(url.searchParams.get('p')) * 12 : 0
+    })
     if (data) {
       return {
         props: { 
           page: data.page,
-          articles: data.articleCollection.items
+          articles: data.articleCollection.items,
+          p: url.searchParams.has('p') ? parseInt(url.searchParams.get('p')) : 0
         }
       }
     }
@@ -90,6 +93,7 @@
 
 	export let page: PageDocument
   export let articles: ArticleDocument[]
+  export let p: number
 </script>
 
 <Page {page} />
@@ -97,7 +101,7 @@
 <ExplorerLinks current="articles" />
 
 <section class="padded">
-  <Articles {articles} />
+  <Articles {articles} {p} />
 </section>
 
 <ExplorerMore />
