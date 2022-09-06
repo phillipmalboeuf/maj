@@ -14,6 +14,7 @@
 
 <ol class="grid {thirds ? 'grid--thirds' : 'grid--halves'}{archives ? ' grid--tight' : ''}{tight ? ' grid--supertight' : ''}">
   {#each articles as article}
+  {#key article.id}
   <li class={!archives && article.vedette && 'span__2'}>
     <a href="/{{
       'Article': 'articles',
@@ -46,6 +47,7 @@
       {#if !archives}<h3>{article.titreCourt || article.titre}</h3>{/if}
     </a>
   </li>
+  {/key}
   {/each}
 </ol>
 

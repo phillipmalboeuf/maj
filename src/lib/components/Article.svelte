@@ -35,6 +35,7 @@
 </script>
 
 
+{#key article.id}
 <article bind:this={element} class="padded">
   <h2 class="center">{page.titre}</h2>
   
@@ -128,6 +129,7 @@
 {#if !noComments}
 <Comments />
 {/if}
+{/key}
 
 
 <style lang="scss">

@@ -11,6 +11,8 @@
   export let label: string = undefined
   export let maxHeight = false
 
+  export let noLink = false
+
   let open: boolean
   let x: number
   let y: number
@@ -55,6 +57,17 @@
     }
   }
 
+  a {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+
+    svg {
+      margin: 0 auto;
+    }
+  }
+
   figure {
     pointer-events: none;
     padding: var(--gutter);
@@ -96,6 +109,10 @@
 {#if media.title !== '[SPACER]'}
 {#if media.contentType?.startsWith('video/')}
 <video class:zoom class:label class:maxHeight src="{media.url}" autoplay muted loop playsinline />
+{:else if !noLink && media.title?.startsWith('http')}
+<a href={media.title} target="_blank" rel="external">
+  <svelte:self {media} {small} {ar} {eager} noLink />
+</a>
 {:else if media.contentType?.startsWith('image/')}
 <picture>
   {#if small}
@@ -108,9 +125,14 @@
 <img class:zoom class:label class:maxHeight class:beat={media.title === 'Heartbeat'} on:pointermove={move} on:pointerleave={() => labelVisible = false} on:click={() => open = true} style={ar ? `aspect-ratio: 1800 / ${Math.round(ar * 1800)}` : `aspect-ratio: ${media.width} / ${media.height}`} src="{media.url}?w=1800{ar ? `&h=${Math.round(ar * 1800)}&fit=fill` : ''}" alt="{media.title} {media.description}" loading={eager ? "eager" : "lazy"} />
   {/if}
 </picture>
+{:else}
+<svg width="310" height="310" viewBox="0 0 310 310" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="155.254" cy="155.255" r="149.155"/>
+  <path d="M234.961 141.763C244.931 147.519 244.931 161.909 234.961 167.666L126.777 230.126C116.807 235.882 104.344 228.687 104.344 217.174L104.344 92.2541C104.344 80.7418 116.807 73.5466 126.777 79.3027L234.961 141.763Z" />
+</svg>
 {/if}
 
-{#if !noDescription && media.title !== 'Heartbeat' && (media.title || media.description)}
+{#if !noDescription && media.title !== 'Heartbeat' && (media.title || media.description) && !media.title?.startsWith('http')}
 <p class="small">{media.title} {media.description || ''}</p>
 {/if}
 
