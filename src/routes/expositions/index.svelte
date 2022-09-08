@@ -152,7 +152,7 @@
     <ExpoLinks {expo} type="folder" />
   </div>
   <ol class="padded">
-    <Slider particlesToShow={innerWidth < 888 ? 3 : 7} bind:swiping>
+    <Slider particlesToShow={innerWidth < 888 ? 3 : 7} detach bind:swiping>
     {#each expo.oeuvresCollection.items as oeuvre, j}
     {#if oeuvre}
     <li>

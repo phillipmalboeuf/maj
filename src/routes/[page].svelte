@@ -37,11 +37,13 @@
   export let page: PageDocument
 </script>
 
+{#if page}
 <Page {page} />
 {#if page.id === 'a-propos' && page.media}
 <figure>
   <Picture media={page.media} />
 </figure>
+{/if}
 {/if}
 
 <style lang="scss">

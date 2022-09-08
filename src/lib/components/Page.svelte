@@ -29,17 +29,17 @@
 	export let page: PageDocument
   export let noTitre = false
 
-  if (!noTitre) { titre.set(page.titre) } else { titre.set(undefined) }
+  if (!noTitre && page) { titre.set(page.titre) } else { titre.set(undefined) }
 </script>
 
-{@html `<style>body { --color: var(--${page.couleur?.toLowerCase()}) !important; }</style>`}
+{@html `<style>body { --color: var(--${page?.couleur?.toLowerCase()}) !important; }</style>`}
 {#if !noTitre}
-{#if $$slots.titre}
+{#if $$slots?.titre}
 <slot name="titre" />
 {:else}
-<h1 class="center h2 padded">{page.titre}</h1>
+<h1 class="center h2 padded">{page?.titre}</h1>
 {/if}
-<Contenu contenu={page.contenuCollection?.items} />
+<Contenu contenu={page?.contenuCollection?.items} />
 {/if}
 
 <style lang="scss">
