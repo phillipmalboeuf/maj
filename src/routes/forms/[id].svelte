@@ -5,6 +5,7 @@
     titre: string
     id: string
     cta: string
+    smallPrint: string
     inputsCollection: {
       items: {
         label: string
@@ -32,6 +33,7 @@
             titre
             id
             cta
+            smallPrint
             inputsCollection {
               items {
                 label
@@ -94,8 +96,10 @@
     <br>
     <Inputs {form} />
 
+    {#if form.smallPrint}
     <!-- <input type="checkbox" name="conditions" id="conditions"> -->
-    <label for="conditions">En envoyant votre création à JAM, vous autorisez le Musée à la reproduire sur cette plateforme et dans d'autres médias pour des fins promotionnelles seulement.</label>
+    <label for="conditions">{form.smallPrint}</label>
+    {/if}
 
     <input type="checkbox" name="accept" id="accept">
     <label for="accept">Accept <a href="/terms" target="_blank">terms and conditions</a></label>
