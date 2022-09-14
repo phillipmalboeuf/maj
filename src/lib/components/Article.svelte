@@ -59,7 +59,7 @@
 
   <div class="flex flex--center info">
     <span>{date(article.date)}</span>
-    {#if article.personnesCollection}<span>{article.personnesCollection.items.map(personne => [personne.nom, personne.position].filter(e => e).join(', ')).join(', ')}</span>{/if}
+    {#if article.personnesCollection?.items?.length}<span>{article.personnesCollection.items.map(personne => [personne.nom, personne.position].filter(e => e).join(', ')).join(', ')}</span>{/if}
     <span>{readingTime} min</span>
   </div>
 
@@ -67,7 +67,7 @@
 
   {#if article.media}
   <figure>
-    <Picture media={article.media} />
+    <Picture media={article.media} maxHeight />
   </figure>
   {/if}
 

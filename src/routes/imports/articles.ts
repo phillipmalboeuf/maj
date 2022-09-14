@@ -151,12 +151,12 @@ const formatContent = async (node, environment: Environment) => {
         data: {},
         value: node.textData?.text,
         marks: node.textData?.decorations
-          .filter(d => d.type !== "LINK" && d.type !== "COLOR")
+          .filter(d => d.type !== "LINK" && d.type !== "COLOR" && d.type !== "ANCHOR")
           .map(d => ({ type: d.type.toLowerCase() }))
       }
     ] } : { value: node.textData?.text }) ,
     ...(!link && node.textData?.decorations?.filter(d => d.type !== "LINK")) && { marks: node.textData?.decorations
-      .filter(d => d.type !== "LINK" && d.type !== "COLOR")
+      .filter(d => d.type !== "LINK" && d.type !== "COLOR" && d.type !== "ANCHOR")
       .map(d => ({ type: d.type.toLowerCase() })) },
     ...(node.type !== "TEXT") && { content }
   }
@@ -272,6 +272,7 @@ export const GET: RequestHandler<{ titre: string }, {}> = async ({ request, ...e
   const environment = await space.getEnvironment('master')
 
   const items = [...articleCollection.items, ...activityCollection.items, ...baladoCollection.items, ...themeCollection.items]
+    .filter(item => item.sys.id === "516e8c14-6303-43d0-9039-f5d72ead3ffe")
   const articles = [...articles1[0].body.posts, ...articles2[0].body.posts, ...articles3[0].body.posts]
 
   // console.log(items.length)
@@ -286,21 +287,28 @@ export const GET: RequestHandler<{ titre: string }, {}> = async ({ request, ...e
 
     if (entry) {
       const content = articles.find(a => a.id === article.sys.id)?.richContent
-      if (content) {
-        console.log(i)
-        const formatted = await Promise.all(content.nodes.map(node => formatContent(node, environment)));
-        // console.log(JSON.stringify(formatted,null,2))
-        await entry.patch([
-          {
-            op: 'replace',
-            path: '/fields/intro/fr-CA',
-            value: {
-              nodeType: "document",
-              data: {},
-              content: formatted
-            }
-          }
-        ])
+      // if (content) {
+      //   console.log(i)
+      //   const formatted = await Promise.all(content.nodes.map(node => formatContent(node, environment)));
+      //   // console.log(JSON.stringify(formatted,null,2))
+      //   await entry.patch([
+      //     {
+      //       op: 'replace',
+      //       path: '/fields/intro/fr-CA',
+      //       value: {
+      //         nodeType: "document",
+      //         data: {},
+      //         content: formatted
+      //       }
+      //     }
+      //   ])
+      // }
+      console.log(i)
+      console.log(article)
+      try {
+        await entry.publish()  
+      } catch (error) {
+        console.error(error)
       }
     }
 

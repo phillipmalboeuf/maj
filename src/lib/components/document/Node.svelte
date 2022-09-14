@@ -8,6 +8,12 @@
   export let node
 </script>
 
+<style lang="scss">
+  figure {
+    max-width: calc(var(--width) / 2);
+  }
+</style>
+
 {#if node.nodeType === 'heading-1'}
   <h1>{#each node.content as mark}<Mark mark={mark} />{/each}</h1>
 {:else if node.nodeType === 'heading-2'}
@@ -42,6 +48,8 @@
 {#await query(fetch, `query($id: String!) {
   asset(id: $id) ${media}
 }`, { id: node.data.target.sys.id }) then { data }}
-  <Picture media={data.asset} noDescription />  
+<figure>
+  <Picture media={data.asset} maxHeight />  
+</figure>
 {/await}
 {/if}
