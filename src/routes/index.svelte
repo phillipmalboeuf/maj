@@ -101,6 +101,18 @@
             id
             debut
             media ${media}
+            oeuvresCollection(limit: 1) {
+              items {
+                ... on Oeuvre {
+                  titre
+                  media ${media}
+                }
+                ... on Soumission {
+                  titre
+                  media ${media}
+                }
+              }
+            }
             curatorsCollection(limit: 6) {
               items {
                 nom

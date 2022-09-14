@@ -1,6 +1,14 @@
 <script context="module" lang="ts">
   import { query } from '$lib/clients/contentful'
   import { contenuCollection, media } from '$lib/nodes'
+  interface OeuvreDocument {
+    titre: string
+    id: string
+    description?: object
+    media?: object
+    date: string
+    bref: string
+  }
 
   export interface ExpositionDocument {
     titre: string
@@ -12,6 +20,9 @@
     media?: object
     sys?: {
       id: string
+    }
+    oeuvresCollection?: {
+      items: OeuvreDocument[]
     }
     curatorsCollection?: {
       items: CuratorDocument[]
@@ -89,7 +100,7 @@
   import { goto } from '$app/navigation'
 
   import Page, { type PageDocument } from '$lib/components/Page.svelte'
-  import Oeuvres, { type OeuvreDocument } from '$lib/components/Oeuvres.svelte'
+  
   import ExpoOverlay from '$lib/components/ExpoOverlay.svelte'
 
 	export let page: PageDocument

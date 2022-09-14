@@ -20,7 +20,11 @@ import { date } from '$lib/formatters';
           <span>{date(exposition.debut)}</span>
         </figcaption>
         {/if}
+        {#if exposition.media}
         <Picture media={exposition.media} noDescription label="Voir l'exposition" />
+        {:else if exposition.oeuvresCollection?.items}
+        <Picture media={exposition.oeuvresCollection?.items[0].media} noDescription label="Voir l'exposition" />
+        {/if}
         {#if !tight}
         <figcaption class="flex flex--spaced">
           <span>{exposition.curatorsCollection.items.map(personne => [personne.nom].join(', ')).join(', ')}</span>
