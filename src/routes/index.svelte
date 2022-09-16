@@ -156,6 +156,7 @@
   import TextAnimation from '$lib/components/TextAnimation.svelte'
   import { titre } from '$lib/stores'
   import { page } from '$app/stores'
+    import Fleche from '$lib/components/Fleche.svelte';
 
 	export let index: {
     titre: string
@@ -218,9 +219,9 @@
     <div>
       <h2 class="p3">
         {#if page.id === 'soutenir'}
-        <a href="https://www.museejoliette.org/fr/donnez/" class="button" rel="external" target="_blank">{page.titre} <svg width="53" height="32" viewBox="0 0 53 32" fill="none" xmlns="http://www.w3.org/2000/svg"> <line x1="15.623" y1="15.8079" x2="-0.000949809" y2="15.8079" stroke="currentColor" stroke-width="1.15"/> <path d="M38.023 31.616L52.9991 15.808L38.023 0H36.423L50.823 15.232H15.623V16.384H50.823L36.423 31.616H38.023Z" fill="currentColor"/> </svg> </a>
+        <a href="https://www.museejoliette.org/fr/donnez/" class="button" rel="external" target="_blank">{page.titre} <Fleche /></a>
         {:else}
-        <a href="/{page.id}" class="button" sveltekit:prefetch>{page.titre} <svg width="53" height="32" viewBox="0 0 53 32" fill="none" xmlns="http://www.w3.org/2000/svg"> <line x1="15.623" y1="15.8079" x2="-0.000949809" y2="15.8079" stroke="currentColor" stroke-width="1.15"/> <path d="M38.023 31.616L52.9991 15.808L38.023 0H36.423L50.823 15.232H15.623V16.384H50.823L36.423 31.616H38.023Z" fill="currentColor"/> </svg> </a>
+        <a href="/{page.id}" class="button" sveltekit:prefetch>{page.titre} <Fleche /></a>
         {/if}
       </h2>
       {#if page.description}<p>{page.description}</p>{/if}

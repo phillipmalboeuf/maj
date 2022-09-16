@@ -79,6 +79,7 @@
   import type { ExpositionDocument } from './index.svelte'
   import ExpoLinks from '$lib/components/ExpoLinks.svelte'
   import { titre } from '$lib/stores'
+  import Fleche from '$lib/components/Fleche.svelte'
 
 	export let page: PageDocument
   export let expos: ExpositionDocument[]
@@ -119,10 +120,7 @@
   <span></span>
   {/if}
   {#if next}
-  <a href="/expositions/{next.id}/oeuvres?type={type}" class="button">
-    {next.titre}
-    <svg width="53" height="32" viewBox="0 0 53 32" fill="none" xmlns="http://www.w3.org/2000/svg"> <line x1="15.623" y1="15.8079" x2="-0.000949809" y2="15.8079" stroke="currentColor" stroke-width="1.15"/> <path d="M38.023 31.616L52.9991 15.808L38.023 0H36.423L50.823 15.232H15.623V16.384H50.823L36.423 31.616H38.023Z" fill="currentColor"/> </svg>
-  </a>
+  <a href="/expositions/{next.id}/oeuvres?type={type}" class="button">{next.titre} <Fleche /></a>
   {/if}
 </aside>
 {/if}

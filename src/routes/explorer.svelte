@@ -90,6 +90,7 @@
   import type { ArticleDocument } from './articles/index.svelte'
   import type { BaladoDocument } from './balados/index.svelte'
   import type { ActivityDocument } from './activites/index.svelte'
+  import Fleche from '$lib/components/Fleche.svelte'
 
   export let page: PageDocument
   export let articles: ArticleDocument[]
@@ -103,12 +104,15 @@
 
 <section class="padded">
   <Articles thirds {articles} />
+  <nav><a href="/articles" class="button">Articles <Fleche /></a></nav>
 </section>
 <section class="padded dark" style="--color: white">
   <Balados {balados} />
+  <nav><a href="/balados" class="button">Balados <Fleche /></a></nav>
 </section>
 <section class="padded">
   <Articles thirds articles={activites} />
+  <nav><a href="/activites" class="button">Activités <Fleche /></a></nav>
 </section>
 
 <ExplorerMore />
@@ -121,5 +125,9 @@
       color: var(--light);
       background-color: var(--dark);
     }
+  }
+
+  nav {
+    text-align: right;
   }
 </style>
