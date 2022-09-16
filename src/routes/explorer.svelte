@@ -45,6 +45,9 @@
             intro {
               json
             }
+            introduction {
+              json
+            }
           }
         }
         activityCollection(limit: 3, order: date_DESC) {

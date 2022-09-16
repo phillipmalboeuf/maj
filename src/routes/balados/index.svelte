@@ -23,6 +23,9 @@
     intro: {
       json: object
     }
+    introduction: {
+      json: object
+    }
     liens: object
   }
 
@@ -52,6 +55,9 @@
             media ${media}
             liens
             intro {
+              json
+            }
+            introduction {
               json
             }
           }
