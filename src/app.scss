@@ -283,6 +283,7 @@ svg {
 
   .span__2 {
     grid-column: span 2;
+    @media (max-width: 888px) { grid-column: span 1; }
   }
 }
 

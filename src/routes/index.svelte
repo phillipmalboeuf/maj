@@ -370,6 +370,8 @@
     }
 
     nav {
+      margin-top: 1.5rem;
+
       :global(a) {
         margin-bottom: 0.5rem;
       }

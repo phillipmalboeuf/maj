@@ -47,7 +47,8 @@
     }
 
     .full &,
-    .media & {
+    .media &,
+    .center & {
       color: var(--color);
     }
   }
