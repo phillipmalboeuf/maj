@@ -152,9 +152,9 @@
     <ExpoLinks {expo} type="folder" />
   </div>
   <ol class="padded">
+    {#if expo.oeuvresCollection.items?.length}
     <Slider particlesToShow={innerWidth < 888 ? 3 : 7} detach bind:swiping>
-    {#each expo.oeuvresCollection.items as oeuvre, j}
-    {#if oeuvre}
+    {#each expo.oeuvresCollection.items.filter(oeuvre => oeuvre) as oeuvre, j}
     <li>
       <a href="/expositions/{expo.id}/oeuvres/{oeuvre.id}"
         on:click|preventDefault={() => { if (!swiping) { open = `${i}.${j}` } }}>
@@ -168,9 +168,9 @@
         </aside>
       </a>
     </li>
-    {/if}
     {/each}
     </Slider>
+    {/if}
   </ol>
   {/each}
 

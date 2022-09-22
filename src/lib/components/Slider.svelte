@@ -94,29 +94,6 @@
   {/if}
 </article>
 
-<!-- <article
-  on:pointerenter={() => {
-    if (autoplay) { paused = true }
-  }}
-  on:pointerleave={() => {
-    if (autoplay) { paused = false }
-  }}>
-  
-  {#if entry.slidesCollection}
-  <div class="flex flex--tight" style="width: {length * 66}%; transform: translateX({(current * -(100 / length)) + 8}%)" use:swipe={{ timeframe: 500, minSwipeDistance: 25, touchAction: 'pan-y' }} on:swipe={(e) => {
-    if (e.detail.direction === 'right') {
-      prev()
-    } else {
-      next()
-    }
-  }}>
-    {#each entry.slidesCollection.items as slide}
-    <Text entry={slide} />
-    {/each}
-  </div>
-  {/if}
-</article> -->
-
 <style lang="scss">
   article {
     position: relative;
