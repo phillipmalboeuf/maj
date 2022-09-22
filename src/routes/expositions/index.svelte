@@ -195,7 +195,14 @@
     color: var(--color);
 
     li {
-      // font-size: ;
+      a {
+        transition: padding-left 333ms;
+        
+        &:hover,
+        &:focus {
+          padding-left: 1em;
+        }
+      }
     }
   }
 
