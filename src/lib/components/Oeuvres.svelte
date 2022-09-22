@@ -71,7 +71,7 @@
     <a href="/expositions/{exposition.id}/oeuvres/{oeuvre.id}"
         on:click|preventDefault={() => open = oeuvre.id}>
       <figure>
-        <Picture media={{ ...oeuvre.media, title: `${oeuvre.titre}, ${oeuvre.nom}` }} maxHeight />
+        <Picture media={{ ...oeuvre.media, title: `${oeuvre.titre}, ${oeuvre.nom}` }} />
       </figure>
     </a>
   </li>
@@ -109,6 +109,7 @@
   }
 
   .masonry {
+    width: calc(100% + 12px);
     li {
       display: inline-block;
       width: calc(33% - 4px);
