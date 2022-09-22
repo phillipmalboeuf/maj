@@ -61,6 +61,11 @@
     @media (max-width: 888px) {
       flex-direction: column;
     }
+
+    figcaption {
+      width: calc((100% / 4) - var(--gap));
+      @media (max-width: 888px) { width: 100%; }
+    }
   }
 
   ol {
