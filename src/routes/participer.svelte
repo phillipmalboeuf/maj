@@ -80,7 +80,7 @@
   export let page: PageDocument
   export let theme: ThemeDocument
 
-  page.titre = theme.titreCourt 
+  // page.titre = theme.titreCourt || theme.titre
 </script>
 
 <Page {page} noTitre />
