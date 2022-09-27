@@ -41,7 +41,7 @@
   </nav>
 
   <div class="flex flex--end">
-    <Locale />
+    <!-- <Locale /> -->
   </div>
 
   <hr>

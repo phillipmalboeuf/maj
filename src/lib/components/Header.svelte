@@ -53,7 +53,7 @@
     {/each}
     
     <br>
-    <a class="h3" href="/">En</a>
+    <!-- <a class="h3" href="/">En</a> -->
 
     <div on:click|stopPropagation><NewsletterForm /></div>
 
