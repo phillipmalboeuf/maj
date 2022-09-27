@@ -204,6 +204,10 @@
         }
       }
     }
+
+    button {
+      background-color: white;
+    }
   }
 
   section {
