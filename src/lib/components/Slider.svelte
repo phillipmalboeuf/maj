@@ -132,7 +132,7 @@
 
       &.detach {
         position: absolute;
-        top: 50%;
+        top: calc(var(--gutter) * 3);
         left: var(--gutter);
 
         &.arrow--next {
