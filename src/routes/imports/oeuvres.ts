@@ -5,7 +5,6 @@ import type { RequestHandler } from '@sveltejs/kit'
 import slugify from 'slugify'
 import { readdir, readFile, stat } from 'fs/promises'
 import { getType } from 'mime'
-import type { Asset } from 'contentful-management'
 
 async function getFiles(path = "./") {
     const entries = await readdir(path, { withFileTypes: true });
