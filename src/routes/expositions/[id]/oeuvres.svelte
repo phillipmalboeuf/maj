@@ -80,15 +80,18 @@
   import ExpoLinks from '$lib/components/ExpoLinks.svelte'
   import { titre } from '$lib/stores'
   import Fleche from '$lib/components/Fleche.svelte'
+  import { browser } from '$app/env'
 
 	export let page: PageDocument
   export let expos: ExpositionDocument[]
   export let exposition: ExpositionDocument
   export let oeuvres: SoumissionDocument[]
 
-  onMount(() => {
-    titre.set(exposition.titreCourt || exposition.titre)
-  })
+  $: {
+    if (browser) {
+      titre.set(exposition.titreCourt || exposition.titre)
+    }
+  }
   
 </script>
 

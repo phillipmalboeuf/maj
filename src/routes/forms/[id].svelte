@@ -64,6 +64,7 @@
 
 <script lang="ts">
   import { onMount } from 'svelte'
+  import { browser } from '$app/env'
 
   import Page, { type PageDocument } from '$lib/components/Page.svelte'
   import Document from '$lib/components/document/Document.svelte'
@@ -76,7 +77,11 @@
 	export let page: PageDocument
   export let form: FormDocument
 
-  titre.set(form.titre)
+  $: {
+    if (browser) {
+      titre.set(form.titre)
+    }
+  }
 </script>
 
 <Page {page} noTitre />
