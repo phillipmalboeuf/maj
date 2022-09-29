@@ -82,6 +82,7 @@
   import Balados from '$lib/components/Balados.svelte'
   import ExplorerLinks from '$lib/components/ExplorerLinks.svelte'
   import ExplorerMore from '$lib/components/ExplorerMore.svelte'
+  import Articles from '$lib/components/Articles.svelte'
 
 	export let page: PageDocument
   export let balados: BaladoDocument[]
@@ -92,7 +93,7 @@
 <ExplorerLinks current="balados" />
 
 <section class="padded dark">
-  <Balados {balados} />
+  <Articles articles={balados} />
 </section>
 
 <ExplorerMore />

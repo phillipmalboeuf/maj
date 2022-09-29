@@ -44,7 +44,7 @@
       object-fit: contain;
 
       &:not(.beat) {
-        background-color: var(--color);
+        // background-color: var(--color);
       }
     }
 

@@ -42,7 +42,7 @@
       z-index: -1;
       // background: transparent;
       // border: none;
-      background-color: rgba(255, 255, 255, 0.33);
+      background-color: rgba(255, 255, 255, 0.66);
       -webkit-backdrop-filter: blur(20px);
       backdrop-filter: blur(20px);
 

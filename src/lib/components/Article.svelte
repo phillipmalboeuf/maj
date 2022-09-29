@@ -135,6 +135,15 @@
 <style lang="scss">
   article {
     color: var(--color);
+
+    :global(p),
+    :global(ul),
+    :global(ol),
+    :global(figure) {
+      max-width: 66rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 
   h1 {
