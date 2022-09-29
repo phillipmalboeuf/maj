@@ -47,6 +47,7 @@
         }
         baladoCollection(order: [date_DESC], limit: 10) {
           items {
+            __typename
             titre
             titreCourt
             id
