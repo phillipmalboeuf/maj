@@ -73,13 +73,17 @@
 <Article {page} article={balado}>
   <div class="padded" slot="extra">
       <!-- <span><Picture media={balado.media} /></span> -->
+    {#if balado.audio}
     <Audio media={balado.audio} />
+    {/if}
 
+    {#if balado.liens}
     <nav class="flex flex--center flex--tight">
       {#each Object.entries(balado.liens) as [label, href]}
       <a {href} target="_blank" class="button">{label}</a><br>
       {/each}
     </nav>
+    {/if}
   </div>
 </Article>
 
