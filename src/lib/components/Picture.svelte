@@ -93,6 +93,10 @@
     // backdrop-filter: blur(20px);
     border: 1px solid transparent;
     padding: 0.5em;
+
+    @media (hover: none) {
+      display: none;
+    }
   }
 
   .beat {
