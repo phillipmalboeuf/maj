@@ -112,7 +112,8 @@
     align-items: flex-start;
     transition: height 333ms;
 
-    > :global(li) {
+    > :global(li),
+    > :global(article) {
       flex: 0 0 var(--width);
       color: var(--color) !important;
     }

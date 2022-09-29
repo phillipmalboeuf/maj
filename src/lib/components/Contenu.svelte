@@ -14,7 +14,7 @@
 <Gallerie {entry} />
 {:else if entry.__typename === 'Slider'}
 {#if !entry.titreInvisible}<h2 class="d2 center">{entry.titre}</h2>{/if}
-<Slider>
+<Slider particlesToShow={1}>
   {#each entry.slidesCollection.items as slide}
   <Text entry={slide} center />
   {/each}
