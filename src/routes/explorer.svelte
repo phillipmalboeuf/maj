@@ -118,7 +118,7 @@
   <nav><a href="/activites" class="button">Activités <Fleche /></a></nav>
 </section>
 
-<ExplorerMore />
+<!-- <ExplorerMore /> -->
 
 <style lang="scss">
   section {

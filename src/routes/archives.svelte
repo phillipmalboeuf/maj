@@ -82,7 +82,7 @@
 <ExplorerLinks current="archives" />
 
 <section class="padded">
-  <Articles thirds archives articles={[...articles, ...balados, ...activites]} />
+  <Articles thirds archives articles={[...articles].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())} />
 </section>
 
 <style lang="scss">
