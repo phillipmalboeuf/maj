@@ -140,6 +140,11 @@
           left: auto;
           right: var(--gutter);
         }
+
+        @media (max-width: 888px) {
+          padding: 0;
+          width: calc(var(--gutter) * 2.5);
+        }
       }
 
       &:hover,
