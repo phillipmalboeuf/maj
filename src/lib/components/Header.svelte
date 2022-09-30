@@ -157,9 +157,14 @@
     }
 
     nav {
+      --height: 100vh;
+      @supports (height: 100dvh) {
+        --height: 100dvh;
+      }
+
       z-index: 9;
       width: 100vw;
-      height: 100vh;
+      height: var(--height);
       background:  linear-gradient(180deg, rgba(251, 251, 251, 0.81) 71.35%, rgba(251, 251, 251, 0) 100%);
       -webkit-backdrop-filter: blur(20px);
       backdrop-filter: blur(20px);

@@ -28,11 +28,16 @@
 
 <style lang="scss">
   aside {
+    --height: 100vh;
+    @supports (height: 100dvh) {
+      --height: 100dvh;
+    }
+
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: var(--height);
     z-index: 15;
     overflow-y: auto;
     

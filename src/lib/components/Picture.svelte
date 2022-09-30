@@ -75,9 +75,14 @@
   }
 
   figure {
+    --height: 100vh;
+    @supports (height: 100dvh) {
+      --height: 100dvh;
+    }
+
     pointer-events: none;
     padding: var(--gutter);
-    min-height: 100vh;
+    min-height: var(--height);
     margin: 0;
     text-align: center;
     display: flex;
@@ -85,7 +90,7 @@
     justify-content: center;
 
     :global(img) {
-      max-height: calc(100vh - (var(--gutter) * 2));
+      max-height: calc(var(--height) - (var(--gutter) * 2));
       object-fit: contain;
     }
   }

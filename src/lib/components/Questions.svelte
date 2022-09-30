@@ -135,12 +135,14 @@
     padding-top: 10rem;
     max-width: calc(24rem + var(--gutter));
     margin: 0 auto;
+    pointer-events: none;
 
     li {
+      pointer-events: auto;
       color: var(--light);
       background: var(--bleu);
       margin-bottom: 1em;
-      padding: calc(var(--gutter) / 2);
+      padding: var(--gutter) calc(var(--gutter) / 2);
       border-radius: 2em;
       -webkit-backdrop-filter: blur(4px);
       backdrop-filter: blur(4px);
