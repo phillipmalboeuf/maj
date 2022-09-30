@@ -10,6 +10,7 @@
   export let zoom = false
   export let label: string = undefined
   export let maxHeight = false
+  export let maxCrop = false
 
   export let noLink = false
 
@@ -46,6 +47,11 @@
       &:not(.beat) {
         // background-color: var(--color);
       }
+    }
+
+    &.maxCrop {
+      max-height: 50vh;
+      object-fit: cover;
     }
 
     &.zoom {
@@ -112,7 +118,7 @@
 {#if media}
 {#if media.title !== '[SPACER]'}
 {#if media.contentType?.startsWith('video/')}
-<video class:zoom class:label class:maxHeight src="{media.url}" autoplay muted loop playsinline />
+<video class:zoom class:label class:maxHeight class:maxCrop src="{media.url}" autoplay muted loop playsinline />
 {:else if !noLink && media.title?.startsWith('http')}
 <a href={media.title} target="_blank" rel="external">
   <svelte:self {media} {small} {ar} {eager} noLink />
@@ -122,11 +128,11 @@
   {#if small}
 <source srcSet="{media.url}?w=400{ar ? `&h=${Math.round(ar * 400)}&fit=fill` : ''}" media="(max-width: 900px)" />
 <source srcSet="{media.url}?w=600{ar ? `&h=${Math.round(ar * 600)}&fit=fill` : ''}" media="(max-width: 1200px)" />
-<img class:zoom class:label class:maxHeight on:click={() => open = true} style={ar ? `aspect-ratio: 800 / ${Math.round(ar * 800)}` : `aspect-ratio: ${media.width} / ${media.height}`} src="{media.url}?w=800{ar ? `&h=${Math.round(ar * 800)}&fit=fill` : ''}" alt="{media.title} {media.description}" loading={eager ? "eager" : "lazy"} />
+<img class:zoom class:label class:maxHeight class:maxCrop on:click={() => open = true} style={ar ? `aspect-ratio: 800 / ${Math.round(ar * 800)}` : `aspect-ratio: ${media.width} / ${media.height}`} src="{media.url}?w=800{ar ? `&h=${Math.round(ar * 800)}&fit=fill` : ''}" alt="{media.title} {media.description}" loading={eager ? "eager" : "lazy"} />
   {:else}
 <source srcSet="{media.url}?w=900{ar ? `&h=${Math.round(ar * 900)}&fit=fill` : ''}" media="(max-width: 900px)" />
 <source srcSet="{media.url}?w=1200{ar ? `&h=${Math.round(ar * 1200)}&fit=fill` : ''}" media="(max-width: 1200px)" />
-<img class:zoom class:label class:maxHeight class:beat={media.title === 'Heartbeat'} on:pointermove={move} on:pointerleave={() => labelVisible = false} on:click={() => open = true} style={ar ? `aspect-ratio: 1800 / ${Math.round(ar * 1800)}` : `aspect-ratio: ${media.width} / ${media.height}`} src="{media.url}?w=1800{ar ? `&h=${Math.round(ar * 1800)}&fit=fill` : ''}" alt="{media.title} {media.description}" loading={eager ? "eager" : "lazy"} />
+<img class:zoom class:label class:maxHeight class:maxCrop class:beat={media.title === 'Heartbeat'} on:pointermove={move} on:pointerleave={() => labelVisible = false} on:click={() => open = true} style={ar ? `aspect-ratio: 1800 / ${Math.round(ar * 1800)}` : `aspect-ratio: ${media.width} / ${media.height}`} src="{media.url}?w=1800{ar ? `&h=${Math.round(ar * 1800)}&fit=fill` : ''}" alt="{media.title} {media.description}" loading={eager ? "eager" : "lazy"} />
   {/if}
 </picture>
 {:else}

@@ -159,7 +159,7 @@
       <a href="/expositions/{expo.id}/oeuvres/{oeuvre.id}"
         on:click|preventDefault={() => { if (!swiping) { open = `${i}.${j}` } }}>
         {#if oeuvre.media}<figure>
-          <Picture media={oeuvre.media} noDescription maxHeight small />
+          <Picture media={oeuvre.media} noDescription maxCrop small />
         </figure>{/if}
         <h5>{oeuvre.titre}</h5>
         <aside class="flex flex--spaced">

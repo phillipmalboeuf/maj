@@ -49,7 +49,7 @@
   asset(id: $id) ${media}
 }`, { id: node.data.target.sys.id }) then { data }}
 <figure>
-  <Picture media={data.asset} maxHeight />  
+  <Picture media={data.asset} maxHeight zoom />  
 </figure>
 {/await}
 {/if}
