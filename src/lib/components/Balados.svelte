@@ -27,13 +27,13 @@
       {/if}
     </figcaption>
 
-    <main>
+    <div>
       {#if balados[0].audio}
       <Audio visible media={balados[0].audio} bind:duration={durations[balados[0].id]} />
       {:else if balados[0].embed}
       <iframe src={balados[0].embed} loading="lazy" width="100%" height="200" frameborder="0" scrolling="no" title={balados[0].titre}></iframe>
       {/if}
-    </main>
+    </div>
     
     <!-- <span><Picture media={balado.media} /></span> -->
     
@@ -78,8 +78,8 @@
       @media (max-width: 888px) { width: 100%; }
     }
 
-    main {
-      width: 100%;
+    div {
+      flex: 1;
     }
   }
 
