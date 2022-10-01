@@ -31,7 +31,7 @@
       {/if}
     </div>
     <figure>
-      <Picture media={oeuvre.media} zoom maxHeight noDescription />
+      <Picture media={oeuvre.media} zoom maxHeight noDescription controls />
     </figure>
 
     <Comments url={`${$page.url.protocol}//${$page.url.host}/oeuvres/${oeuvre.id}`} />

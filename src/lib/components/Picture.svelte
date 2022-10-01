@@ -11,6 +11,7 @@
   export let label: string = undefined
   export let maxHeight = false
   export let maxCrop = false
+  export let controls = false
 
   export let noLink = false
 
@@ -123,7 +124,7 @@
 {#if media}
 {#if media.title !== '[SPACER]'}
 {#if media.contentType?.startsWith('video/')}
-<video class:zoom class:label class:maxHeight class:maxCrop src="{media.url}" autoplay muted loop playsinline />
+<video class:zoom class:label class:maxHeight class:maxCrop src="{media.url}" autoplay muted loop {controls} playsinline={!controls} loading={eager ? "eager" : "lazy"} />
 {:else if !noLink && media.title?.startsWith('http')}
 <a href={media.title} target="_blank" rel="external">
   <svelte:self {media} {small} {ar} {eager} noLink />

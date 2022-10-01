@@ -34,7 +34,9 @@
         gutter: 8
       })
 
-      return () => msnry.destroy()
+      return () => {
+        msnry.destroy()
+      }
     }
   })
 
@@ -106,6 +108,12 @@
   ul {
     list-style: none;
     padding: 0;
+
+    li {
+      a {
+        display: block;
+      }
+    }
   }
 
   .masonry {
@@ -118,6 +126,12 @@
       figure,
       figure :global(p) {
         margin-bottom: calc(var(--small) / 3);
+      }
+
+      :global(video) {
+        display: block;
+        height: 50vh;
+        object-fit: cover;
       }
     }
   }
