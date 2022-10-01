@@ -93,7 +93,7 @@
             }
           }
         }
-        expositionCollection(order: [debut_DESC], limit: 10) {
+        expositionCollection(order: [debut_DESC], limit: 16) {
           items {
             __typename
             titre
@@ -113,7 +113,7 @@
                 }
               }
             }
-            curatorsCollection(limit: 6) {
+            curatorsCollection(limit: 2) {
               items {
                 nom
                 id
@@ -157,6 +157,7 @@
   import { titre } from '$lib/stores'
   import { page } from '$app/stores'
     import Fleche from '$lib/components/Fleche.svelte';
+    import Slider from '$lib/components/Slider.svelte';
 
 	export let index: {
     titre: string
@@ -174,6 +175,7 @@
   let elements: {[key: string]: HTMLElement} = {}
   let scrollY: number
   let innerHeight: number
+  let innerWidth: number
 
   onMount(() => {
     document.body.setAttribute('style', `--color: var(--${elements[index.pagesCollection.items[0].id].getAttribute('data-color')}); color: var(--color);`)
@@ -205,7 +207,7 @@
   }
 </script>
 
-<svelte:window bind:scrollY bind:innerHeight />
+<svelte:window bind:scrollY bind:innerHeight bind:innerWidth />
 
 <p class="p2 center padded">{index.description}</p>
 
@@ -254,11 +256,17 @@
     {#if page.id === 'explorer'}
     <Articles tight articles={[...articles,...activites,...balados]} />
     {:else if page.id === 'expositions'}
-    <Expositions expositions={expositions.slice(0, 3)} />
+    <ol class="grid grid--halves">
+      <Expositions expositions={expositions.slice(0, 3)} />
+    </ol>
     <div class="flex flex--end">
       <a href="/expositions" class="button">Voir l’Archive →</a>
     </div>
-    <Expositions expositions={expositions.slice(3, 10)} tight />
+    <ol class="flex flex--supertight flex--end">
+      <Slider particlesToShow={innerWidth < 888 ? 3 : 7} detach autoHeight={false}>
+        <Expositions expositions={expositions.slice(3)} tight />
+      </Slider>
+    </ol>
     {/if}
   </div>
 
@@ -375,6 +383,15 @@
       :global(a) {
         margin-bottom: 0.5rem;
       }
+    }
+  }
+
+  ol {
+    list-style: none;
+    padding: 0;
+
+    figure {
+      margin-bottom: 0;
     }
   }
 </style>

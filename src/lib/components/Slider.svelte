@@ -6,7 +6,9 @@
   import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
 
   export let autoplay = false
+  export let autoHeight = true
   export let arrows = true
+  export let loop = true
   export let particlesToShow: number = undefined
   export let detach = false
 
@@ -46,10 +48,10 @@
     use:emblaCarouselSvelte={{
       options: {
         dragFree: detach,
-        loop: true,
+        loop,
         slidesToScroll: particlesToShow > 1 ? detach ? 4 : 2 : 1
       },
-      plugins: [AutoHeight(), AutoPlay({ stopOnMouseEnter: true, playOnInit: autoplay }), WheelGesturesPlugin()]
+      plugins: [...autoHeight ? [AutoHeight()] : [], AutoPlay({ stopOnMouseEnter: true, playOnInit: autoplay }), WheelGesturesPlugin()]
     }}
     on:init={event => embla = event.detail}
     style="--width: {100/particlesToShow}%;"
