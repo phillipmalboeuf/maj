@@ -39,6 +39,7 @@
             id
             titreCourt
             date
+            embed
             audio ${media}
             media ${media}
             liens

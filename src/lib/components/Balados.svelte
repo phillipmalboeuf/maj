@@ -18,6 +18,7 @@
   <figure class="flex">
     <figcaption class="flex__third">
       <a href="/balados/{balados[0].id}" class="button">Contenu du balado <Fleche /></a><br><br>
+      <h5>{balados[0].titre}</h5>
       <Document body={balados[0].introduction || balados[0].intro} />
       {#if balados[0].liens}
       {#each Object.entries(balados[0].liens) as [label, href]}
@@ -25,9 +26,17 @@
       {/each}
       {/if}
     </figcaption>
+
+    <main>
+      {#if balados[0].audio}
+      <Audio visible media={balados[0].audio} bind:duration={durations[balados[0].id]} />
+      {:else if balados[0].embed}
+      <iframe src={balados[0].embed} loading="lazy" width="100%" height="200" frameborder="0" scrolling="no" title={balados[0].titre}></iframe>
+      {/if}
+    </main>
     
     <!-- <span><Picture media={balado.media} /></span> -->
-    <Audio visible media={balados[0].audio} bind:duration={durations[balados[0].id]} />
+    
   </figure>
   {/if}
 
@@ -41,14 +50,16 @@
   <ol>
     {#each balados as balado, i}
     {#if i > 0}
-    <li class="flex flex--spaced">
-      <span>{balado.titre}</span>
-      <span>{balado.titreCourt}</span>
-      <span>{date(balado.date)}</span>
-      <span>{durations[balado.id] && Duration.fromMillis(durations[balado.id]*1000).toFormat('mm:ss')}</span>
+    <li>
+      <a class="flex flex--spaced" href="/balados/{balado.id}">
+        <span>{balado.titre}</span>
+        <!-- <span>{balado.titreCourt}</span> -->
+        <span>{date(balado.date)}</span>
+        <!-- <span>{durations[balado.id] && Duration.fromMillis(durations[balado.id]*1000).toFormat('mm:ss')}</span> -->
+      </a>
     </li>
 
-    <Audio visible={false} media={balado.audio} bind:duration={durations[balado.id]} />
+    <!-- <Audio visible={false} media={balado.audio} bind:duration={durations[balado.id]} /> -->
     {/if}
     {/each}
   </ol>
@@ -65,6 +76,10 @@
     figcaption {
       width: calc((100% / 4) - var(--gap));
       @media (max-width: 888px) { width: 100%; }
+    }
+
+    main {
+      width: 100%;
     }
   }
 

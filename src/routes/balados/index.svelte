@@ -8,6 +8,7 @@
     titreCourt?: string
     id: string
     date: string
+    embed: string
     audio: object
     media: object
     personnesCollection: {
