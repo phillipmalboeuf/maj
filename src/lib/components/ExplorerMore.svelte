@@ -2,10 +2,10 @@
 </script>
 
 <nav class="padded flex flex--middle flex--center">
-  <center>
+  <!-- <center>
     <h3>Vous croyez avoir fait le tour?</h3>
     <a href="/archives" class="button">Explorer davantage dans notre archive</a>
-  </center>
+  </center> -->
 </nav>
 
 <style lang="scss">

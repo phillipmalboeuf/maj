@@ -45,6 +45,9 @@
             titreCourt
             id
             debut
+            description {
+              json
+            }
             oeuvresCollection(limit: 30) {
               items {
                 ... on Oeuvre {
