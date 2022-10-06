@@ -139,10 +139,20 @@
     :global(p),
     :global(ul),
     :global(ol),
+    :global(h1),
+    :global(h2),
+    :global(h3),
+    :global(h4),
+    :global(h5),
+    :global(h6),
     :global(figure) {
-      max-width: 66rem;
+      max-width: 42rem;
       margin-left: auto;
       margin-right: auto;
+    }
+
+    :global(figure) {
+      max-width: 66rem;
     }
   }
 
