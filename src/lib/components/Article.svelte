@@ -65,7 +65,7 @@
 
   <div class="padded"><br><br></div>
 
-  {#if article.media && article.afficherMedia}
+  {#if article.media && !article.hideMedia}
   <figure>
     <Picture media={article.media} maxHeight />
   </figure>

@@ -10,7 +10,7 @@
     date: string
     vedette?: boolean
     media?: object
-    afficherMedia?: boolean
+    hideMedia?: boolean
     sys: {
       id: string
     }
