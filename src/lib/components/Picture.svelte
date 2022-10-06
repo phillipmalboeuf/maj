@@ -64,6 +64,12 @@
     }
   }
 
+  iframe {
+    width: 100%;
+    max-width: 100%;
+    height: 50vh;
+  }
+
   a {
     display: block;
     width: 100%;
@@ -126,9 +132,13 @@
 {#if media.contentType?.startsWith('video/')}
 <video class:zoom class:label class:maxHeight class:maxCrop src="{media.url}" autoplay muted loop {controls} playsinline={!controls} loading={eager ? "eager" : "lazy"} />
 {:else if !noLink && media.title?.startsWith('http')}
+{#if media.title.includes('youtu.be')}
+<iframe src="https://www.youtube.com/embed/{media.title.split("youtu.be/")[1]}" title={media.title} frameborder="0" />
+{:else}
 <a href={media.title} target="_blank" rel="external">
   <svelte:self {media} {small} {ar} {eager} noLink />
 </a>
+{/if}
 {:else if media.contentType?.startsWith('image/')}
 <picture>
   {#if small}
