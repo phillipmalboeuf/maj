@@ -25,6 +25,7 @@
               json
             }
             media ${media}
+            afficherMedia
             personnesCollection {
               items {
                 nom

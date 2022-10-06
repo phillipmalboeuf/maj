@@ -168,6 +168,15 @@ a {
   }
 }
 
+ul,
+ol {
+  li {
+    > p:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
 button,
 a.button,
 span.button {
