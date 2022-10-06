@@ -20,7 +20,7 @@
       {/if}
       {#if exposition.media}
       <Picture media={exposition.media} noDescription label={!tight && "Voir l'exposition"} />
-      {:else if exposition.oeuvresCollection?.items}
+      {:else if exposition.oeuvresCollection?.items?.length > 0}
       <Picture media={exposition.oeuvresCollection?.items[0].media} noDescription label={!tight && "Voir l'exposition"} />
       {/if}
       {#if !tight}
