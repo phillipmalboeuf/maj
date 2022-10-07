@@ -134,6 +134,8 @@
 {:else if !noLink && media.title?.startsWith('http')}
 {#if media.title.includes('youtu.be')}
 <iframe src="https://www.youtube.com/embed/{media.title.split("youtu.be/")[1]}" title={media.title} frameborder="0" />
+{:else if media.title.includes('youtube.com/watch?v=')}
+<iframe src="https://www.youtube.com/embed/{media.title.split("youtube.com/watch?v=")[1]}" title={media.title} frameborder="0" />
 {:else}
 <a href={media.title} target="_blank" rel="external">
   <svelte:self {media} {small} {ar} {eager} noLink />
