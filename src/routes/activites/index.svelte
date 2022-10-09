@@ -1,6 +1,7 @@
 <script context="module" lang="ts">
   import { query } from '$lib/clients/contentful'
   import { contenuCollection, media } from '$lib/nodes'
+  import type { ArticleDocument } from '../articles/index.svelte'
 
   export interface ActivityDocument {
     __typename: string
@@ -31,13 +32,16 @@
       items: any[]
     }
   }
-
+  
   /** @type {import('@sveltejs/kit').Load} */
   export async function load({ fetch, params }) {
     const { data } = await query<{
       page: PageDocument
       activityCollection: {
         items: ActivityDocument[]
+      },
+      articleCollection: {
+        items: ArticleDocument[]
       }
     }>(fetch, `
       query {
@@ -47,6 +51,24 @@
           description
           couleur
           ${contenuCollection}
+        }
+        articleCollection(order: [date_DESC], limit: 10, where: { type: "Activité" }) {
+          items {
+            __typename
+            titre
+            titreCourt
+            id
+            date
+            media ${media}
+            personnesCollection(limit: 6) {
+              items {
+                nom
+                id
+                position
+              }
+            }
+            ${contenuCollection}
+          }
         }
         activityCollection(order: [date_DESC], limit: 10) {
           items {
@@ -72,7 +94,7 @@
       return {
         props: { 
           page: data.page,
-          activites: data.activityCollection.items
+          activites: [...data.activityCollection.items, ...data.articleCollection.items].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
         }
       }
     }

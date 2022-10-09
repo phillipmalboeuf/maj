@@ -50,7 +50,7 @@
           couleur
           ${contenuCollection}
         }
-        articleCollection(order: [date_DESC], limit: 12, skip: $skip) {
+        articleCollection(order: [date_DESC], limit: 12, skip: $skip, where: { type_not: "Activité" }) {
           items {
             titre
             titreCourt

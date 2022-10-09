@@ -15,7 +15,7 @@
             ${contenuCollection}
           }
         }
-        articleCollection(limit: 3, order: date_DESC) {
+        articleCollection(limit: 3, order: date_DESC, where: { type_not: "Activité" }) {
           items {
             __typename
             titre
