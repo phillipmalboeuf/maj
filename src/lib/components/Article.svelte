@@ -71,6 +71,10 @@
   </figure>
   {/if}
 
+  {#if article.embed}
+  <iframe src={article.embed} loading="lazy" width="100%" height="200" frameborder="0" scrolling="no" title={article.titre}></iframe>
+  {/if}
+
   <aside class="h5"><Document body={article.intro} /></aside>
   {#if article.contenuCollection}<Contenu contenu={article.contenuCollection.items} />{/if}
 

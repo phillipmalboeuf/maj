@@ -20,6 +20,7 @@
             titreCourt
             id
             date
+            embed
             audio ${media}
             media ${media}
             personnesCollection {
