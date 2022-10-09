@@ -5,6 +5,7 @@
     "node": "16.x"
   },
   "scripts": {
+    "start": "node build/index.js",
     "dev": "vite dev --open --port 3000",
     "build": "vite build",
     "package": "vite package",
