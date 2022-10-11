@@ -2,6 +2,9 @@ import { query } from '$lib/clients/contentful'
 import { contenuCollection, media } from '$lib/nodes'
 
 import type { PageLoad } from './$types'
+import type { ExpositionDocument } from './expositions/+page'
+import type { PageDocument } from '$lib/components/Page.svelte'
+
 export const load: PageLoad = async ({ fetch, params }) => {
   const { data } = await query(fetch, `
       query {
@@ -36,58 +39,54 @@ export const load: PageLoad = async ({ fetch, params }) => {
                     externe
                   }
                 }
-              }
-            }
-          }
-        }
-        articleCollection(order: [date_DESC], limit: 1) {
-          items {
-            __typename
-            titre
-            titreCourt
-            vedette
-            id
-            date
-            media ${media}
-            personnesCollection(limit: 2) {
-              items {
-                nom
-                id
-                position
-              }
-            }
-          }
-        }
-        activityCollection(order: [date_DESC], limit: 1) {
-          items {
-            __typename
-            titre
-            titreCourt
-            id
-            date
-            media ${media}
-            personnesCollection(limit: 2) {
-              items {
-                nom
-                id
-                position
-              }
-            }
-          }
-        }
-        baladoCollection(order: [date_DESC], limit: 1) {
-          items {
-            __typename
-            titre
-            titreCourt
-            id
-            date
-            media ${media}
-            personnesCollection(limit: 2) {
-              items {
-                nom
-                id
-                position
+                articlesCollection(limit: 12) {
+                  items {
+                    __typename
+                    ... on Article {
+                      titre
+                      titreCourt
+                      vedette
+                      id
+                      date
+                      media ${media}
+                      personnesCollection(limit: 2) {
+                        items {
+                          nom
+                          id
+                          position
+                        }
+                      }
+                    }
+                    ... on Activity {
+                      titre
+                      titreCourt
+                      id
+                      date
+                      media ${media}
+                      personnesCollection(limit: 2) {
+                        items {
+                          nom
+                          id
+                          position
+                        }
+                      }
+                    }
+                    ... on Balado {
+                      titre
+                      titreCourt
+                      id
+                      date
+                      media ${media}
+                      personnesCollection(limit: 2) {
+                        items {
+                          nom
+                          id
+                          position
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -125,11 +124,18 @@ export const load: PageLoad = async ({ fetch, params }) => {
     `)
   if (data) {
     return { 
-  index: data.index,
-  articles: data.articleCollection.items,
-  balados: data.baladoCollection.items,
-  activites: data.activityCollection.items,
-  expositions: data.expositionCollection.items
-}
+      index: data.index as {
+        titre: string
+        id: string
+        description: string
+        pagesCollection: {
+          items: PageDocument[]
+        }
+      },
+      // articles: data.articleCollection.items,
+      // balados: data.baladoCollection.items,
+      // activites: data.activityCollection.items,
+      expositions: data.expositionCollection.items as ExpositionDocument[]
+    }
   }
 }

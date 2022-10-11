@@ -1,5 +1,6 @@
 <script context="module" lang="ts">
   import type { Lien } from './Link.svelte'
+  import type { ArticleDocument } from 'src/routes/articles/+page'
   
   export interface PageDocument {
     titre: string
@@ -16,6 +17,9 @@
     }
     contenuCollection?: {
       items: any[]
+    }
+    articlesCollection?: {
+      items: ArticleDocument[]
     }
     gallerie?: any
   }

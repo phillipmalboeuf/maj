@@ -30,7 +30,7 @@
 
   import type { PageData } from './$types'
   export let data: PageData
-  const { index, articles, balados, activites, expositions } = data
+  const { index, expositions } = data
   // export let articles: ArticleDocument[]
   // export let balados: BaladoDocument[]
   // export let activites: ActivityDocument[]
@@ -117,8 +117,8 @@
     <Gallerie entry={page.gallerie} />
     {/if}
 
-    {#if page.id === 'explorer'}
-    <Articles tight articles={[...articles,...activites,...balados]} />
+    {#if page.articlesCollection?.items?.length}
+    <Articles tight articles={page.articlesCollection.items} />
     {:else if page.id === 'expositions'}
     <ol class="grid grid--halves">
       <Expositions expositions={expositions.slice(0, 3)} />

@@ -1,5 +1,4 @@
 <script lang="ts">
-  import type { CuratorDocument, ExpositionDocument } from '../../routes/expositions/[id]/index.svelte'
   import { onMount } from 'svelte'
   import { DateTime } from 'luxon'
   import { fly, fade } from 'svelte/transition'
@@ -10,6 +9,7 @@
   import Picture from './Picture.svelte'
   import Document from './document/Document.svelte'
   import Comments from './Comments.svelte'
+  import type { ExpositionDocument } from 'src/routes/expositions/+page'
 
   export let open: string | boolean
   export let onClose: Function = undefined

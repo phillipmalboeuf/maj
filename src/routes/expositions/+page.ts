@@ -1,7 +1,8 @@
 import { query } from '$lib/clients/contentful'
 import { contenuCollection, media } from '$lib/nodes'
 import type { OeuvreDocument } from '$lib/components/Oeuvres.svelte'
-import type { SoumissionDocument } from '../forms/[form_id]/soumissions/[id].svelte'
+import type { SoumissionDocument } from '../forms/[form_id]/soumissions/[id]/+page'
+import type { PageDocument } from '$lib/components/Page.svelte'
 
 export interface ExpositionDocument {
   titre: string
