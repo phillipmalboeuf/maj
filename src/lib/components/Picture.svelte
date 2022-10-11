@@ -64,6 +64,10 @@
     }
   }
 
+  p {
+    &.maxHeight {}
+  }
+
   iframe {
     width: 100%;
     max-width: 100%;
@@ -130,7 +134,7 @@
 {#if media}
 {#if media.title !== '[SPACER]'}
 {#if media.contentType?.startsWith('video/')}
-<video class:zoom class:label class:maxHeight class:maxCrop src="{media.url}" autoplay muted loop {controls} playsinline={!controls} loading={eager ? "eager" : "lazy"} />
+<video class:zoom class:label class:maxHeight class:maxCrop src="{media.url}" autoplay muted loop {controls} playsinline={!controls} loading={eager ? "eager" : "lazy"} on:pointermove={move} on:pointerleave={() => labelVisible = false} />
 {:else if !noLink && media.title?.startsWith('http')}
 {#if media.title.includes('youtu.be')}
 <iframe src="https://www.youtube.com/embed/{media.title.split("youtu.be/")[1]}" title={media.title} frameborder="0" />
@@ -161,11 +165,7 @@
 {/if}
 
 {#if !noDescription && media.title !== 'Heartbeat' && (media.title || media.description) && !media.title?.startsWith('http')}
-<p class="small">{media.title} {media.description || ''}</p>
-{/if}
-
-{#if label && labelVisible}
-<span style="top: {y}px; left: {x}px;">{label}</span>
+<p class="small" class:maxHeight>{media.title} {media.description || ''}</p>
 {/if}
 
 {#if zoom}
@@ -175,5 +175,9 @@
   </figure>
 </Overlay>
 {/if}
+{/if}
+
+{#if label && labelVisible}
+<span style="top: {y}px; left: {x}px;">{label}</span>
 {/if}
 {/if}
