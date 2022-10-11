@@ -162,7 +162,7 @@ const formatContent = async (node, environment: Environment) => {
   }
 }
 
-export const GET: RequestHandler<{ titre: string }, {}> = async ({ request, ...event }) => {
+export const GET: RequestHandler = async ({ request, ...event }) => {
 
   const { data: { articleCollection } } = await query<{
       articleCollection: {

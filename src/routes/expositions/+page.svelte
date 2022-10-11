@@ -1,93 +1,3 @@
-<script context="module" lang="ts">
-  // throw new Error("@migration task: Check code was safely removed (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292722)");
-
-  // import { query } from '$lib/clients/contentful'
-  // import { contenuCollection, media } from '$lib/nodes'
-  // import type { OeuvreDocument } from '$lib/components/Oeuvres.svelte'
-  // import type { SoumissionDocument } from '../forms/[form_id]/soumissions/[id].svelte'
-
-  // export interface ExpositionDocument {
-  //   titre: string
-  //   titreCourt?: string
-  //   id: string
-  //   debut: string
-  //   fin: string
-  //   description?: string
-  //   sys: {
-  //     id: string
-  //   }
-  //   media: object
-  //   oeuvresCollection: {
-  //     items: SoumissionDocument[]
-  //   }
-  // }
-
-  // /** @type {import('@sveltejs/kit').Load} */
-  // export async function load({ fetch, params }) {
-  //   const { data } = await query<{
-  //     page: PageDocument
-  //     expositionCollection: {
-  //       items: ExpositionDocument[]
-  //     }
-  //   }>(fetch, `
-  //     query {
-  //       page(id: "2kSFcw8y6f6cAVCN10AeY1") {
-  //         titre
-  //         id
-  //         description
-  //         couleur
-  //       }
-  //       expositionCollection(order: [debut_DESC]) {
-  //         items {
-  //           sys {
-  //             id
-  //           }
-  //           media ${media}
-  //           titre
-  //           titreCourt
-  //           id
-  //           debut
-  //           description {
-  //             json
-  //           }
-  //           oeuvresCollection(limit: 30) {
-  //             items {
-  //               ... on Oeuvre {
-  //                 titre
-  //                 id
-  //                 media ${media}
-  //                 description {
-  //                   json
-  //                 }
-  //               }
-  //               ... on Soumission {
-  //                 titre
-  //                 id
-  //                 date
-  //                 nom
-  //                 media ${media}
-  //                 bref
-  //                 description {
-  //                   json
-  //                 }
-  //               }
-  //             }
-  //           }
-  //         }
-  //       }
-  //     }
-  //   `)
-  //   if (data) {
-  //     return {
-  //       props: { 
-  //         page: data.page,
-  //         expositions: data.expositionCollection.items
-  //       }
-  //     }
-  //   }
-  // }
-</script>
-
 <script lang="ts">
   
   import { onMount } from 'svelte'
@@ -155,10 +65,12 @@
 
 <section>
   {#each expositions as expo, i}
-  <div class="flex flex--center padded" bind:this={elements[i]} id={expo.id}
+  <div class="flex flex--middle flex--spaced padded" bind:this={elements[i]} id={expo.id}
     data-titre={expo.titreCourt || expo.titre}>
+    <h4>{expo.titre}</h4>
     <!-- <h3>{expo.titreCourt || expo.titre}</h3> -->
     <ExpoLinks {expo} type="folder" />
+    <div></div>
   </div>
   <ol class="padded">
     {#if expo.oeuvresCollection.items?.length}
@@ -221,6 +133,14 @@
 
   section {
     color: var(--color);
+
+    > div {
+      h4,
+      > div {
+        margin-bottom: 0;
+        flex: 1
+      }
+    }
 
     @media (max-width: 888px) {
       > div {

@@ -4,7 +4,7 @@ import { prisma } from '$lib/clients/prisma'
 import type { RequestHandler } from '@sveltejs/kit'
 import slugify from 'slugify'
 
-export const GET: RequestHandler<{ titre: string }, {}> = async ({ request, ...event }) => {
+export const GET: RequestHandler = async ({ request, ...event }) => {
 
   const { data: { assetCollection } } = await query<{
       assetCollection: {

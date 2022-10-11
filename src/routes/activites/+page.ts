@@ -1,6 +1,7 @@
 import { query } from '$lib/clients/contentful'
+import type { PageDocument } from '$lib/components/Page.svelte'
 import { contenuCollection, media } from '$lib/nodes'
-import type { ArticleDocument } from '../articles/index.svelte'
+import type { ArticleDocument } from '../articles/+page'
 
 export interface ActivityDocument {
   __typename: string

@@ -1,5 +1,6 @@
 <script lang="ts">
-  import type { CuratorDocument, ExpositionDocument } from '../../routes/expositions/[id]/index.svelte'
+  import { titre } from '$lib/stores'
+  import type { ExpositionDocument } from 'src/routes/expositions/[id]/+page'
   import ExpoOverlay from './ExpoOverlay.svelte'
 
   export let expo: ExpositionDocument
@@ -44,7 +45,6 @@
     }
   }
 </style>
-
 <span class="flex flex--middle flex--tight">
   {#if !noDescription}<a href="/expositions/{expo.id}" class="button" on:click|preventDefault={() => open = true}>Description de l’expo</a>{/if}
   <a class:active={type === 'folder'} href="/expositions#{expo.id}">

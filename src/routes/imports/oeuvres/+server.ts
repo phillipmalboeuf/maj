@@ -27,7 +27,7 @@ async function getFiles(path = "./") {
     return files;
 }
 
-export const GET: RequestHandler<{ titre: string }, {}> = async ({ request, ...event }) => {
+export const GET: RequestHandler = async ({ request, ...event }) => {
 
   const { data: { expositionCollection } } = await query<{
       expositionCollection: {
