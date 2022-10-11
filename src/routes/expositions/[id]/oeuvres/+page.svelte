@@ -1,74 +1,3 @@
-<script context="module" lang="ts">
-  // throw new Error("@migration task: Check code was safely removed (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292722)");
-
-  // import { query } from '$lib/clients/contentful'
-  // import { contenuCollection, media } from '$lib/nodes'
-
-
-  // /** @type {import('@sveltejs/kit').Load} */
-  // export async function load({ fetch, params }) {
-  //   const { data } = await query(fetch, `
-  //     query($pageId: String!, $id: String!) {
-  //       page(id: $pageId) {
-  //         titre
-  //         id
-  //         description
-  //         couleur
-  //       }
-  //       expos: expositionCollection(order: [debut_DESC]) {
-  //         items {
-  //           sys {
-  //             id
-  //           }
-  //           titre
-  //           id
-  //         }
-  //       }
-  //       expositionCollection(limit: 1, where: {id: $id}) {
-  //         items {
-  //           titre
-  //           id
-  //           titreCourt
-  //           oeuvresCollection {
-  //             items {
-  //               ... on Oeuvre {
-  //                 titre
-  //                 id
-  //                 media ${media}
-  //               }
-  //               ... on Soumission {
-  //                 titre
-  //                 id
-  //                 bref
-  //                 date
-  //                 nom
-  //                 media ${media}
-  //                 description {
-  //                   json
-  //                 }
-  //               }
-  //             }
-  //           }
-  //         }
-  //       }
-  //     }
-  //   `, {
-  //     pageId: "2kSFcw8y6f6cAVCN10AeY1",
-  //     id: params.id
-  //   })
-  //   if (data && data.expositionCollection.items.length > 0) {
-  //     return {
-  //       props: { 
-  //         page: data.page,
-  //         exposition: data.expositionCollection.items[0],
-  //         expos: data.expos.items,
-  //         oeuvres: data.expositionCollection.items[0].oeuvresCollection.items
-  //       }
-  //     }
-  //   }
-  // }
-</script>
-
 <script lang="ts">
   
   import { onMount } from 'svelte'
@@ -87,13 +16,15 @@
 
   import type { PageData } from './$types'
   export let data: PageData
-  const { page, expos, exposition, oeuvres } = data
+  let { page, expos, exposition, oeuvres } = data
 	// export let page: PageDocument
   // export let expos: ExpositionDocument[]
   // export let exposition: ExpositionDocument
   // export let oeuvres: SoumissionDocument[]
 
   $: {
+    exposition = data.exposition
+    oeuvres = data.oeuvres
     if (browser) {
       titre.set(exposition.titreCourt || exposition.titre)
     }
