@@ -170,9 +170,9 @@
         {#if oeuvre.media}<figure>
           <Picture media={oeuvre.media} noDescription maxCrop small />
         </figure>{/if}
-        <h5>{oeuvre.titre}</h5>
+        <h6>{oeuvre.titre}</h6>
         <aside class="flex flex--spaced">
-          <span>{oeuvre.nom}</span>
+          <small>{oeuvre.nom}</small>
           <!-- <span>{date(oeuvre.date)}</span> -->
         </aside>
       </a>
@@ -246,11 +246,11 @@
 
   a {
     > aside,
-    > h5 {
+    > h6 {
       padding: 0 0.5rem;
     }
 
-    > h5 {
+    > h6 {
       margin-bottom: 0;
     }
 
