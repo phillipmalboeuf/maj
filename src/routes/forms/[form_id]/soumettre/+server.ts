@@ -1,6 +1,6 @@
 import { cma } from '$lib/clients/contentful_management'
 import type { RequestHandler } from '@sveltejs/kit'
-import slugify from 'slugify'
+import slugify from 'slug'
 
 export const POST: RequestHandler = async ({ request, ...event }) => {
   const formData = await request.formData()

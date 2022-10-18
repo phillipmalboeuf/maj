@@ -3,7 +3,6 @@ import { cma } from '$lib/clients/contentful_management'
 import type { Asset, Environment } from 'contentful-management'
 import { prisma } from '$lib/clients/prisma'
 import type { RequestHandler } from '@sveltejs/kit'
-import slugify from 'slugify'
 import { getType } from 'mime'
 
 import articles1 from '../articles1.json'

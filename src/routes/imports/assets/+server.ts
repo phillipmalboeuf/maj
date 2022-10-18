@@ -1,8 +1,6 @@
 import { query } from '$lib/clients/contentful'
 import { cma } from '$lib/clients/contentful_management'
-import { prisma } from '$lib/clients/prisma'
 import type { RequestHandler } from '@sveltejs/kit'
-import slugify from 'slugify'
 
 export const GET: RequestHandler = async ({ request, ...event }) => {
 
