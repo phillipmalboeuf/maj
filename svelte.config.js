@@ -9,7 +9,10 @@ const config = {
 	preprocess: preprocess(),
 
 	kit: {
-		adapter: process.env.VERCEL ? auto() : node()
+		adapter: process.env.VERCEL ? auto() : node(),
+		csrf: {
+      checkOrigin: false,
+    }
 	}
 };
 
