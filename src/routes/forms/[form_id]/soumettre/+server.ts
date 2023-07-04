@@ -13,9 +13,11 @@ export const POST: RequestHandler = async ({ request, ...event }) => {
 
   const space = await cma.getSpace('hlfxtjh4lx5k')
   const environment = await space.getEnvironment('master')
+  let asset
 
+  if (file && file !== 'undefined') {
   const [id, contentType, fileName] = file.split('.')
-  const asset = await environment.createAsset({
+  asset = await environment.createAsset({
     fields: {
       title: {
         'fr-CA': titre
@@ -39,6 +41,7 @@ export const POST: RequestHandler = async ({ request, ...event }) => {
     }
   })
   await asset.processForAllLocales()
+  }
 
   const entry = await environment.createEntry('soumission', {
     fields: {
@@ -51,11 +54,11 @@ export const POST: RequestHandler = async ({ request, ...event }) => {
       ville: { 'fr-CA': ville },
       bref: { 'fr-CA': bref },
       details: { 'fr-CA': details },
-      media: { 'fr-CA': { sys: {
+      ...asset ? { media: { 'fr-CA': { sys: {
         id: asset.sys.id,
         linkType: "Asset",
         type: "Link",
-      } } }
+      } } } } : {}
     }
   })
  
