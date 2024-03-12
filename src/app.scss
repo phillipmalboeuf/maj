@@ -206,7 +206,7 @@ span.button {
   }
 }
 
-input:not([type="range"]),
+input:not([type="range"]):not([type="checkbox"]),
 textarea,
 pre {
   display: block;
