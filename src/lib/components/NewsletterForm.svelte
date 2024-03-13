@@ -5,7 +5,7 @@
 <form class="flex flex--middle flex--nogap"><span>Infolettre</span> <input type="email" name="email" placeholder="Courriel"> <button type="submit">→</button></form>
 
 <style lang="scss">
-  input {
+  input[type="email"] {
     border-bottom: 1px solid;
     border-radius: 0;
     background-color: transparent;
